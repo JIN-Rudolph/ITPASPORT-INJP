@@ -1,7 +1,7 @@
 {
   "name": "学習サポート教材",
   "short_name": "ITPAS",
-  "start_url": "HOME.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2b2b2b",

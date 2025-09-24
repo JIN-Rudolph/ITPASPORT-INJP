@@ -3,7 +3,7 @@ const CACHE_NAME = "study-materials-v1";
 
 // プリキャッシュする最低限のファイル
 const PRECACHE_URLS = [
-  "/HOME.html",
+  "/index.html",
   "/styles.css",
   "/manifest.json",
   "/icon-192.png",

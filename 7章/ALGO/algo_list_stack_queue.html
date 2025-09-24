@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>データ構造学習 - Stack & Queue</title>
+  <link rel="stylesheet" href="algo.css">
+</head>
+<body>
+  <header>
+    <h1>データ構造の学習</h1>
+  </header>
+
+  <main>
+    <!-- Stack カード -->
+    <section class="card">
+      <h2>Stack（スタック）</h2>
+      <p>Stack は「後入れ先出し (Last In, First Out)」の構造です。<br>上に積み、上から取り出します。</p>
+<!-- ▼ここからスタック可視化UIを追加 ▼ -->
+<div class="controls">
+  <input type="text" id="stackInput" placeholder="値 (例: 7)" />
+  <button onclick="stackPush()">Push</button>
+  <button onclick="stackPop()">Pop</button>
+  <button onclick="stackPeek()">Peek</button>
+</div>
+
+<div class="stack-top-label">top ↑</div>
+<div id="stackBox" class="stack-box"></div>
+<p id="stackStatus" class="status"></p>
+<!-- ▲ここまで -->
+</section>
+
+    <!-- Queue カード -->
+<section class="card">
+      <h2>Queue（キュー）</h2>
+      <p>Queue は「先入れ先出し (First-In First-Out)」の構造です。<br>先頭から取り出し、末尾に追加します。</p>
+
+<div class="queue-controls">
+  <input type="text" id="queueInput" placeholder="値 (例: A)" />
+  <button onclick="enqueue()">Enqueue</button>
+  <button onclick="dequeue()">Dequeue</button>
+  <button onclick="front()">Front</button>
+</div>
+
+<div id="queueBox" class="queue-box"></div>
+<p id="queueStatus" class="queue-status"></p>
+</section>
+
+<section class="card">
+  <h2>List（リスト）</h2>
+  <p>
+    List はデータを並べた形です。途中に入れたり、消したりが
+    <b>やりやすい</b> 構造です。
+  </p>
+
+  <div class="list-controls">
+    <input type="text" id="listValue" placeholder="値 (例: X)" />
+    <input type="number" id="listIndex" placeholder="位置 (0〜)" min="0" style="width:70px;" />
+    <button onclick="listInsert()">Insert</button>
+    <button onclick="listDelete()">Delete</button>
+  </div>
+
+  <div id="listBox" class="list-box"></div>
+  <p id="listStatus" class="list-status"></p>
+</section>
+</main>
+
+  <footer>
+    <p>Copyright©Chibamode.JIN</p><br>
+    <a href="algo_home.html">💻 アルゴリズムとプログラミングにもどる</a>
+  </footer>
+
+<script>
+  const stack = [];
+
+  function renderStack({ highlightTop = false } = {}) {
+    const box = document.getElementById('stackBox');
+    box.innerHTML = '';
+    stack.forEach(v => {
+      const el = document.createElement('div');
+      el.className = 'stack-slot';
+      el.textContent = v;
+      box.appendChild(el);
+    });
+
+    if (highlightTop && box.firstElementChild) {
+      box.firstElementChild.classList.add('active');
+      setTimeout(() => box.firstElementChild &&
+        box.firstElementChild.classList.remove('active'), 350);
+    }
+
+    document.getElementById('stackStatus').textContent =
+      `size: ${stack.length}${stack.length ? ` | top: ${stack[stack.length-1]}` : ''}`;
+  }
+
+  function stackPush() {
+    const input = document.getElementById('stackInput');
+    const val = input.value.trim();
+    if (!val) return;
+
+    // ★ 上限チェック
+    if (stack.length >= 5) {
+      document.getElementById('stackStatus').textContent =
+        `size: ${stack.length} (上限に達しました！)`;
+      return;
+    }
+
+    stack.push(val);
+    input.value = '';
+    input.focus();
+    renderStack({ highlightTop: true });
+  }
+
+  function stackPop() {
+    if (stack.length === 0) {
+      document.getElementById('stackStatus').textContent = 'size: 0\n(空です)';
+      return;
+    }
+    const box = document.getElementById('stackBox');
+    const topEl = box.firstElementChild; // top は先頭
+    if (topEl) {
+      topEl.classList.add('pop');
+      setTimeout(() => {
+        stack.pop();
+        renderStack();
+      }, 320);
+    }
+  }
+
+  function stackPeek() {
+    if (stack.length === 0) {
+      document.getElementById('stackStatus').textContent = 'size: 0\n(空です)';
+      return;
+    }
+    renderStack({ highlightTop: true });
+    document.getElementById('stackStatus').textContent =
+      `size: ${stack.length} | top: ${stack[stack.length-1]} ← Peek`;
+  }
+  const queue = [];
+
+  function renderQueue({ highlightFront = false } = {}) {
+    const box = document.getElementById('queueBox');
+    box.innerHTML = '';
+    queue.forEach(v => {
+      const el = document.createElement('div');
+      el.className = 'queue-slot';
+      el.textContent = v;
+      box.appendChild(el);
+    });
+
+    if (highlightFront && box.firstElementChild) {
+      box.firstElementChild.classList.add('active');
+      setTimeout(() => box.firstElementChild &&
+        box.firstElementChild.classList.remove('active'), 350);
+    }
+
+    document.getElementById('queueStatus').textContent =
+      `size: ${queue.length}${queue.length ? ` | front: ${queue[0]}` : ''}`;
+  }
+
+  function enqueue() {
+    const input = document.getElementById('queueInput');
+    const val = input.value.trim();
+    if (!val) return;
+
+    if (queue.length >= 5) { // ★ 上限5個
+      document.getElementById('queueStatus').textContent =
+        `size: ${queue.length} (上限に達しました！)`;
+      return;
+    }
+
+    queue.push(val);
+    input.value = '';
+    input.focus();
+    renderQueue();
+  }
+
+  function dequeue() {
+    if (queue.length === 0) {
+      document.getElementById('queueStatus').textContent = 'size: 0\n(空です)';
+      return;
+    }
+    const box = document.getElementById('queueBox');
+    const frontEl = box.firstElementChild;
+    if (frontEl) {
+      frontEl.classList.add('dequeue');
+      setTimeout(() => {
+        queue.shift();
+        renderQueue();
+      }, 320);
+    }
+  }
+
+  function front() {
+    if (queue.length === 0) {
+      document.getElementById('queueStatus').textContent = 'size: 0\n(空です)';
+      return;
+    }
+    renderQueue({ highlightFront: true });
+    document.getElementById('queueStatus').textContent =
+      `size: ${queue.length} | front: ${queue[0]} ← Front`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('queueInput');
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') enqueue();
+      });
+    }
+    renderQueue();
+  });
+ const list = [];
+
+function renderList({ highlightIndex = null } = {}) {
+  const box = document.getElementById('listBox');
+  box.innerHTML = '';
+  list.forEach((v, i) => {
+    const el = document.createElement('div');
+    el.className = 'list-slot';
+    el.innerHTML = `
+      <div class="value">${v}</div>
+      <div class="index">${i}</div>
+    `;
+    if (highlightIndex === i) {
+      el.classList.add('active');
+      setTimeout(() => el.classList.remove('active'), 350);
+    }
+    box.appendChild(el);
+  });
+
+  document.getElementById('listStatus').textContent =
+    `size: ${list.length}${list.length ? ` | elements: [${list.join(', ')}]` : ''}`;
+}
+
+  function listInsert() {
+    const valInput = document.getElementById('listValue');
+    const idxInput = document.getElementById('listIndex');
+    const val = valInput.value.trim();
+    let idx = parseInt(idxInput.value, 10);
+
+    if (!val) return;
+    if (isNaN(idx) || idx < 0 || idx > list.length) idx = list.length;
+
+ if (list.length >= 5) { // 上限 5 個
+  document.getElementById('listStatus').textContent =
+    `size: ${list.length} (上限に達しました！)`;
+  return;
+}
+
+    list.splice(idx, 0, val);
+    valInput.value = '';
+    idxInput.value = '';
+    renderList({ highlightIndex: idx });
+  }
+
+  function listDelete() {
+    const idxInput = document.getElementById('listIndex');
+    let idx = parseInt(idxInput.value, 10);
+
+    if (isNaN(idx) || idx < 0 || idx >= list.length) {
+      document.getElementById('listStatus').textContent =
+        `削除位置 ${idxInput.value} は無効です`;
+      return;
+    }
+
+    const box = document.getElementById('listBox');
+    const targetEl = box.children[idx];
+    if (targetEl) {
+      targetEl.classList.add('delete');
+      setTimeout(() => {
+        list.splice(idx, 1);
+        renderList();
+      }, 320);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const valInput = document.getElementById('listValue');
+    const idxInput = document.getElementById('listIndex');
+    if (valInput) {
+      valInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') listInsert();
+      });
+    }
+    if (idxInput) {
+      idxInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') listDelete();
+      });
+    }
+    renderList();
+  });
+</script>
+
+</body>
+</html>

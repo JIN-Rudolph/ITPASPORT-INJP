@@ -1,0 +1,119 @@
+/* 集合ページ専用スタイル */
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* ヘッダー */
+header {
+  background-color: #4caf50; /* 緑系で集合教材っぽく */
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+main {
+  padding: 20px;
+}
+
+/* セクション */
+section {
+  background: #ffffff;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  max-width: 800px;
+}
+
+section h2 {
+  margin-top: 0;
+  color: #2e7d32;
+}
+
+/* クイズ用ボタン */
+.quiz-options button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 8px;
+  background: #c8e6c9;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.quiz-options button:hover {
+  background: #a5d6a7;
+}
+
+/* クイズ進捗バー */
+.progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress {
+  height: 20px;
+  background-color: #4caf50;
+  width: 0%;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+/* フッター */
+footer {
+  background-color: #e8f5e9;
+  color: #000;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+footer a {
+  color: #2e7d32;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* 集合ページ用の画像サイズ */
+section img {
+  max-width: 120px;
+  height: auto;
+  display: inline-block;
+  margin: 5px;
+}
+
+
+/* 集合サブホームのカード配置 */
+.home-cards {
+  display: flex;
+  justify-content: center; /* 横方向の中央揃え */
+  flex-wrap: wrap;         /* 画面幅が狭いときは折り返す */
+  gap: 20px;               /* カード間の余白 */
+}
+
+.home-cards .card {
+  flex: 0 1 250px;         /* カードの幅を揃える */
+  text-align: center;
+}

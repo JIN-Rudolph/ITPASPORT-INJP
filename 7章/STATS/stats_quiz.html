@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>確率と統計クイズ | Stats Quiz</title>
+  <link rel="stylesheet" href="stats.css">
+</head>
+<body>
+  <header>
+    <h1>📝 確率と統計クイズ</h1>
+    <p>4択 + 入力式でチャレンジ！</p>
+  </header>
+
+  <main class="quiz-container">
+    <div class="progress-bar"><div id="progress" class="progress">0%</div></div>
+    <div id="question-container"></div>
+    <div class="quiz-options" id="options"></div>
+    <div id="feedback" class="result"></div>
+    <footer>
+      <p><a href="stats_home.html">📘 確率と統計サブホームへ</a></p>
+    </footer>
+  </main>
+
+  <script>
+    const questions = [
+      {q:"サイコロを1回投げる。偶数が出る確率は？", options:["1/6","1/2","2/3","5/6"], answer:1},
+      {q:"データ {2,4,4,6,8} の平均は？", options:["4","4.8","5","6"], answer:1},
+      {q:"コインを2回投げる。表が2回出る確率は？ (入力)", input:true, answer:"1/4"}
+    ];
+
+    let remainingQuestions = [...questions];
+    let totalQuestions = questions.length;
+    let currentQuestion = 0;
+    let score = 0;
+
+    function updateProgress() {
+      const progress = document.getElementById('progress');
+      const percent = Math.round((currentQuestion / totalQuestions) * 100);
+      progress.style.width = percent + '%';
+      progress.textContent = percent + '%';
+    }
+
+    function showQuestion() {
+      if (remainingQuestions.length === 0) {
+        document.getElementById('question-container').innerHTML = '<h2>🎉 クイズ終了！</h2>';
+        document.getElementById('options').innerHTML = '';
+        document.getElementById('feedback').textContent = 'スコア: ' + score + '/' + totalQuestions;
+        return;
+      }
+      const qObj = remainingQuestions.shift();
+      currentQuestion++;
+
+      document.getElementById('question-container').innerHTML = '<p><strong>Q' + currentQuestion + ':</strong> ' + qObj.q + '</p>';
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+
+      if (qObj.input) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'user-answer';
+        input.placeholder = '答えを入力';
+        optionsDiv.appendChild(input);
+
+        const btn = document.createElement('button');
+        btn.textContent = '答え合わせ';
+        btn.onclick = () => checkAnswer(input.value.trim(), qObj.answer);
+        optionsDiv.appendChild(btn);
+      } else {
+        qObj.options.forEach((opt, i) => {
+          const btn = document.createElement('button');
+          btn.textContent = opt;
+          btn.onclick = () => checkAnswer(i, qObj.answer);
+          optionsDiv.appendChild(btn);
+        });
+      }
+      updateProgress();
+    }
+
+    function checkAnswer(selected, correct) {
+      const feedback = document.getElementById('feedback');
+      if (selected === correct || selected === correct.toString()) {
+        feedback.textContent = '✅ 正解！';
+        feedback.style.color = 'green';
+        score++;
+      } else {
+        feedback.textContent = '❌ 不正解… 正解は ' + correct;
+        feedback.style.color = 'red';
+      }
+      setTimeout(() => {
+        feedback.textContent = '';
+        showQuestion();
+      }, 1200);
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>

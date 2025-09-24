@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>ITパスポート 第8章｜8-1〜8-13 総合クイズ100問（学習モード）</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans JP', sans-serif; background:#f4f6fb; margin:0; }
+    header { background:#0b57d0; color:#fff; padding:16px 0; box-shadow:0 1px 8px rgba(0,0,0,.2); }
+    header h1 { max-width:900px; margin:0 auto; padding:0 16px; font-size:22px; }
+    .quiz-container { max-width: 900px; margin: 24px auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.08); }
+    .progress-bar { width: 100%; background-color: #e6ecf5; border-radius: 10px; overflow: hidden; margin: 16px 0 20px; border:1px solid #d7dfeb; }
+    .progress { height: 20px; background-color: #1565c0; width: 0%; text-align: center; color: white; font-size: 12px; line-height: 20px; transition: width .25s ease; }
+    .meta { display:flex; gap:8px; align-items:center; color:#5a6b85; font-size:13px; margin-bottom:6px; }
+    .pill { border:1px solid #d7dfeb; border-radius:999px; padding:4px 10px; }
+    #question { font-size: 18px; margin: 8px 0 0; }
+    .quiz-options { margin-top: 12px; }
+    .quiz-options button { display:block; width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; background:#e3f2fd; cursor:pointer; font-size:16px; text-align:left; }
+    .quiz-options button:hover { background:#cfe3fb; }
+    .quiz-options button[disabled] { opacity:.6; cursor:not-allowed; }
+    .choice-correct { outline:2px solid #22c55e; }
+    .choice-wrong { outline:2px solid #ef4444; }
+    .controls { display:flex; gap:10px; margin-top: 10px; }
+    .controls button { background:#0b57d0; color:#fff; border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer; }
+    .controls button[disabled] { opacity:.5; cursor:not-allowed; }
+    .result { font-weight: bold; margin-top: 12px; text-align: left; }
+    .muted { color:#5a6b85; font-size:13px; }
+    dialog { border:none; border-radius:12px; padding:16px; max-width:520px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+    dialog .actions { display:flex; gap:8px; margin-top:10px; }
+    input[type=text] { width:100%; padding:8px; border-radius:8px; border:1px solid #cdd6e3; }
+    .records { margin:8px 0 0; padding-left:18px; color:#5a6b85; }
+  </style>
+</head>
+<body>
+  <header><h1>💻 ITパスポート 第8章｜8-1〜8-13 総合クイズ 100問（学習モード）</h1></header>
+
+  <main class="quiz-container">
+    <div class="meta">
+      <span id="topic" class="pill">-</span>
+      <span id="counter" class="pill">0 / 100</span>
+      <span class="pill" id="modePill">mode: study</span>
+    </div>
+    <div class="progress-bar"><div id="progress" class="progress">0%</div></div>
+
+    <div id="question"></div>
+    <div id="options" class="quiz-options"></div>
+    <div class="controls">
+      <button id="btnNext" disabled>次の問題へ</button>
+      <button id="btnRestart">リセット</button>
+      <button id="btnSavePrompt" style="margin-left:auto" disabled>結果を保存</button>
+    </div>
+    <div id="feedback" class="result"></div>
+
+    <hr style="margin:20px 0; border:none; border-top:1px solid #e6ecf5;"/>
+    <div class="muted">※ 出題は毎回ランダム。<b>回答後に正誤を即時表示</b>し、採点後のみ次へ進めます（連打スキップ防止）。</div>
+
+    <dialog id="saveDialog">
+      <form method="dialog" id="saveForm">
+        <h3>結果の保存</h3>
+        <p class="muted">保存するとブラウザのローカルに <code>クラス-番号-名前: 正答率%</code> で記録します。</p>
+        <label>クラス <input type="text" id="fldClass" required placeholder="例：A組"/></label>
+        <label>番号 <input type="text" id="fldNum" required placeholder="例：12"/></label>
+        <label>名前 <input type="text" id="fldName" required placeholder="例：山田 太郎"/></label>
+        <div class="actions">
+          <button id="btnDoSave">保存する</button>
+          <button value="cancel" formnovalidate>閉じる</button>
+        </div>
+        <div id="saveMsg" class="muted"></div>
+      </form>
+    </dialog>
+
+    <div class="muted" style="margin-top:14px;">保存された記録</div>
+    <ul id="recordList" class="records"></ul>
+  </main>
+    <div class="footer">
+      <p>Copyright©Chibamode.JIN</p><br>
+      <a href= "index.html">📚 8章　コンピュータシステムにもどる</a>
+    </div>
+<script>
+// ---- 100問データ（8-1〜8-13：初心者向け／被り無し） ----
+const QUESTIONS = [
+  {q:'コンピュータの基本構成に含まれないものはどれか。', options:['入力','演算','冷却','出力'], answer:2, topic:'8-1 プロセッサ'},
+  {q:'CPUの演算装置(ALU)が主に行う処理はどれか。', options:['入出力の制御','数値演算や論理演算','記憶装置の管理','プロセスのスケジューリング'], answer:1, topic:'8-1 プロセッサ'},
+  {q:'命令実行サイクルの正しい順序はどれか。', options:['実行→デコード→フェッチ','フェッチ→デコード→実行','デコード→フェッチ→実行','フェッチ→実行→デコード'], answer:1, topic:'8-1 プロセッサ'},
+  {q:'レジスタの特徴として最も適切なのはどれか。', options:['容量大・低速','容量小・高速','容量大・不揮発','容量中・外部接続'], answer:1, topic:'8-1 プロセッサ'},
+  {q:'データバス幅が広がると一般にどうなるか。', options:['一度に転送できるデータ量が増える','最大アドレス空間が広がる','クロック周波数が下がる','主記憶容量が増える'], answer:0, topic:'8-1 プロセッサ'},
+  {q:'アドレスバス32ビットの理論アドレス空間に最も近いものはどれか。', options:['約4KB','約4MB','約4GB','約4TB'], answer:2, topic:'8-1 プロセッサ'},
+  {q:'パイプライン処理の目的はどれか。', options:['応答時間を必ず短縮','スループットの向上','メモリ消費の削減','電力を必ず削減'], answer:1, topic:'8-1 プロセッサ'},
+  {q:'キャッシュメモリの利用原理として適切なのはどれか。', options:['局所性の原理','冗長性の原理','偶然性の原理','均等性の原理'], answer:0, topic:'8-1 プロセッサ'},
+  {q:'制御装置の役割として適切なのはどれか。', options:['記録媒体の作成','命令の解釈と実行の指揮','画像の高精細化','暗号化処理のみ'], answer:1, topic:'8-1 プロセッサ'},
+  {q:'バスの種類に含まれないものはどれか。', options:['データバス','アドレスバス','制御バス','映像バス'], answer:3, topic:'8-1 プロセッサ'},
+  {q:'クロック周波数を上げると生じやすい課題はどれか。', options:['消費電力と発熱の増加','主記憶の不揮発化','アドレス空間の縮小','I/O速度の自動向上'], answer:0, topic:'8-1 プロセッサ'},
+  {q:'CPUの基本構成に含まれるものはどれか。', options:['ALUと制御装置','GPUとNIC','ROMとHDD','SSDと電源'], answer:0, topic:'8-1 プロセッサ'},
+  {q:'RAMの特徴として正しいものはどれか。', options:['電源断でも内容保持','主に読み出し専用','揮発性で読み書きが高速','外部記憶装置である'], answer:2, topic:'8-2 記憶装置'},
+  {q:'ROMの典型的な用途はどれか。', options:['作業領域','キャッシュ','ファームウェア格納','仮想記憶'], answer:2, topic:'8-2 記憶装置'},
+  {q:'DRAMとSRAMの関係で正しいものはどれか。', options:['DRAMはSRAMより高速','SRAMはDRAMより高価で高速','両者とも不揮発','SRAMは主記憶，DRAMはキャッシュが一般的'], answer:1, topic:'8-2 記憶装置'},
+  {q:'フラッシュメモリを主に利用する装置はどれか。', options:['HDD','SSD','磁気テープ','光ディスク'], answer:1, topic:'8-2 記憶装置'},
+  {q:'記憶階層で最も高速なのはどれか。', options:['キャッシュ','主記憶','補助記憶(HDD/SSD)','光学ディスク'], answer:0, topic:'8-2 記憶装置'},
+  {q:'HDDの長所として適切なのはどれか。', options:['低容量・高価格','大容量・安価','無音・耐衝撃','書換え寿命が無限'], answer:1, topic:'8-2 記憶装置'},
+  {q:'SSDの短所として挙げられやすいものはどれか。', options:['ランダムアクセスが遅い','書換え回数に制限','容量が必ず小さい','回転音がうるさい'], answer:1, topic:'8-2 記憶装置'},
+  {q:'キャッシュ→主記憶→補助記憶の順でどう変化するか。', options:['速度↑ 容量↑ 価格/GB↑','速度↓ 容量↑ 価格/GB↓','速度↑ 容量↓ 価格/GB↓','全て一定'], answer:1, topic:'8-2 記憶装置'},
+  {q:'光ディスクの特徴として適切なのはどれか。', options:['磁気で記録','レーザーで読み書き','半導体素子で構成','ランダムアクセスが極端に遅いのみ'], answer:1, topic:'8-2 記憶装置'},
+  {q:'主記憶に当たるものはどれか。', options:['HDD','SSD','RAM','DVD'], answer:2, topic:'8-2 記憶装置'},
+  {q:'UART・SPI・I²Cはいずれも何の一種か。', options:['無線LAN','シリアルI/F','パラレルI/F','映像I/F'], answer:1, topic:'8-3 入出力'},
+  {q:'パラレルI/Fの特徴として適切なのはどれか。', options:['1本の線で逐次転送','複数ビット同時転送','無線のみ','長距離伝送に強い'], answer:1, topic:'8-3 入出力'},
+  {q:'USBの説明として正しいものはどれか。', options:['受信側がマスター','ホスト制御の汎用シリアル','必ず光ファイバ','1対1専用で多点不可'], answer:1, topic:'8-3 入出力'},
+  {q:'無線方式で近距離・省電力の周辺接続に適するのはどれか。', options:['Wi‑Fi','Bluetooth','NFCタグ','LPWA'], answer:1, topic:'8-3 入出力'},
+  {q:'NFCの特徴はどれか。', options:['長距離・高速','中距離・IP通信','超近距離・非接触','衛星通信'], answer:2, topic:'8-3 入出力'},
+  {q:'I²Cの物理線は通常どれか。', options:['1線','2線','3線','4線以上固定'], answer:1, topic:'8-3 入出力'},
+  {q:'SPIの説明として適切なのはどれか。', options:['ホスト無しのP2P','主従でMOSI/MISO/SCLK/SS','必ず無線','電源線のみで通信'], answer:1, topic:'8-3 入出力'},
+  {q:'DisplayPortやHDMIは何のI/Fか。', options:['映像出力','ストレージ','LAN','電源供給'], answer:0, topic:'8-3 入出力'},
+  {q:'ToFセンサーが計測するものはどれか。', options:['温度','距離','圧力','騒音'], answer:1, topic:'8-4 IoT'},
+  {q:'ホール効果センサーの用途はどれか。', options:['光の強度','磁界による回転・位置検出','湿度','気圧'], answer:1, topic:'8-4 IoT'},
+  {q:'アクチュエータに含まれるものはどれか。', options:['加速度計','温湿度計','ステッピングモータ','マイク'], answer:2, topic:'8-4 IoT'},
+  {q:'PWM制御の説明として適切なのはどれか。', options:['周波数とデューティ固定','デューティで平均出力調整','必ずアナログ電圧可変','極性切替のみ'], answer:1, topic:'8-4 IoT'},
+  {q:'デバイスドライバの役割はどれか。', options:['アプリとハードの仲立ち','電源の安定化','回線の提供','ログイン管理のみ'], answer:0, topic:'8-4 IoT'},
+  {q:'環境センサーに該当するものはどれか。', options:['ジャイロ','CO₂センサー','タコメータ','フォトダイオード'], answer:1, topic:'8-4 IoT'},
+  {q:'位置・距離の検出に用いられるものはどれか。', options:['超音波センサー','湿度センサー','騒音計','温度計'], answer:0, topic:'8-4 IoT'},
+  {q:'画像入力デバイスとして適切なのはどれか。', options:['CMOSカメラ','ヒータ','ソレノイド','リレー'], answer:0, topic:'8-4 IoT'},
+  {q:'集中処理の長所として適切なのはどれか。', options:['ローカル最適化','統一的な管理','遅延に強い','障害点が分散'], answer:1, topic:'8-5 構成'},
+  {q:'分散処理の留意点はどれか。', options:['単一障害点が必ず生じる','データ整合性の確保が課題','拡張が困難','管理が単純'], answer:1, topic:'8-5 構成'},
+  {q:'分散処理の利点はどれか。', options:['スケールアウトが可能','一貫性確保が不要','セキュリティ対策が不要','導入が常に安価'], answer:0, topic:'8-5 構成'},
+  {q:'集中処理の欠点はどれか。', options:['SPOFになりやすい','管理が複雑','整合性が取りにくい','帯域が不要'], answer:0, topic:'8-5 構成'},
+  {q:'分散処理で重要になるネットワーク特性はどれか。', options:['遅延と帯域','電源電圧','画面解像度','プリンタ解像度'], answer:0, topic:'8-5 構成'},
+  {q:'集中処理が向くのはどれか。', options:['一貫性重視の基幹系','地理的に分散したIoT','キャンペーンサイト','P2P共有'], answer:0, topic:'8-5 構成'},
+  {q:'デュプレックス方式の説明として正しいものはどれか。', options:['2系統同時稼働で照合','主系と待機系で障害時に切替','3台以上で投票','データを水平分割'], answer:1, topic:'8-6 構成'},
+  {q:'クラスタ構成の利点はどれか。', options:['必ず1台のみ','可用性・拡張性の向上','ストレージ不要','ネットワーク不要'], answer:1, topic:'8-6 構成'},
+  {q:'クライアントサーバ方式の説明として適切なのはどれか。', options:['UIも処理も全てサーバ','サーバが業務処理，クライアントはUI中心','P2Pと同じ','クライアントがDB管理'], answer:1, topic:'8-6 構成'},
+  {q:'Web3層の構成要素でないものはどれか。', options:['Web(プレゼン)','AP(アプリ)','DB','GPU(描画)'], answer:3, topic:'8-6 構成'},
+  {q:'仮想化の利点として最も適切なのはどれか。', options:['物理資源の集約と隔離','常に性能が向上','ネットワーク不要','アプリ改修が不要になる'], answer:0, topic:'8-6 構成'},
+  {q:'VDIの説明として正しいものはどれか。', options:['端末内で仮想デスクトップ','サーバ上のデスクトップをリモート提供','GPUを仮想化する技術のみ','Webアプリを指す用語'], answer:1, topic:'8-6 構成'},
+  {q:'RAID1の特徴はどれか。', options:['ストライピング','ミラーリング','分散パリティ','二重パリティ'], answer:1, topic:'8-6 構成'},
+  {q:'RAID5の耐障害性はどれか。', options:['0台まで','1台まで','2台まで','無制限'], answer:1, topic:'8-6 構成'},
+  {q:'RAID0の特徴として正しいものはどれか。', options:['冗長性がない','冗長性が高い','書込みが必ず遅い','容量が半分になる'], answer:0, topic:'8-6 構成'},
+  {q:'DB障害時に影響が最も大きい層はどれか。', options:['Web層','AP層','DB層','同等'], answer:2, topic:'8-6 構成'},
+  {q:'処理時間短縮率はどの観点か。', options:['品質向上','業務効率化','意思決定高度化','収益拡大'], answer:1, topic:'8-7 価値'},
+  {q:'定性効果の例として適切なのはどれか。', options:['エラー率の低下','作業コストの削減額','顧客満足度の向上','処理件数の増加'], answer:2, topic:'8-7 価値'},
+  {q:'意思決定高度化の指標に該当するものはどれか。', options:['レポート作成時間','紙使用量','サーバ台数','電力料金'], answer:0, topic:'8-7 価値'},
+  {q:'新規サービスによる売上増はどの観点か。', options:['業務効率化','品質向上','収益拡大／新規価値','保守性'], answer:2, topic:'8-7 価値'},
+  {q:'システム導入価値の評価で最も適切なのはどれか。', options:['単一指標のみ','複数観点をKPIで総合評価','ベンダ規模のみ重視','導入費だけで決める'], answer:1, topic:'8-7 価値'},
+  {q:'スループットの説明として適切なのはどれか。', options:['要求→応答の時間','投入→完了の時間','単位時間あたりの処理件数','ネットワーク遅延'], answer:2, topic:'8-8 評価'},
+  {q:'レスポンスタイムとは何か。', options:['要求→応答の時間','1日の稼働時間','MTTRの逆数','CPUクロック'], answer:0, topic:'8-8 評価'},
+  {q:'稼働率Aの式はどれか。', options:['A=MTTR/(MTBF+MTTR)','A=MTBF/(MTBF+MTTR)','A=MTBF×MTTR','A=1−MTTR/MTBF'], answer:1, topic:'8-8 評価'},
+  {q:'直列構成の稼働率の求め方は。', options:['各稼働率の積','各稼働率の和','1−積(1−Ai)','最大値'], answer:0, topic:'8-8 評価'},
+  {q:'並列(冗長)構成の稼働率の求め方は。', options:['積(Ai)','和(Ai)','1−積(1−Ai)','最小値'], answer:2, topic:'8-8 評価'},
+  {q:'MTTRが増えると一般に稼働率は。', options:['上がる','下がる','変わらない','不明'], answer:1, topic:'8-8 評価'},
+  {q:'TCOとは何を表すか。', options:['導入費のみ','総保有コスト','電力コストのみ','人件費のみ'], answer:1, topic:'8-8 評価'},
+  {q:'ROIの計算に含まれるものはどれか。', options:['(利益−投資)/投資','投資/利益','利益×投資','利益−投資費用を除く'], answer:0, topic:'8-8 評価'},
+  {q:'ターンアラウンドタイムとは何か。', options:['要求→応答','投入→完了','電源ON→ログイン','ネット遅延'], answer:1, topic:'8-8 評価'},
+  {q:'ボトルネックになりやすいものはどれか。', options:['CPU・I/O・ネットワーク','壁紙の色','マウスの色','ディスプレイ大きさのみ'], answer:0, topic:'8-8 評価'},
+  {q:'OSの主目的として適切なのはどれか。', options:['アプリを直接ハードに接続','資源管理と抽象化','電源を供給','回線を提供'], answer:1, topic:'8-9 OS'},
+  {q:'プロセス管理に含まれるものはどれか。', options:['圧縮','スケジューリング','暗号化','配線'], answer:1, topic:'8-9 OS'},
+  {q:'メモリ管理の機能はどれか。', options:['ページングと保護','印刷キュー','画面描画','接続共有のみ'], answer:0, topic:'8-9 OS'},
+  {q:'ファイル管理の機能として適切なのはどれか。', options:['アクセス権管理','クロック供給','電圧制御','冷却制御'], answer:0, topic:'8-9 OS'},
+  {q:'ユーザインタフェースの例はどれか。', options:['CLIやGUI','GPU','UPS','BIOSのみ'], answer:0, topic:'8-9 OS'},
+  {q:'OS種類の分類に含まれないものはどれか。', options:['リアルタイム/タイムシェアリング','シングル/マルチタスク','シングル/マルチユーザ','アナログ/デジタル'], answer:3, topic:'8-9 OS'},
+  {q:'リアルタイムOSの説明として適切なのはどれか。', options:['常に高スループット','期限内応答が重視','電源制御専用','GUIが必須'], answer:1, topic:'8-9 OS'},
+  {q:'仮想記憶方式の利点はどれか。', options:['必ず高速化','物理より大きな空間を見せる','電源断でも保持','CPUを冷却'], answer:1, topic:'8-9 OS'},
+  {q:'入出力管理で中心となるものはどれか。', options:['デバイスドライバ','圧縮ドライバ','電源ドライバ','温度ドライバ'], answer:0, topic:'8-9 OS'},
+  {q:'OSのネットワーク機能で提供されるものはどれか。', options:['TCP/IPスタック','電源コンセント','画面の輝度','キーボード配列の物理変更'], answer:0, topic:'8-9 OS'},
+  {q:'絶対パスの説明として適切なのはどれか。', options:['現在地からの指定','ルートからの一意の指定','拡張子を除いた指定','URLのみを指す'], answer:1, topic:'8-10 ファイル'},
+  {q:'相対パスで「..」は何を意味するか。', options:['ホーム','カレント','親ディレクトリ','ルート'], answer:2, topic:'8-10 ファイル'},
+  {q:'共有で排他制御が必要な理由はどれか。', options:['電力節約','同時更新の矛盾防止','画面保護','回転数を上げるため'], answer:1, topic:'8-10 ファイル'},
+  {q:'SMB/CIFSに該当するのはどれか。', options:['Windows系ファイル共有','UNIXの印刷プロトコル','メール転送','暗号プロトコル'], answer:0, topic:'8-10 ファイル'},
+  {q:'差分バックアップの説明として正しいものはどれか。', options:['直前バックアップ以降の変更','前回フル以降の変更','常に全データ','メタデータのみ'], answer:1, topic:'8-10 ファイル'},
+  {q:'増分バックアップの復元時に必要なのはどれか。', options:['最新の増分のみ','フル＋全ての増分チェーン','最新差分のみ','どれでもよい'], answer:1, topic:'8-10 ファイル'},
+  {q:'3-2-1ルールに含まれる考え方はどれか。', options:['3つのコピー、2媒体、1つはオフサイト','3媒体、2回復元、1人で管理','3TBを2台、1室に保管','3/日・2/週・1/月'], answer:0, topic:'8-10 ファイル'},
+  {q:'オフィススイートに含まれやすいものはどれか。', options:['ワープロ・表計算・プレゼン','GPUドライバ','OSカーネル','ハイパーバイザ'], answer:0, topic:'8-11 ツール'},
+  {q:'ブラウザの基本機能に含まれないものはどれか。', options:['レンダリング','拡張機能','Cookie管理','物理印刷装置の制御'], answer:3, topic:'8-11 ツール'},
+  {q:'プライバシーモードの説明として適切なのはどれか。', options:['通信が暗号化されない','履歴やCookieを端末に残しにくい','ウイルス対策機能','広告が必ず非表示'], answer:1, topic:'8-11 ツール'},
+  {q:'共同編集で重要な機能はどれか。', options:['同時編集と履歴管理','GPU描画','冷却制御','電源供給'], answer:0, topic:'8-11 ツール'},
+  {q:'ブラウザで標準として扱われる技術はどれか。', options:['HTML/CSS/JavaScript','USB/PCIe','JPEG/PNGのみ','SQL'], answer:0, topic:'8-11 ツール'},
+  {q:'キャッシュの主目的はどれか。', options:['表示の高速化','セキュリティ低下','電力節約のみ','印刷精度の向上'], answer:0, topic:'8-11 ツール'},
+  {q:'OSSの特徴として正しいものはどれか。', options:['ソース非公開','改変や再配布がライセンスで許諾','必ず無償のみ','商用禁止'], answer:1, topic:'8-12 OSS'},
+  {q:'コピーレフトの代表的ライセンスはどれか。', options:['MIT','GPL','BSD','Apache-2.0'], answer:1, topic:'8-12 OSS'},
+  {q:'OSS利用時に重要なことはどれか。', options:['ライセンス条項の遵守','著作権表示を削除','無断で再ライセンス','出典を隠す'], answer:0, topic:'8-12 OSS'},
+  {q:'OSSの利点として適切なのはどれか。', options:['ベンダロックイン低減','品質が保証されない','必ず有償','閉鎖的な改良'], answer:0, topic:'8-12 OSS'},
+  {q:'スーパーコンピュータの主用途はどれか。', options:['文書作成','科学技術計算','会計伝票入力','プリンタ管理'], answer:1, topic:'8-13 ハードウェア'},
+  {q:'入力装置に該当しないものはどれか。', options:['バーコードリーダ','OCR','Webカメラ','レーザプリンタ'], answer:3, topic:'8-13 ハードウェア'},
+  {q:'ページプリンタの説明として正しいものはどれか。', options:['1行ずつ印字','ページ単位で高速印刷','点打ちで複写に強い','常にインクジェット'], answer:1, topic:'8-13 ハードウェア'},
+  {q:'ディスプレイの指標に含まれないものはどれか。', options:['解像度','リフレッシュレート','視野角','紙質'], answer:3, topic:'8-13 ハードウェア'}
+];
+
+// ---- 状態 ----
+let order = [];
+let cur = 0; // 0-based
+let score = 0;
+let locked = false; // 連打防止
+let selected = null; // 表示順のインデックス
+let choiceMap = []; // 表示→元
+
+// ---- 要素参照 ----
+const elTopic = document.getElementById('topic');
+const elCounter = document.getElementById('counter');
+const elProgress = document.getElementById('progress');
+const elQ = document.getElementById('question');
+const elOpts = document.getElementById('options');
+const elFeedback = document.getElementById('feedback');
+const btnNext = document.getElementById('btnNext');
+const btnRestart = document.getElementById('btnRestart');
+const btnSavePrompt = document.getElementById('btnSavePrompt');
+
+// ---- Utility ----
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function percent(){ return Math.round((cur)/QUESTIONS.length*100); }
+
+function start(){
+  order = shuffle([...Array(QUESTIONS.length).keys()]);
+  cur = 0; score = 0; locked = false; selected = null; choiceMap = [];
+  btnSavePrompt.disabled = true; elFeedback.textContent='';
+  render();
+}
+
+function render(){
+  const q = QUESTIONS[ order[cur] ];
+  elTopic.textContent = q.topic; elCounter.textContent = `${cur+1} / ${QUESTIONS.length}`;
+  elProgress.style.width = percent()+"%"; elProgress.textContent = percent()+"%";
+  elQ.innerHTML = `<div id=\"qtext\">${q.q}</div>`;
+  elOpts.innerHTML = '';
+  elFeedback.textContent = '';
+  btnNext.disabled = true; locked = false; selected = null;
+
+  const idx = [0,1,2,3]; shuffle(idx); choiceMap = idx.slice();
+  idx.forEach((orig, disp)=>{
+    const b = document.createElement('button');
+    b.textContent = q.options[orig];
+    b.addEventListener('click', ()=>onPick(disp, b));
+    elOpts.appendChild(b);
+  });
+}
+
+function onPick(displayIdx, btn){
+  if(locked) return; locked = true; selected = displayIdx;
+  // 全ボタン非活性 → 二度押し/連打防止
+  document.querySelectorAll('.quiz-options button').forEach(b=>b.disabled=true);
+
+  const q = QUESTIONS[ order[cur] ];
+  const pickedOrig = choiceMap[displayIdx];
+  const isCorrect = (pickedOrig === q.answer);
+
+  // 学習モード：即時正誤表示・ハイライト
+  const btns = Array.from(document.querySelectorAll('.quiz-options button'));
+  btns.forEach((node,i)=>{
+    const orig = choiceMap[i];
+    if(orig===q.answer) node.classList.add('choice-correct');
+    if(i===displayIdx && !isCorrect) node.classList.add('choice-wrong');
+  });
+  elFeedback.style.color = isCorrect? '#137333':'#b3261e';
+  elFeedback.textContent = isCorrect? '正解！':'不正解。';
+
+  if(isCorrect) score++;
+  btnNext.disabled = false; // 採点後のみ次へ
+}
+
+function nextQ(){
+  if(btnNext.disabled) return; // guard
+  btnNext.disabled = true;
+  setTimeout(()=>{ // 微ディレイで多重進行防止
+    cur++;
+    if(cur>=QUESTIONS.length){ finish(); }
+    else{ render(); }
+  }, 80);
+}
+
+function finish(){
+  elTopic.textContent = '結果';
+  elCounter.textContent = `${QUESTIONS.length} / ${QUESTIONS.length}`;
+  elProgress.style.width = '100%'; elProgress.textContent = '100%';
+  elQ.innerHTML = '<b>お疲れさまでした！全問終了です。</b>';
+  elOpts.innerHTML='';
+  const p = Math.round(score/QUESTIONS.length*100);
+  elFeedback.style.color='#111';
+  elFeedback.innerHTML = `スコア：<b>${score}</b> / ${QUESTIONS.length}（正答率 <b>${p}%</b>）`;
+  btnSavePrompt.disabled = false;
+}
+
+// ---- 保存機能（localStorage） ----
+const dlg = document.getElementById('saveDialog');
+const btnDoSave = document.getElementById('btnDoSave');
+const fldClass = document.getElementById('fldClass');
+const fldNum = document.getElementById('fldNum');
+const fldName = document.getElementById('fldName');
+const saveMsg = document.getElementById('saveMsg');
+const recordList = document.getElementById('recordList');
+
+btnSavePrompt.addEventListener('click', ()=>{ dlg.showModal(); saveMsg.textContent=''; });
+
+document.getElementById('btnDoSave').addEventListener('click', (e)=>{
+  e.preventDefault();
+  const klass=(fldClass.value||'').trim(); const num=(fldNum.value||'').trim(); const name=(fldName.value||'').trim();
+  if(!klass||!num||!name){ saveMsg.textContent='未入力の項目があります。'; return; }
+  const percent = Math.round(score/QUESTIONS.length*100);
+  const rec={class:klass,num,name,score,total:QUESTIONS.length,percent,ts:Date.now()};
+  const raw=localStorage.getItem('itp8_study_records'); const arr=raw?JSON.parse(raw):[]; arr.push(rec);
+  localStorage.setItem('itp8_study_records', JSON.stringify(arr));
+  dlg.close(); refreshRecords();
+});
+
+function refreshRecords(){
+  const raw=localStorage.getItem('itp8_study_records');
+  recordList.innerHTML=''; if(!raw) return;
+  JSON.parse(raw).slice().reverse().forEach(r=>{
+    const li=document.createElement('li');
+    li.textContent=`${r.class}-${r.num}-${r.name}: ${r.percent}% (${r.score}/${r.total}) ${new Date(r.ts).toLocaleString()}`;
+    recordList.appendChild(li);
+  });
+}
+
+// ---- イベント ----
+btnNext.addEventListener('click', nextQ);
+btnRestart.addEventListener('click', start);
+
+// ---- 起動 ----
+refreshRecords();
+start();
+</script>
+</body>
+</html>

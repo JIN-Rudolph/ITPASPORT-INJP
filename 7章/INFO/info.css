@@ -1,0 +1,54 @@
+/* 情報量の単位専用スタイル */
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #333;
+}
+
+header {
+  background-color: #00695c; /* 深緑系でデータ感 */
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+main {
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  max-width: 800px;
+}
+
+.card h2 {
+  color: #00695c;
+}
+
+footer {
+  background-color: #e0f2f1;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+footer a {
+  color: #00695c;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

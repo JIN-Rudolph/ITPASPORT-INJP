@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>ITパスポート 第8章 コンピュータシステム｜学習教材</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121938; --ink:#eef3ff; --muted:#b9c3e6;
+      --brand:#6ea8fe; --accent:#7ee7ff; --ok:#22c55e; --bad:#ef4444;
+    }
+    html,body{height:100%}
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; background: linear-gradient(180deg,#0b1020,#0b1020 40%,#0e1530); color:var(--ink);}
+    a{color:var(--accent)}
+    header{position:sticky; top:0; z-index:10; backdrop-filter: blur(8px); background: #0b1020cc; border-bottom: 1px solid #1f2a5a}
+    .wrap{max-width:1100px; margin:0 auto; padding:20px}
+    .hero{display:flex; gap:18px; align-items:center}
+    .badge{font-size:12px; color:#0b1020; background:linear-gradient(90deg,var(--brand),var(--accent)); padding:4px 8px; border-radius:999px; font-weight:700}
+    h1{margin:6px 0 12px; font-size:28px}
+    .sub{color:var(--muted); margin:0}
+    nav.toc{display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin:18px 0}
+    .card{background:linear-gradient(180deg,#121938,#0f1742); border:1px solid #20306b; border-radius:16px; padding:16px; box-shadow: 0 10px 24px rgba(4,12,48,0.35)}
+    .card:hover{border-color:#2b4493}
+    .card h3{margin:0 0 6px; font-size:16px}
+    .card p{margin:0; color:var(--muted)}
+    .grid{display:grid; grid-template-columns: 1.2fr 1fr; gap:18px}
+    section{scroll-margin-top:84px}
+
+    details.topic{border:1px solid #22316b; background:#11183b; border-radius:14px; padding:14px; margin:12px 0}
+    details.topic[open]{background:#10173a}
+    details.topic summary{list-style:none; cursor:pointer; font-weight:700}
+    details.topic summary::marker{display:none}
+    details.topic summary span{color:var(--muted); font-weight:500; margin-left:8px}
+
+    .kvs{display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:10px}
+    .kv{background:#0f1640; padding:12px; border:1px solid #1f2d66; border-radius:12px}
+    .kv h4{margin:2px 0 6px}
+    .list{margin-top:6px; color:var(--muted)}
+
+    .table{width:100%; border-collapse: collapse; margin-top:10px}
+    .table th,.table td{border:1px solid #263472; padding:8px; text-align:left}
+    .table th{background:#0f1742}
+
+    .svgwrap{background:#0f1640; border:1px solid #1f2d66; border-radius:12px; padding:10px; display:flex; justify-content:center}
+
+    .quiz{margin-top:14px; border:1px dashed #2b4493; border-radius:14px; padding:14px}
+    .quiz h4{margin:0 0 8px}
+    .quiz .q{margin:8px 0}
+    .quiz button{background:linear-gradient(90deg,var(--brand),var(--accent)); color:#0b1020; border:none; padding:8px 12px; border-radius:10px; font-weight:800; cursor:pointer}
+    .result{margin-top:8px; font-weight:700}
+
+    .footer{margin:40px 0 80px; color:var(--muted); text-align:center}
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{font-size:12px; border:1px solid #2b4493; padding:6px 10px; border-radius:999px; color:var(--muted)}
+
+    .progress{height:10px; background:#0f1640; border-radius:999px; border:1px solid #1f2d66; overflow:hidden}
+    .bar{height:10px; width:0%; background:linear-gradient(90deg,var(--brand),var(--accent)); transition:width .5s ease}
+
+    .note{font-size:12px; color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div class="badge">ITパスポート 第8章</div>
+      <div>
+        <h1>コンピュータシステム｜HTML学習教材</h1>
+        <p class="sub">8-1 プロセッサ／8-2 記憶装置／8-3 入出力デバイス／8-4 IoTデバイス</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <div>
+        <h2>学習の道しるべ</h2>
+        <nav class="toc">
+          <a class="card" href="#sec8-1">
+            <h3>8-1 プロセッサ</h3>
+            <p>コンピュータの構成／CPUの基本／バス幅</p>
+          </a>
+          <a class="card" href="#sec8-2">
+            <h3>8-2 記憶装置</h3>
+            <p>RAM・ROM／用途／記憶媒体</p>
+          </a>
+          <a class="card" href="#sec8-3">
+            <h3>8-3 入出力デバイス</h3>
+            <p>I/Oインターフェース（シリアル／パラレル／無線）</p>
+          </a>
+          <a class="card" href="#sec8-4">
+            <h3>8-4 IoTデバイス</h3>
+            <p>センサー／アクチュエーター／デバイスドライバ</p>
+          </a>
+        </nav>
+        <div class="progress" aria-label="学習進捗">
+          <div class="bar" id="progressBar"></div>
+        </div>
+        <p class="note">各セクションのクイズに正解すると進捗バーが伸びます。</p>
+      </div>
+      <aside>
+        <div class="card">
+          <h3>この章で身につくこと</h3>
+          <ul class="list">
+            <li>CPUの働きと命令実行サイクルを説明できる</li>
+            <li>メモリ階層とRAM/ROMの違いを区別できる</li>
+            <li>主要なI/Oインターフェースの特徴を整理できる</li>
+            <li>代表的なセンサーとアクチュエーターを用途と結び付けられる</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>重要キーワード</h3>
+          <div class="chips">
+            <div class="chip">制御装置／演算装置</div>
+            <div class="chip">レジスタ</div>
+            <div class="chip">命令実行サイクル</div>
+            <div class="chip">バス幅</div>
+            <div class="chip">キャッシュメモリ</div>
+            <div class="chip">順編成・直接編成</div>
+            <div class="chip">USB／PCIe</div>
+            <div class="chip">UART／SPI／I²C</div>
+            <div class="chip">Bluetooth／Wi‑Fi／NFC</div>
+            <div class="chip">加速度／温湿度／画像</div>
+            <div class="chip">PWM／ステッピング</div>
+            <div class="chip">デバイスドライバ</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 8-1 プロセッサ -->
+    <section id="sec8-1">
+      <h2>8-1 プロセッサ（CPU）</h2>
+
+      <details class="topic" open>
+        <summary>コンピュータの基本構成 <span>（入力／記憶／演算／制御／出力）</span></summary>
+        <div class="kvs">
+          <div class="kv"><h4>入力</h4><p class="list">キーボード・マウス・センサーなど</p></div>
+          <div class="kv"><h4>記憶</h4><p class="list">主記憶（RAM）・補助記憶（SSD/HDD）</p></div>
+          <div class="kv"><h4>演算</h4><p class="list">ALUが数値演算・論理演算を実行</p></div>
+          <div class="kv"><h4>制御</h4><p class="list">制御装置が命令の解釈と各装置の指揮</p></div>
+          <div class="kv"><h4>出力</h4><p class="list">ディスプレイ・プリンタ・アクチュエーター</p></div>
+        </div>
+        <div class="svgwrap" aria-hidden="true">
+          <svg viewBox="0 0 640 160" width="100%" height="140">
+            <rect x="10" y="30" width="120" height="100" rx="10" fill="#16205a" stroke="#2b4493"/>
+            <text x="70" y="85" fill="#cfe0ff" text-anchor="middle">入力</text>
+
+            <rect x="150" y="30" width="120" height="100" rx="10" fill="#16205a" stroke="#2b4493"/>
+            <text x="210" y="63" fill="#cfe0ff" text-anchor="middle">主記憶</text>
+            <text x="210" y="95" fill="#93b7ff" font-size="12" text-anchor="middle">RAM</text>
+
+            <rect x="290" y="30" width="120" height="100" rx="10" fill="#1a2468" stroke="#2b4493"/>
+            <text x="350" y="63" fill="#cfe0ff" text-anchor="middle">CPU</text>
+            <text x="350" y="95" fill="#93b7ff" font-size="12" text-anchor="middle">制御＋演算</text>
+
+            <rect x="430" y="30" width="120" height="100" rx="10" fill="#16205a" stroke="#2b4493"/>
+            <text x="490" y="63" fill="#cfe0ff" text-anchor="middle">補助記憶</text>
+            <text x="490" y="95" fill="#93b7ff" font-size="12" text-anchor="middle">SSD/HDD</text>
+
+            <rect x="570" y="30" width="60" height="100" rx="10" fill="#16205a" stroke="#2b4493"/>
+            <text x="600" y="85" fill="#cfe0ff" text-anchor="middle">出力</text>
+
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L10,3 L0,6" fill="#6ea8fe" />
+              </marker>
+            </defs>
+            <line x1="130" y1="80" x2="150" y2="80" stroke="#6ea8fe" stroke-width="2" marker-end="url(#arrow)"/>
+            <line x1="270" y1="80" x2="290" y2="80" stroke="#6ea8fe" stroke-width="2" marker-end="url(#arrow)"/>
+            <line x1="410" y1="80" x2="430" y2="80" stroke="#6ea8fe" stroke-width="2" marker-end="url(#arrow)"/>
+            <line x1="550" y1="80" x2="570" y2="80" stroke="#6ea8fe" stroke-width="2" marker-end="url(#arrow)"/>
+          </svg>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary>CPUの基本的な仕組み <span>（フェッチ→デコード→実行）</span></summary>
+        <ul class="list">
+          <li><b>レジスタ</b>：高速な作業領域（PC/IR/ACCなど）</li>
+          <li><b>命令実行サイクル</b>：主記憶から命令を<b>フェッチ</b>→内容を<b>デコード</b>→ALU等で<b>実行</b></li>
+          <li><b>クロック</b>：動作の刻み。周波数が高いほど並列度や性能の上限が上がるが、消費電力・発熱も増える</li>
+          <li><b>パイプライン</b>：複数命令の工程を重ねて処理（スループット向上）</li>
+          <li><b>キャッシュメモリ</b>：主記憶より高速な小容量メモリ（局所性の原理を利用）</li>
+        </ul>
+      </details>
+
+      <details class="topic">
+        <summary>バスと<b>バス幅</b> <span>（データ／アドレス／制御）</span></summary>
+        <p class="list">バスは装置間でデータや信号をやり取りする共通の通路。代表的に<b>データバス</b>（やり取りする値）、<b>アドレスバス</b>（参照先）、<b>制御バス</b>（読取/書込などの制御）。</p>
+        <table class="table">
+          <thead><tr><th>項目</th><th>意味</th><th>影響</th></tr></thead>
+          <tbody>
+            <tr><td>データバス幅</td><td>一度に転送できるデータ量（例：32bit, 64bit）</td><td>1クロックで扱えるビット数→転送効率</td></tr>
+            <tr><td>アドレスバス幅</td><td>表現できるアドレスのビット長</td><td>理論上の最大アドレス空間（例：32bitで約4GB）</td></tr>
+            <tr><td>バス周波数</td><td>転送の刻みの速さ</td><td>帯域幅（周波数×幅）</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <div class="quiz" data-quiz="q8-1">
+        <h4>確認クイズ（8-1）</h4>
+        <div class="q"><label><input type="radio" name="q8-1" value="A"> 命令実行サイクルは「実行→フェッチ→デコード」の順である。</label></div>
+        <div class="q"><label><input type="radio" name="q8-1" value="B" data-correct> レジスタは主記憶より高速な作業領域である。</label></div>
+        <div class="q"><label><input type="radio" name="q8-1" value="C"> アドレスバス幅はスループットを直接表す。</label></div>
+        <button onclick="grade('q8-1')">採点</button>
+        <div class="result" id="res-q8-1"></div>
+      </div>
+    </section>
+
+    <!-- 8-2 記憶装置 -->
+    <section id="sec8-2">
+      <h2>8-2 記憶装置（メモリと記憶媒体）</h2>
+
+      <details class="topic" open>
+        <summary>RAMとROM <span>（揮発性／不揮発性）</span></summary>
+        <table class="table">
+          <thead><tr><th>種類</th><th>特徴</th><th>典型用途</th></tr></thead>
+          <tbody>
+            <tr><td>RAM</td><td>電源断で消える（揮発）。読み書き高速。</td><td>作業領域（主記憶）、キャッシュ</td></tr>
+            <tr><td>ROM</td><td>電源断でも保持（不揮発）。基本は読み出し専用。</td><td>ファームウェア、起動プログラム</td></tr>
+          </tbody>
+        </table>
+        <ul class="list">
+          <li>DRAM（安価・大容量）とSRAM（高速・少容量）</li>
+          <li>フラッシュメモリ（EEPROMの一種）：SSD・USBメモリに利用</li>
+        </ul>
+      </details>
+
+      <details class="topic">
+        <summary>メモリの用途と記憶階層</summary>
+        <ul class="list">
+          <li><b>キャッシュ</b>→<b>主記憶</b>→<b>補助記憶</b>の順に高速・小容量から低速・大容量へ</li>
+          <li>局所性（時間的／空間的）を活かし、平均アクセス時間を短縮</li>
+        </ul>
+      </details>
+
+      <details class="topic">
+        <summary>記憶媒体の種類</summary>
+        <table class="table">
+          <thead><tr><th>媒体</th><th>特徴</th><th>長所</th><th>短所</th></tr></thead>
+          <tbody>
+            <tr><td>SSD（フラッシュ）</td><td>半導体。ランダムアクセス高速</td><td>高速・静音・耐衝撃</td><td>書換え寿命・価格</td></tr>
+            <tr><td>HDD（磁気）</td><td>回転磁気ディスク</td><td>大容量・安価</td><td>物理衝撃に弱い・遅い</td></tr>
+            <tr><td>光学（BD/DVD）</td><td>レーザーで読み書き</td><td>配布・長期保存</td><td>書込み速度・耐久</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <div class="quiz" data-quiz="q8-2">
+        <h4>確認クイズ（8-2）</h4>
+        <div class="q"><label><input type="radio" name="q8-2" value="A" data-correct> DRAMはSRAMより大容量で安価だが遅い傾向がある。</label></div>
+        <div class="q"><label><input type="radio" name="q8-2" value="B"> SSDは磁気ディスクの一種である。</label></div>
+        <div class="q"><label><input type="radio" name="q8-2" value="C"> ROMは必ずしも不揮発ではない。</label></div>
+        <button onclick="grade('q8-2')">採点</button>
+        <div class="result" id="res-q8-2"></div>
+      </div>
+    </section>
+
+    <!-- 8-3 入出力デバイス -->
+    <section id="sec8-3">
+      <h2>8-3 入出力デバイス（I/Oインターフェース）</h2>
+
+      <details class="topic" open>
+        <summary>インターフェースの全体像</summary>
+        <ul class="list">
+          <li><b>内部</b>：PCIe、SATA、M.2など装置内接続</li>
+          <li><b>外部</b>：USB、HDMI、DisplayPort、Thunderbolt など</li>
+          <li><b>無線</b>：Wi‑Fi、Bluetooth、NFC など</li>
+        </ul>
+      </details>
+
+      <details class="topic">
+        <summary>シリアルインターフェース</summary>
+        <ul class="list">
+          <li><b>UART</b>：シンプルな逐次通信。組込みで広く利用</li>
+          <li><b>SPI</b>：主従（Master/Slave）方式。高速・複線</li>
+          <li><b>I²C</b>：2線式（SCL/SDA）で多点接続</li>
+          <li><b>USB</b>：ホスト制御型の汎用シリアル</li>
+        </ul>
+      </details>
+
+      <details class="topic">
+        <summary>パラレルインターフェイス</summary>
+        <p class="list">複数ビットを同時転送。プリンタ用の旧式規格（Centronics/IEEE1284）などが代表。近年は配線本数・クロストークの課題から、高速化は主にシリアルへ。</p>
+      </details>
+
+      <details class="topic">
+        <summary>ワイヤレスインターフェイス</summary>
+        <table class="table">
+          <thead><tr><th>方式</th><th>特徴</th><th>主な用途</th></tr></thead>
+          <tbody>
+            <tr><td>Wi‑Fi</td><td>高速・中距離・IP通信</td><td>LAN接続、IoTゲートウェイ</td></tr>
+            <tr><td>Bluetooth</td><td>省電力・近距離</td><td>ヘッドセット、周辺機器</td></tr>
+            <tr><td>NFC</td><td>超近距離・非接触</td><td>決済、タグ読み取り</td></tr>
+            <tr><td>LPWA（LoRa/Sigfox等）</td><td>低速・長距離・省電力</td><td>センサ遠隔監視</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <div class="quiz" data-quiz="q8-3">
+        <h4>確認クイズ（8-3）</h4>
+        <div class="q"><label><input type="radio" name="q8-3" value="A"> I²Cは4線式で、クロック2本＋データ2本を使う。</label></div>
+        <div class="q"><label><input type="radio" name="q8-3" value="B" data-correct> SPIは主従方式のシリアルで、複数ライン（MOSI/MISO/SCLK/SS）を使う。</label></div>
+        <div class="q"><label><input type="radio" name="q8-3" value="C"> 近年はパラレル方式が高速化の主流である。</label></div>
+        <button onclick="grade('q8-3')">採点</button>
+        <div class="result" id="res-q8-3"></div>
+      </div>
+    </section>
+
+    <!-- 8-4 IoTデバイス -->
+    <section id="sec8-4">
+      <h2>8-4 IoTデバイス（センサー／アクチュエーター／ドライバ）</h2>
+
+      <details class="topic" open>
+        <summary>センサーの種類</summary>
+        <table class="table">
+          <thead><tr><th>種別</th><th>測るもの</th><th>例</th></tr></thead>
+          <tbody>
+            <tr><td>物理</td><td>加速度・角速度・振動・圧力・光</td><td>加速度計、ジャイロ、圧力センサ、フォトダイオード</td></tr>
+            <tr><td>環境</td><td>温度・湿度・気体・騒音</td><td>温湿度、CO₂、VOC、騒音計</td></tr>
+            <tr><td>位置</td><td>距離・位置・方角</td><td>超音波・ToF、GPS、磁気</td></tr>
+            <tr><td>画像／音</td><td>画像・音声</td><td>CMOSカメラ、マイク</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details class="topic">
+        <summary>応用的な仕組みのセンサー</summary>
+        <ul class="list">
+          <li><b>ToF（Time of Flight）</b>：光の往復時間から距離を算出</li>
+          <li><b>ホール効果</b>：磁界で電位差→回転や位置検出</li>
+          <li><b>ピエゾ素子</b>：圧力で電荷発生→振動・タッチ検出</li>
+        </ul>
+      </details>
+
+      <details class="topic">
+        <summary>アクチュエーター</summary>
+        <ul class="list">
+          <li>モータ（DC、サーボ、ステッピング）</li>
+          <li>リレー、ソレノイド（直線動作）</li>
+          <li>ヒータ、バルブ など</li>
+          <li>制御例：<b>PWM制御</b>（デューティ比で出力を調整）</li>
+        </ul>
+      </details>
+
+      <details class="topic">
+        <summary>デバイスドライバ</summary>
+        <ul class="list">
+          <li>OSがハードウェアを統一的に扱うためのソフトウェア</li>
+          <li>アプリケーションはドライバを介して入出力を利用</li>
+          <li>カーネルモジュール／ユーザ空間ドライバ などの形態</li>
+        </ul>
+      </details>
+
+      <div class="quiz" data-quiz="q8-4">
+        <h4>確認クイズ（8-4）</h4>
+        <div class="q"><label><input type="radio" name="q8-4" value="A"> PWMは周波数を固定しデューティ比も固定する制御。</label></div>
+        <div class="q"><label><input type="radio" name="q8-4" value="B"> ホールセンサは光の位相差を利用する。</label></div>
+        <div class="q"><label><input type="radio" name="q8-4" value="C" data-correct> デバイスドライバはアプリとハードの仲立ちをする。</label></div>
+        <button onclick="grade('q8-4')">採点</button>
+        <div class="result" id="res-q8-4"></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <p>Copyright©Chibamode.JIN</p><br>
+      <a href= "index.html">📚 8章　コンピュータシステムにもどる</a>
+    </div>
+  </main>
+
+  <script>
+    // 簡易採点＆進捗
+    const answered = new Set();
+    function grade(id){
+      const group = document.querySelector(`[data-quiz="${id}"]`);
+      const name = group.querySelector('input[type=radio]').name;
+      const selected = group.querySelector('input[type=radio]:checked');
+      const res = document.getElementById(`res-${id}`);
+      if(!selected){res.textContent='選択してください。'; res.style.color='var(--muted)';return}
+      const correct = selected.hasAttribute('data-correct');
+      if(correct){
+        res.textContent='正解！よくできました。';
+        res.style.color='var(--ok)';
+        answered.add(id);
+      }else{
+        res.textContent='不正解。各トピックを見直しましょう。';
+        res.style.color='var(--bad)';
+      }
+      updateProgress();
+    }
+    function updateProgress(){
+      const total = document.querySelectorAll('.quiz').length;
+      const done = answered.size;
+      const ratio = Math.round(done/total*100);
+      document.getElementById('progressBar').style.width = ratio+"%";
+    }
+  </script>
+</body>
+</html>

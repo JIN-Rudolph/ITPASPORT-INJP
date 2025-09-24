@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>外国人留学生向け｜5章 プロジェクトマネジメント（やさしい日本語＋英語用語）</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel:#121a2b;
+      --ink:#eaf2ff;
+      --muted:#a8b3cf;
+      --accent:#5ab0ff;
+      --ok:#43d17c;
+      --warn:#ffb657;
+      --danger:#ff6b6b;
+      --ring: rgba(90,176,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:linear-gradient(180deg, #09101e 0%, #0e1830 100%);
+      letter-spacing:.02em;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:linear-gradient(180deg, rgba(9,16,30,.85), rgba(9,16,30,.6));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+    .title{display:flex;gap:14px;align-items:center}
+    .badge{font-size:12px;color:#00142b;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .sub{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    nav#toc{position:sticky;top:84px;align-self:start;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    nav#toc h2{margin:0 0 8px;font-size:16px}
+    nav#toc ul{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+    nav#toc li{margin:6px 0}
+    nav#toc a{color:var(--ink)}
+
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 20px}
+    .controls input[type="search"]{flex:1;min-width:240px;background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+    .btn{background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+
+    section{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px;margin-bottom:18px}
+    h2{margin:.2em 0 .6em;font-size:24px}
+    h3{margin:1.2em 0 .4em;font-size:18px}
+    p{color:var(--ink);opacity:.92}
+    .muted{color:var(--muted)}
+
+    .timeline{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:12px}
+    .step{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;position:relative}
+    .step .num{font-weight:700;color:var(--accent);font-size:12px}
+    .step .name{font-weight:600}
+    .step .desc{color:var(--muted);font-size:13px;margin-top:6px}
+
+    details{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin:.6em 0}
+    details[open]{outline:2px solid var(--ring)}
+    summary{cursor:pointer;font-weight:600}
+
+    .card{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:.6em 0}
+    .label{font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:inline-block;color:var(--muted)}
+
+    .checklist label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px}
+    .checklist input{accent-color:var(--accent);margin-top:3px}
+
+    .model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .model{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+
+    .gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .gloss b{color:var(--accent)}
+
+    .foot{color:var(--muted);font-size:12px;margin-top:8px}
+    .kicker{font-size:13px;color:var(--muted)}
+
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      nav#toc{position:relative;top:auto}
+      .timeline{grid-template-columns: 1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>📘 5章 プロジェクトマネジメント <span class="muted">Project Management</span></h1>
+  <p class="muted">外国人留学生向け学習サポート教材 — やさしい日本語と英語用語つき</p>
+</header>
+<div class="wrap grid">
+<nav id="toc" aria-label="目次">
+    <h2>目次</h2>
+    <ul>
+      <li><a href="#project">プロジェクトとは</a></li>
+      <li><a href="#pm">プロジェクトマネジメントの流れ</a></li>
+      <li><a href="#knowledge">プロジェクトマネジメント知識エリア</a>
+        <ul>
+          <li><a href="#scope">スコープマネジメント</a></li>
+          <li><a href="#schedule">スケジュールマネジメント</a></li>
+          <li><a href="#cost">コストマネジメント</a></li>
+          <li><a href="#quality">品質マネジメント</a></li>
+          <li><a href="#resources">資源マネジメント</a></li>
+          <li><a href="#communication">コミュニケーションマネジメント</a></li>
+          <li><a href="#risk">リスクマネジメント</a></li>
+          <li><a href="#procurement">調達マネジメント</a></li>
+          <li><a href="#stakeholder">ステークホルダーマネジメント</a></li>
+          <li><a href="#integration">統合マネジメント</a></li>
+          <li><a href= "../HOME.html">学習一覧ホームにもどる</a>
+        </ul>
+      </li>
+      <li><a href="#diagrams">図解（ダイアグラム）</a></li>
+    </ul>
+  </nav>
+<main>
+
+
+  <section id="project">
+    <h2>プロジェクトとは <span class="muted">What is a Project?</span></h2>
+    <p>プロジェクト（Project）は、<b>特定の目的</b>と<b>期限</b>を持ち、ユニークな成果物やサービスを作る活動です。<br>
+       例：新しいアプリの開発、国際会議の運営、キャンパスイベントの企画など。</p>
+  </section>
+
+  <section id="pm">
+    <h2>プロジェクトマネジメントの流れ <span class="muted">Project Management Process</span></h2>
+    <details open>
+      <summary>① プロジェクトの立上げ（Initiating）</summary>
+      <div class="card">
+        <p>目的を明確にし、プロジェクトを正式に始める段階です。<br>
+        - ビジネスケースを確認<br>
+        - プロジェクト憲章（Project Charter）を作成<br>
+        - 関係者を特定（Stakeholder Identification）</p>
+      </div>
+    </details>
+    <details>
+      <summary>② 計画（Planning）</summary>
+      <div class="card">
+        <p>プロジェクトをどう進めるか、具体的な計画を立てます。</p>
+        <ul class="list">
+          <li>スコープ（範囲）を決める</li>
+          <li>スケジュール（いつ何をするか）</li>
+          <li>コスト（予算）を見積もる</li>
+          <li>リスクや資源の計画</li>
+        </ul>
+      </div>
+    </details>
+    <details>
+      <summary>③ 実行（Executing）</summary>
+      <div class="card">
+        <p>計画した作業を行うフェーズ。チームを指導し、成果物を作ります。</p>
+      </div>
+    </details>
+    <details>
+      <summary>④ 把握とコントロール（Monitoring & Controlling）</summary>
+      <div class="card">
+        <p>進捗やコストをモニタリングし、必要なら調整します。</p>
+        <p class="muted">例：ガントチャートで進捗確認、リスクの再評価</p>
+      </div>
+    </details>
+    <details>
+      <summary>⑤ 終結・評価（Closing）</summary>
+      <div class="card">
+        <p>成果物を引き渡し、振り返りを行う段階です。</p>
+        <ul class="list">
+          <li>受入（Acceptance）</li>
+          <li>教訓（Lessons Learned）の記録</li>
+          <li>チーム解散</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <section id="knowledge">
+    <h2>プロジェクトマネジメントの知識エリア <span class="muted">Knowledge Areas</span></h2>
+    <p>PMBOK（Project Management Body of Knowledge）で整理された、<b>10の知識エリア</b>です。</p>
+
+    <h3 id="scope">1. スコープマネジメント <span class="muted">Scope</span></h3>
+    <div class="card">
+      <p>プロジェクトで<b>何をするか・何をしないか</b>を定義します。<br>
+      - WBS（Work Breakdown Structure）を作成<br>
+      - スコープ変更の管理</p>
+    </div>
+
+    <h3 id="schedule">2. スケジュールマネジメント <span class="muted">Schedule</span></h3>
+    <div class="card">
+      <p>作業の順序と所要時間を決め、タイムラインを管理します。<br>
+      - ガントチャート（Gantt Chart）<br>
+      - クリティカルパス法（Critical Path Method）</p>
+    </div>
+
+    <h3 id="cost">3. コストマネジメント <span class="muted">Cost</span></h3>
+    <div class="card">
+      <p>予算を見積もり、支出をコントロールします。<br>
+      - EVM（Earned Value Management）でコストと進捗を評価</p>
+    </div>
+
+    <h3 id="quality">4. 品質マネジメント <span class="muted">Quality</span></h3>
+    <div class="card">
+      <p>成果物が満足できる品質かを確保します。<br>
+      - 品質保証（Quality Assurance）<br>
+      - 品質管理（Quality Control）</p>
+    </div>
+
+    <h3 id="resources">5. 資源マネジメント <span class="muted">Resources</span></h3>
+    <div class="card">
+      <p>人・物・設備を適切に割り当てます。<br>
+      - RACIチャート（役割分担表）</p>
+    </div>
+
+    <h3 id="communication">6. コミュニケーションマネジメント <span class="muted">Communication</span></h3>
+    <div class="card">
+      <p>情報を正しく、必要な人に届ける仕組みを作ります。<br>
+      - 定例ミーティング、レポート、チャットツール</p>
+    </div>
+
+    <h3 id="risk">7. リスクマネジメント <span class="muted">Risk</span></h3>
+    <div class="card">
+      <p>起こりうる問題を洗い出し、対応策を考えます。<br>
+      - リスク登録簿（Risk Register）<br>
+      - 回避・転嫁・受容・軽減の戦略</p>
+    </div>
+
+    <h3 id="procurement">8. 調達マネジメント <span class="muted">Procurement</span></h3>
+    <div class="card">
+      <p>外部から必要な物やサービスを契約・調達します。<br>
+      - 契約の種類（固定価格・時間単価など）</p>
+    </div>
+
+    <h3 id="stakeholder">9. ステークホルダーマネジメント <span class="muted">Stakeholder</span></h3>
+    <div class="card">
+      <p>利害関係者の期待を理解し、関与を促す活動。<br>
+      - ステークホルダーマップ<br>
+      - エンゲージメント計画</p>
+    </div>
+
+    <h3 id="integration">10. 統合マネジメント <span class="muted">Integration</span></h3>
+    <div class="card">
+      <p>全ての知識エリアをまとめ、バランスを取る役割。<br>
+      - プロジェクト計画書の作成と更新<br>
+      - 変更管理</p>
+    </div>
+  </section>
+
+  <section id="diagrams">
+    <h2>図解（ダイアグラム） <span class="muted">Visual Guides</span></h2>
+
+    <h3 id="flow">1. プロジェクトの流れ（Process Flow）</h3>
+    <div class="card">
+      <svg viewBox="0 0 900 140" width="100%" height="140" role="img" aria-label="Initiating → Planning → Executing → Monitoring & Controlling → Closing">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#5ab0ff" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="#43d17c" stop-opacity="0.9"/>
+          </linearGradient>
+        </defs>
+        <g font-family="system-ui, 'Noto Sans JP'" font-size="13" fill="#eaf2ff" text-anchor="middle">
+          <rect x="15" y="34" rx="10" ry="10" width="150" height="60" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="90" y="62">立上げ</text><text x="90" y="80">Initiating</text>
+
+          <rect x="195" y="34" rx="10" ry="10" width="150" height="60" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="270" y="62">計画</text><text x="270" y="80">Planning</text>
+
+          <rect x="375" y="34" rx="10" ry="10" width="150" height="60" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="450" y="62">実行</text><text x="450" y="80">Executing</text>
+
+          <rect x="555" y="22" rx="10" ry="10" width="150" height="84" fill="#0c1426" stroke="#ffb657"/>
+          <text x="630" y="58">把握・コントロール</text><text x="630" y="78">Monitoring &amp; Controlling</text>
+
+          <rect x="735" y="34" rx="10" ry="10" width="150" height="60" fill="#0c1426" stroke="#43d17c"/>
+          <text x="810" y="62">終結</text><text x="810" y="80">Closing</text>
+
+          <g stroke="url(#g1)" fill="none" stroke-width="3" marker-end="url(#arrow)">
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <polygon points="0 0, 10 4, 0 8" fill="url(#g1)"/>
+              </marker>
+            </defs>
+            <path d="M165 64 H195"/>
+            <path d="M345 64 H375"/>
+            <path d="M525 64 H555"/>
+            <path d="M705 64 H735"/>
+          </g>
+        </g>
+      </svg>
+      <p class="muted">※ 把握・コントロールは実行と並行して継続します。</p>
+    </div>
+
+    <h3 id="wbs">2. WBS（作業分割構成）サンプル</h3>
+    <div class="card">
+      <svg viewBox="0 0 920 300" width="100%" height="300" role="img" aria-label="WBS sample">
+        <g font-family="system-ui, 'Noto Sans JP'" font-size="12" fill="#eaf2ff">
+          <!-- Root -->
+          <rect x="410" y="10" width="120" height="34" rx="8" ry="8" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="470" y="31" text-anchor="middle">アプリ公開</text>
+          <!-- Level 1 -->
+          <rect x="120" y="80" width="160" height="34" rx="8" ry="8" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="200" y="101" text-anchor="middle">1. 要件・設計</text>
+
+          <rect x="380" y="80" width="160" height="34" rx="8" ry="8" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="460" y="101" text-anchor="middle">2. 実装</text>
+
+          <rect x="640" y="80" width="160" height="34" rx="8" ry="8" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="720" y="101" text-anchor="middle">3. テスト・導入</text>
+
+          <!-- Connectors -->
+          <g stroke="#5ab0ff">
+            <line x1="470" y1="44" x2="470" y2="80"/>
+            <line x1="470" y1="80" x2="200" y2="80"/>
+            <line x1="470" y1="80" x2="460" y2="80"/>
+            <line x1="470" y1="80" x2="720" y2="80"/>
+          </g>
+
+          <!-- Level 2 under 1 -->
+          <rect x="40" y="150" width="160" height="30" rx="6" ry="6" fill="#0c1426" stroke="#a8b3cf"/>
+          <text x="120" y="170" text-anchor="middle">1.1 要件定義</text>
+          <rect x="200" y="150" width="160" height="30" rx="6" ry="6" fill="#0c1426" stroke="#a8b3cf"/>
+          <text x="280" y="170" text-anchor="middle">1.2 基本設計</text>
+
+          <!-- Level 2 under 2 -->
+          <rect x="360" y="150" width="160" height="30" rx="6" ry="6" fill="#0c1426" stroke="#a8b3cf"/>
+          <text x="440" y="170" text-anchor="middle">2.1 フロント</text>
+          <rect x="520" y="150" width="160" height="30" rx="6" ry="6" fill="#0c1426" stroke="#a8b3cf"/>
+          <text x="600" y="170" text-anchor="middle">2.2 バックエンド</text>
+
+          <!-- Level 2 under 3 -->
+          <rect x="680" y="150" width="160" height="30" rx="6" ry="6" fill="#0c1426" stroke="#a8b3cf"/>
+          <text x="760" y="170" text-anchor="middle">3.1 テスト</text>
+          <rect x="840" y="150" width="160" height="30" rx="6" ry="6" fill="#0c1426" stroke="#a8b3cf"/>
+          <text x="920" y="170" text-anchor="middle">3.2 導入</text>
+
+          <!-- connectors level 2 -->
+          <g stroke="#a8b3cf">
+            <line x1="200" y1="114" x2="120" y2="150"/>
+            <line x1="200" y1="114" x2="280" y2="150"/>
+            <line x1="460" y1="114" x2="440" y2="150"/>
+            <line x1="540" y1="114" x2="600" y2="150"/>
+            <line x1="720" y1="114" x2="760" y2="150"/>
+            <line x1="800" y1="114" x2="920" y2="150"/>
+          </g>
+        </g>
+      </svg>
+      <p class="muted">※ WBSは上から下へ「大きい作業 → 小さい作業」に分けます。</p>
+    </div>
+
+    <h3 id="gantt">3. スケジュール（簡易ガントチャート）</h3>
+    <div class="card">
+      <svg viewBox="0 0 900 220" width="100%" height="220" role="img" aria-label="Gantt chart example">
+        <g font-family="system-ui, 'Noto Sans JP'" fill="#eaf2ff" font-size="12">
+          <!-- grid -->
+          <g stroke="rgba(255,255,255,.15)">
+            <line x1="120" y1="30" x2="880" y2="30"/>
+            <line x1="120" y1="70" x2="880" y2="70"/>
+            <line x1="120" y1="110" x2="880" y2="110"/>
+            <line x1="120" y1="150" x2="880" y2="150"/>
+          </g>
+          <text x="10" y="48">要件</text>
+          <text x="10" y="88">設計</text>
+          <text x="10" y="128">実装</text>
+          <text x="10" y="168">テスト</text>
+
+          <!-- bars -->
+          <rect x="130" y="38" width="180" height="16" rx="4" fill="#5ab0ff"/>
+          <rect x="220" y="78" width="220" height="16" rx="4" fill="#5ab0ff"/>
+          <rect x="320" y="118" width="360" height="16" rx="4" fill="#5ab0ff"/>
+          <rect x="540" y="158" width="200" height="16" rx="4" fill="#5ab0ff"/>
+        </g>
+      </svg>
+      <p class="muted">※ 実務では依存関係・マイルストーンを加えます。</p>
+    </div>
+
+    <h3 id="risk-matrix">4. リスクマトリクス（Impact × Probability）</h3>
+    <div class="card">
+      <svg viewBox="0 0 520 280" width="100%" height="280" role="img" aria-label="Risk matrix">
+        <g font-family="system-ui, 'Noto Sans JP'" font-size="12" fill="#eaf2ff">
+          <!-- axes labels -->
+          <text x="12" y="20">影響度</text>
+          <text x="430" y="270">発生確率</text>
+          <!-- grid -->
+          <g>
+            <rect x="80" y="30" width="360" height="200" fill="#0c1426" stroke="#5ab0ff"/>
+            <!-- cells -->
+            <g opacity="0.8">
+              <rect x="80" y="30" width="120" height="66" fill="#234d2f"/>
+              <rect x="200" y="30" width="120" height="66" fill="#38552f"/>
+              <rect x="320" y="30" width="120" height="66" fill="#5a3a3a"/>
+              <rect x="80" y="96" width="120" height="66" fill="#2a5a3f"/>
+              <rect x="200" y="96" width="120" height="66" fill="#5a503a"/>
+              <rect x="320" y="96" width="120" height="66" fill="#8a3d3d"/>
+              <rect x="80" y="162" width="120" height="66" fill="#3a6a4a"/>
+              <rect x="200" y="162" width="120" height="66" fill="#8a6a3d"/>
+              <rect x="320" y="162" width="120" height="66" fill="#b34a4a"/>
+            </g>
+            <!-- labels -->
+            <g text-anchor="middle">
+              <text x="140" y="72">低</text>
+              <text x="260" y="72">中</text>
+              <text x="380" y="72">高</text>
+              <text x="140" y="138">低</text>
+              <text x="260" y="138">中</text>
+              <text x="380" y="138">高</text>
+              <text x="140" y="204">低</text>
+              <text x="260" y="204">中</text>
+              <text x="380" y="204">高</text>
+            </g>
+          </g>
+          <text x="260" y="250" text-anchor="middle" class="muted">左下＝監視、右上＝強力に対策</text>
+        </g>
+      </svg>
+    </div>
+
+    <h3 id="stakeholder-grid">5. ステークホルダー・グリッド（Power × Interest）</h3>
+    <div class="card">
+      <svg viewBox="0 0 520 280" width="100%" height="280" role="img" aria-label="Stakeholder grid">
+        <g font-family="system-ui, 'Noto Sans JP'" font-size="12" fill="#eaf2ff">
+          <rect x="60" y="30" width="400" height="200" fill="#0c1426" stroke="#5ab0ff"/>
+          <line x1="260" y1="30" x2="260" y2="230" stroke="#5ab0ff"/>
+          <line x1="60" y1="130" x2="460" y2="130" stroke="#5ab0ff"/>
+          <text x="20" y="140" transform="rotate(-90 20,140)">Power（影響力）</text>
+          <text x="240" y="260">Interest（関心）</text>
+          <text x="110" y="80">A: 監視（Monitor）</text>
+          <text x="330" y="80">B: 密接に管理（Manage Closely）</text>
+          <text x="110" y="190">C: 情報提供（Keep Informed）</text>
+          <text x="330" y="190">D: 満足維持（Keep Satisfied）</text>
+          <!-- example dots -->
+          <circle cx="330" cy="95" r="6" fill="#ffb657"/><text x="340" y="95"> スポンサー</text>
+          <circle cx="130" cy="210" r="6" fill="#5ab0ff"/><text x="140" y="210"> 一般ユーザ</text>
+        </g>
+      </svg>
+    </div>
+
+    <h3 id="raci">6. 役割分担 RACI（Responsibility Assignment）</h3>
+    <div class="card">
+      <table style="width:100%;border-collapse:collapse;color:#eaf2ff">
+        <thead>
+          <tr style="background:#0c1426"><th style="border:1px solid rgba(255,255,255,.15);padding:8px">タスク</th><th style="border:1px solid rgba(255,255,255,.15);padding:8px">PO</th><th style="border:1px solid rgba(255,255,255,.15);padding:8px">PM</th><th style="border:1px solid rgba(255,255,255,.15);padding:8px">Dev</th><th style="border:1px solid rgba(255,255,255,.15);padding:8px">QA</th><th style="border:1px solid rgba(255,255,255,.15);padding:8px">Ops</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="border:1px solid rgba(255,255,255,.15);padding:6px">要件確定</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">A</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">R</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">C</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">C</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">I</td></tr>
+          <tr><td style="border:1px solid rgba(255,255,255,.15);padding:6px">実装</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">I</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">A</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">R</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">C</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">I</td></tr>
+          <tr><td style="border:1px solid rgba(255,255,255,.15);padding:6px">テスト</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">I</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">C</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">C</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">R/A</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">I</td></tr>
+          <tr><td style="border:1px solid rgba(255,255,255,.15);padding:6px">リリース</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">C</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">A</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">R</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">C</td><td style="border:1px solid rgba(255,255,255,.15);padding:6px">R</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">R=実行責任、A=最終責任、C=相談、I=情報共有</p>
+    </div>
+
+    <h3 id="evm">7. コスト・進捗の見える化（EVMのイメージ）</h3>
+    <div class="card">
+      <svg viewBox="0 0 900 300" width="100%" height="300" role="img" aria-label="EVM chart">
+        <g font-family="system-ui, 'Noto Sans JP'" font-size="12" fill="#eaf2ff">
+          <rect x="60" y="20" width="800" height="220" fill="#0c1426" stroke="#5ab0ff"/>
+          <text x="20" y="140" transform="rotate(-90 20,140)">コスト / 価値</text>
+          <text x="440" y="290">時間</text>
+          <!-- Baseline -->
+          <polyline points="80,220 240,190 400,160 560,130 720,100 840,80" fill="none" stroke="#a8b3cf" stroke-width="2"/>
+          <text x="160" y="200">計画値（PV）</text>
+          <!-- EV -->
+          <polyline points="80,220 240,200 400,175 560,150 720,135 840,120" fill="none" stroke="#5ab0ff" stroke-width="3"/>
+          <text x="300" y="168">出来高（EV）</text>
+          <!-- AC -->
+          <polyline points="80,220 240,210 400,190 560,165 720,150 840,145" fill="none" stroke="#ffb657" stroke-width="3"/>
+          <text x="650" y="155">実コスト（AC）</text>
+        </g>
+      </svg>
+      <p class="muted">EV &lt; AC ならコスト超過、EV &lt; PV なら進捗遅れのサイン。</p>
+    </div>
+  </section>     
+<p class="muted">Copyright©Chibamode.JIN<br>
+<a href= "../HOME.html">学習一覧ホームにもどる</a></p>
+</main></div>
+<script>
+    // Search filter
+    const q = document.getElementById('q');
+    const sections = Array.from(document.querySelectorAll('section, details, .card, .model'));
+    const clearBtn = document.getElementById('clear');
+    function filter(){
+      const term = q.value.trim().toLowerCase();
+      sections.forEach(el=>{
+        if(!term){ el.style.removeProperty('outline'); el.style.removeProperty('display'); return; }
+        const hit = el.textContent.toLowerCase().includes(term);
+        el.style.display = hit? 'block' : 'none';
+        if(hit){ el.style.outline = '2px solid var(--ring)'; }
+        else { el.style.removeProperty('outline'); }
+      });
+    }
+    q.addEventListener('input', filter);
+    clearBtn.addEventListener('click', ()=>{ q.value=''; filter(); });
+
+    // Expand/collapse all details
+    const expandBtn = document.getElementById('expand');
+    const collapseBtn = document.getElementById('collapse');
+    function setAll(open){ document.querySelectorAll('details').forEach(d=> d.open = open); }
+    expandBtn.addEventListener('click', ()=> setAll(true));
+    collapseBtn.addEventListener('click', ()=> setAll(false));
+
+    // Persist checklist state
+    const KEY = 'study-support-progress-v1';
+    function load(){
+      try{ const data = JSON.parse(localStorage.getItem(KEY) || '{}');
+        document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=>{
+          cb.checked = Boolean(data[cb.dataset.id]);
+        });
+      }catch(e){}
+    }
+    function save(){
+      const data = {};
+      document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=> data[cb.dataset.id] = cb.checked);
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+    document.addEventListener('change', e=>{ if(e.target.matches('input[type="checkbox"][data-id]')) save(); });
+    load();
+  </script>
+</body></html>

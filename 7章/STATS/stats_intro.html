@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>確率入門 | Introduction to Probability</title>
+  <link rel="stylesheet" href="stats.css">
+</head>
+<body>
+  <header>
+    <h1>📘 順列・組合せ・確率 (Permutation, Combination, Probability)</h1>
+    <p>やさしい日本語 + English</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>順列 (Permutation)</h2>
+      <p>順列（じゅんれつ, permutation）= 「ならべる方法の数」</p>
+      <p>順番を大事にする。Order matters.</p>
+      <p><b>公式 (Formula)</b>: P(n, r) = n! / (n-r)! </p>
+      <p><b>例 (Example)</b>: 5人から3人をならべる。<br>
+         P(5,3) = 5 × 4 × 3 = 60</p>
+    </section>
+
+    <section class="card">
+      <h2>組合せ (Combination)</h2>
+      <p>組合せ（くみあわせ, combination）= 「えらぶ方法の数」</p>
+      <p>順番は関係ない。Order does not matter.</p>
+      <p><b>公式 (Formula)</b>: C(n, r) = n! / (r!(n-r)!) </p>
+      <p><b>例 (Example)</b>: 5人から3人をえらぶ。<br>
+         C(5,3) = 10</p>
+    </section>
+
+    <section class="card">
+      <h2>確率 (Probability)</h2>
+      <p>確率（かくりつ, probability）= 「おこる場合 / ぜんぶの場合」</p>
+      <p><b>公式 (Formula)</b>: P(A) = 有利な場合の数 / 全体の場合の数</p>
+      <p><b>例 (Example)</b>: 5人から3人をえらぶ。Aさんが入る確率は？<br>
+         全体: C(5,3)=10<br>
+         Aさんをふくむ場合: C(4,2)=6<br>
+         → P = 6/10 = 0.6</p>
+    </section>
+
+    <footer>
+      <p>Copyright©Chibamode.JIN</p><br>
+      <a href="stats_home.html">📘 確率と統計サブホームへ</a></p>
+    </footer>
+  </main>
+</body>
+</html>

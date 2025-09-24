@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>外国人留学生向け｜6-1 サービスマネジメント / 6-2 システム監査（やさしい日本語＋英語用語）</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel:#121a2b;
+      --ink:#eaf2ff;
+      --muted:#a8b3cf;
+      --accent:#5ab0ff;
+      --ok:#43d17c;
+      --warn:#ffb657;
+      --danger:#ff6b6b;
+      --ring: rgba(90,176,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:linear-gradient(180deg, #09101e 0%, #0e1830 100%);
+      letter-spacing:.02em;
+      line-height:1.6;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:linear-gradient(180deg, rgba(9,16,30,.85), rgba(9,16,30,.6));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+    .title{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .badge{font-size:12px;color:#00142b;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .sub{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    nav#toc{position:sticky;top:84px;align-self:start;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    nav#toc h2{margin:0 0 8px;font-size:16px}
+    nav#toc ul{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+    nav#toc li{margin:6px 0}
+    nav#toc a{color:var(--ink)}
+    nav#toc a:focus{outline:2px solid var(--ring);outline-offset:2px;border-radius:6px}
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 20px}
+    .controls input[type="search"]{flex:1;min-width:240px;background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+    .btn{background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+    section{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px;margin-bottom:18px}
+    h2{margin:.2em 0 .6em;font-size:24px}
+    h3{margin:1.2em 0 .4em;font-size:18px}
+    p{color:var(--ink);opacity:.92}
+    .muted{color:var(--muted)}
+    .kicker{font-size:13px;color:var(--muted)}
+    .timeline{display:grid;grid-template-columns:repeat(6,minmax(160px,1fr));gap:12px}
+    .step{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;position:relative;word-break:keep-all}
+    .step .num{font-weight:700;color:var(--accent);font-size:12px}
+    .step .name{font-weight:600}
+    .step .desc{color:var(--muted);font-size:13px;margin-top:6px}
+    details{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin:.6em 0}
+    details[open]{outline:2px solid var(--ring)}
+    summary{cursor:pointer;font-weight:600}
+    .card{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:.6em 0}
+    .label{font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:inline-block;color:var(--muted)}
+    .gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .gloss b{color:var(--accent)}
+    .checklist label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px}
+    .checklist input{accent-color:var(--accent);margin-top:3px}
+    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+    .model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .model{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    .foot{color:var(--muted);font-size:12px;margin-top:8px}
+    .hint{font-size:12px;color:var(--muted)}
+    .badge-inline{font-size:11px;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:2px 6px;margin-left:6px;color:var(--muted)}
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      nav#toc{position:relative;top:auto}
+      .timeline{grid-template-columns: 1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div style="font-weight:800;font-size:20px">📚 外国人留学生向け 学習サポート</div>
+        <span class="badge">やさしい日本語 + English terms</span>
+      </div>
+      <p class="sub">6-1 サービスマネジメント／6-2 システム監査・内部統制・ITガバナンス — 初学者向けに、短い日本語と英語で説明します。</p>
+      <div class="controls">
+        <input id="q" type="search" placeholder="キーワードで検索（例：SLA / ITIL / audit / COBIT）" />
+        <button class="btn" id="expand">すべて開く</button>
+        <button class="btn" id="collapse">すべて閉じる</button>
+        <button class="btn" id="clear">検索クリア</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap grid">
+    <!-- TOC -->
+    <nav id="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ul>
+        <li><a href="#sec61">6-1 サービスマネジメント</a>
+          <ul>
+            <li><a href="#purpose">目的と考え方</a></li>
+            <li><a href="#itil">ITILの基本</a></li>
+            <li><a href="#sla">サービスレベル合意書（SLA）</a></li>
+            <li><a href="#practices">主要プラクティス</a></li>
+            <li><a href="#facility">ファシリティマネジメント</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec62">6-2 システム監査・内部統制・ITガバナンス</a>
+          <ul>
+            <li><a href="#audit">システム監査</a></li>
+            <li><a href="#audit-plan">監査計画</a></li>
+            <li><a href="#audit-do">監査の実施</a></li>
+            <li><a href="#audit-others">その他の監査業務</a></li>
+            <li><a href="#ic-objective">内部統制の目的</a></li>
+            <li><a href="#ic-components">内部統制の基本要素</a></li>
+            <li><a href="#itgov">ITガバナンス</a></li>
+            <li><a href="../HOME.html">学習一覧ホームにもどる</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- 6-1 -->
+      <section id="sec61">
+        <h2>6-1 サービスマネジメント <span class="kicker">Service Management</span></h2>
+        <p>サービスマネジメントは、<b>ITサービスの価値</b>を、<b>安定して</b>、<b>約束どおり</b>に提供するための考え方です。<br><span class="muted">（英語：How to plan, deliver, and improve IT services with stable quality and value.）</span></p>
+
+        <h3 id="purpose">目的と考え方 <span class="kicker">Purpose & Mindset</span></h3>
+        <div class="two-col">
+          <div class="card">
+            <div class="label">目的（Purpose）</div>
+            <ul>
+              <li>利用者とビジネスに<b>価値（Value）</b>を届ける</li>
+              <li>品質・コスト・リスクの<b>バランス</b>を取る</li>
+              <li>継続的改善（<i>Continual Improvement</i>）</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="label">基本の考え方（Principles）</div>
+            <ul>
+              <li>価値にフォーカス（<i>Focus on value</i>）</li>
+              <li>全体を見て働く（<i>Think & work holistically</i>）</li>
+              <li>フィードバックで早く回す（<i>Iterate with feedback</i>）</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 id="itil">ITILの基本 <span class="kicker">ITIL Basics</span></h3>
+        <details open>
+          <summary>ITILとは？（What is ITIL?）</summary>
+          <div class="card">
+            <p>ITサービス管理のベストプラクティス集です。<br><span class="muted">A collection of best practices for managing IT services.</span></p>
+            <p class="hint">※ 試験では、用語の意味と関係（例：インシデント⇔問題、変更⇔リリース）を理解します。</p>
+          </div>
+        </details>
+        <details>
+          <summary>サービスライフサイクルの流れ（Service Lifecycle）</summary>
+          <div class="timeline" role="list">
+            <div class="step" role="listitem">
+              <div class="num">1</div>
+              <div class="name">戦略（Strategy）</div>
+              <div class="desc">サービスの方向と価値を決める。</div>
+            </div>
+            <div class="step" role="listitem">
+              <div class="num">2</div>
+              <div class="name">設計（Design）</div>
+              <div class="desc">SLAやプロセス、仕組みを設計。</div>
+            </div>
+            <div class="step" role="listitem">
+              <div class="num">3</div>
+              <div class="name">移行（Transition）</div>
+              <div class="desc">変更・リリースで本番へ移す。</div>
+            </div>
+            <div class="step" role="listitem">
+              <div class="num">4</div>
+              <div class="name">運用（Operation）</div>
+              <div class="desc">日々のサービス提供と受付。</div>
+            </div>
+            <div class="step" role="listitem">
+              <div class="num">5</div>
+              <div class="name">改善（Improvement）</div>
+              <div class="desc">KPIを見て継続的に改善。</div>
+            </div>
+          </div>
+        </details>
+
+        <h3 id="sla">サービスレベル合意書 <span class="kicker">SLA: Service Level Agreement</span></h3>
+        <div class="card">
+          <p>SLAは、<b>サービスの約束</b>を文書にしたものです。<span class="muted">（A document that defines the promised service quality.）</span></p>
+          <ul>
+            <li>可用性（Availability）例：99.9% 稼働</li>
+            <li>応答時間（Response Time）例：平均3秒</li>
+            <li>復旧時間（MTTR）・故障間隔（MTBF）</li>
+            <li>窓口時間（Service Desk Hours）</li>
+            <li>違反時の対応（Penalty/改善計画）</li>
+          </ul>
+        </div>
+
+        <h3 id="practices">主要プラクティス <span class="kicker">Key Practices</span></h3>
+        <details open>
+          <summary>サービスレベル管理（Service Level Management）</summary>
+          <div class="card">
+            <p>SLA/OLA/UC（下請け契約）を<b>整合</b>させ、KPIを監視します。</p>
+            <ul class="checklist">
+              <label><input type="checkbox" data-id="slm-1"> SLAの指標と閾値を定義した</label>
+              <label><input type="checkbox" data-id="slm-2"> 月次レポートで傾向を説明できる</label>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>サービスカタログ管理（Service Catalog）</summary>
+          <div class="card">
+            <p>利用者が申し込めるサービス一覧（料金、納期、SLA、手順）。</p>
+          </div>
+        </details>
+        <details>
+          <summary>構成管理（Configuration Management / CMDB）</summary>
+          <div class="card">
+            <p>CI（構成アイテム）と<b>関係</b>を記録。影響範囲の把握に使う。</p>
+          </div>
+        </details>
+        <details>
+          <summary>需要管理（Demand Management）</summary>
+          <div class="card">
+            <p>ピークや繁忙期を予測し、キャパシティを確保する。</p>
+          </div>
+        </details>
+        <details>
+          <summary>変更管理（Change Enablement）</summary>
+          <div class="card">
+            <p>リスク評価・承認・スケジュール・バックアウト計画を管理。</p>
+            <p class="foot">CAB（Change Advisory Board）で評価。</p>
+          </div>
+        </details>
+        <details>
+          <summary>リリース管理・展開管理（Release & Deployment）</summary>
+          <div class="card">
+            <p>開発→テスト→本番への<b>安全な配布</b>。段階的ロールアウト、カナリア等。</p>
+          </div>
+        </details>
+        <details>
+          <summary>インシデント管理（Incident Management）</summary>
+          <div class="card">
+            <p>サービス中断を<b>早く復旧</b>。SLA内で対応、エスカレーション。</p>
+          </div>
+        </details>
+        <details>
+          <summary>サービス要求管理（Service Request Management）</summary>
+          <div class="card">
+            <p>アカウント発行やFAQなど、標準的な依頼を効率化。</p>
+          </div>
+        </details>
+        <details>
+          <summary>問題管理（Problem Management）</summary>
+          <div class="card">
+            <p>根本原因（RCA）を分析し、恒久対策（KEDB/回避策）を作る。</p>
+          </div>
+        </details>
+        <details>
+          <summary>サービス可用性管理（Availability Management）</summary>
+          <div class="card">
+            <p>単一障害点（SPOF）の排除、冗長化、監視、テスト。</p>
+          </div>
+        </details>
+        <details>
+          <summary>サービス継続管理（IT Service Continuity）</summary>
+          <div class="card">
+            <p>DR/BCP、RTO/RPO、復旧訓練（演習）。</p>
+          </div>
+        </details>
+        <details>
+          <summary>サービスデスク（Service Desk）</summary>
+          <div class="card">
+            <p>単一窓口。分類・優先度付け・一次解決・エスカレーション。</p>
+          </div>
+        </details>
+
+        <h3 id="facility">ファシリティマネジメント <span class="kicker">Facility Management</span></h3>
+        <div class="two-col">
+          <div class="card">
+            <div class="label">システム環境の整備（Setup）</div>
+            <ul>
+              <li>電源（二重化）、UPS、発電機</li>
+              <li>空調・温湿度・防塵</li>
+              <li>ラック、配線、入退室管理</li>
+              <li>災害対策（耐震、消火）</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="label">システム環境の維持・保守（Maintenance）</div>
+            <ul>
+              <li>点検記録、予防保全、SLAの監視</li>
+              <li>資産管理（Asset）・更新計画（Lifecycle）</li>
+              <li>委託先管理、保守契約、SPOC</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6-2 -->
+      <section id="sec62">
+        <h2>6-2 システム監査・内部統制・ITガバナンス <span class="kicker">System Audit / Internal Control / IT Governance</span></h2>
+        <p>システムが<b>安全・正確・効率</b>に動いているか、第三者や内部の立場から<b>確認（保証）</b>する活動です。<br><span class="muted">（Check if systems operate securely, accurately, and efficiently, and give assurance.）</span></p>
+
+        <h3 id="audit">システム監査 <span class="kicker">What & Why</span></h3>
+        <div class="card">
+          <ul>
+            <li><b>目的</b>：法令順守、資産保全、業務の有効性と効率性、報告の信頼性</li>
+            <li><b>基準</b>：独立性、公正性、専門的懐疑心、証拠の十分性</li>
+            <li><b>方法</b>：ヒアリング、文書レビュー、観察、再実施、データ分析</li>
+          </ul>
+        </div>
+
+        <h3 id="audit-plan">監査計画 <span class="kicker">Audit Planning</span></h3>
+        <details open>
+          <summary>範囲と目的（Scope & Objective）</summary>
+          <div class="card">
+            <p>対象プロセス・システム、評価基準、期間、前提、制約を定める。</p>
+          </div>
+        </details>
+        <details>
+          <summary>リスク評価（Risk Assessment）</summary>
+          <div class="card">
+            <p>重要度と発生可能性で優先度付け。マテリアリティ設定。</p>
+          </div>
+        </details>
+        <details>
+          <summary>手続き設計（Procedures）</summary>
+          <div class="card">
+            <p>コントロールテスト、サンプルサイズ、証拠（Evidence）収集計画。</p>
+          </div>
+        </details>
+
+        <h3 id="audit-do">監査の実施 <span class="kicker">Fieldwork</span></h3>
+        <details open>
+          <summary>証拠の入手（Obtain Evidence）</summary>
+          <div class="card">
+            <ul>
+              <li>設計有効性（Design effectiveness）の確認</li>
+              <li>運用有効性（Operating effectiveness）のテスト</li>
+              <li>例：アクセス権限レビュー、変更記録の追跡、ログの照合</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>評価・指摘（Evaluate & Findings）</summary>
+          <div class="card">
+            <p>根拠・影響・是正案をまとめ、優先度と期限を提案。</p>
+          </div>
+        </details>
+        <details>
+          <summary>報告（Reporting）</summary>
+          <div class="card">
+            <p>ドラフト→レビュー→最終報告。重要度（重大/重要/改善）を明確化。</p>
+          </div>
+        </details>
+
+        <h3 id="audit-others">その他の監査業務 <span class="kicker">Other Engagements</span></h3>
+        <div class="model-grid">
+          <div class="model">
+            <div class="label">遵守監査（Compliance）</div>
+            <p>法令・規程・契約の遵守を評価。</p>
+          </div>
+          <div class="model">
+            <div class="label">運用監査（Operations）</div>
+            <p>運用の効率・効果・安全性を評価。</p>
+          </div>
+          <div class="model">
+            <div class="label">セキュリティ監査（Security）</div>
+            <p>アクセス管理、暗号、ログ、脆弱性など。</p>
+          </div>
+          <div class="model">
+            <div class="label">プロジェクト監査（Project）</div>
+            <p>要件、変更、コスト、品質の管理状況。</p>
+          </div>
+        </div>
+
+        <h3 id="ic-objective">内部統制の目的 <span class="kicker">Objectives of Internal Control</span></h3>
+        <div class="two-col">
+          <div class="card">
+            <ul>
+              <li>業務の<b>有効性と効率性</b>（Effectiveness & Efficiency）</li>
+              <li>報告の<b>信頼性</b>（Reliability of Reporting）</li>
+              <li>法令等の<b>遵守</b>（Compliance with Laws & Regulations）</li>
+              <li>資産の<b>保全</b>（Safeguarding of Assets）</li>
+            </ul>
+          </div>
+          <div class="card">
+            <p>ITでは、アクセス制御、変更管理、バックアップ、ログ監視などが重要。</p>
+          </div>
+        </div>
+
+        <h3 id="ic-components">内部統制の基本要素 <span class="kicker">Key Components</span></h3>
+        <div class="model-grid">
+          <div class="model">
+            <div class="label">統制環境（Control Environment）</div>
+            <p>企業文化、倫理、組織構造、権限と責任。</p>
+          </div>
+          <div class="model">
+            <div class="label">リスク評価（Risk Assessment）</div>
+            <p>目標に対するリスクの特定と分析。</p>
+          </div>
+          <div class="model">
+            <div class="label">統制活動（Control Activities）</div>
+            <p>承認、職務分掌、照合、物理的統制、IT一般統制。</p>
+          </div>
+          <div class="model">
+            <div class="label">情報と伝達（Information & Communication）</div>
+            <p>必要な情報を適切な人へ、適時に伝える。</p>
+          </div>
+          <div class="model">
+            <div class="label">監視活動（Monitoring）</div>
+            <p>内部監査、自己点検、是正と改善。</p>
+          </div>
+        </div>
+
+        <h3 id="itgov">ITガバナンス <span class="kicker">IT Governance</span></h3>
+        <details open>
+          <summary>目的と柱（Purpose & Pillars）</summary>
+          <div class="card">
+            <ul>
+              <li>ビジネスとの<b>整合</b>（Strategic Alignment）</li>
+              <li>価値の<b>創出</b>（Value Delivery）</li>
+              <li>リスクの<b>管理</b>（Risk Management）</li>
+              <li>資源の<b>最適化</b>（Resource Management）</li>
+              <li>成果の<b>測定</b>（Performance Measurement）</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>フレームワーク（Frameworks）</summary>
+          <div class="card">
+            <ul>
+              <li>COBIT：統制目標と成熟度モデル</li>
+              <li>ISO/IEC 38500：組織のITの良いガバナンス原則</li>
+              <li>ISO/IEC 27001：情報セキュリティマネジメント</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>指標（KPI/KRI）の例</summary>
+          <div class="card">
+            <ul>
+              <li>変更失敗率、インシデント再発率</li>
+              <li>プロジェクト進捗遵守率、ROI</li>
+              <li>監査指摘の是正完了率</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <h2>用語ミニ辞書 <span class="kicker">Mini Glossary</span></h2>
+        <div class="gloss">
+          <div><b>SLA</b> サービス品質の約束。<span class="muted">Service Level Agreement.</span></div>
+          <div><b>ITIL</b> ITサービス管理のベストプラクティス。</div>
+          <div><b>CMDB</b> 構成アイテムのデータベース。</div>
+          <div><b>RTO/RPO</b> 復旧までの時間／許容できるデータ損失。</div>
+          <div><b>COBIT</b> ITガバナンスのフレームワーク。</div>
+          <div><b>監査証拠</b> 結論を支える客観的な資料や記録。</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>学習チェック <span class="kicker">Self-check</span></h2>
+        <div class="checklist">
+          <label><input type="checkbox" data-id="chk-1"> SLAの中身（可用性・応答・窓口時間など）を説明できる</label>
+          <label><input type="checkbox" data-id="chk-2"> インシデントと問題の違いを例で言える</label>
+          <label><input type="checkbox" data-id="chk-3"> 監査計画の要素（範囲・リスク・手続き）を挙げられる</label>
+          <label><input type="checkbox" data-id="chk-4"> 内部統制の5要素を順に言える</label>
+          <label><input type="checkbox" data-id="chk-5"> ITガバナンスの柱（整合/価値/リスク/資源/測定）を説明できる</label>
+        </div>
+      </section>
+
+        <p class="muted">Copyright©Chibamode.JIN<br>
+        <a href= "../HOME.html">学習一覧ホームにもどる</a></p>
+    </main>
+  </div>
+
+  <script>
+    // Search filter
+    const q = document.getElementById('q');
+    const blocks = Array.from(document.querySelectorAll('section, details, .card, .model, .step'));
+    const clearBtn = document.getElementById('clear');
+    function filter(){
+      const term = q.value.trim().toLowerCase();
+      blocks.forEach(el=>{
+        if(!term){ el.style.removeProperty('outline'); el.style.removeProperty('display'); return; }
+        const hit = el.textContent.toLowerCase().includes(term);
+        el.style.display = hit? 'block' : 'none';
+        if(hit){ el.style.outline = '2px solid var(--ring)'; }
+        else { el.style.removeProperty('outline'); }
+      });
+    }
+    q.addEventListener('input', filter);
+    clearBtn.addEventListener('click', ()=>{ q.value=''; filter(); });
+
+    // Expand/collapse all details
+    const expandBtn = document.getElementById('expand');
+    const collapseBtn = document.getElementById('collapse');
+    function setAll(open){ document.querySelectorAll('details').forEach(d=> d.open = open); }
+    expandBtn.addEventListener('click', ()=> setAll(true));
+    collapseBtn.addEventListener('click', ()=> setAll(false));
+
+    // Persist checklist state
+    const KEY = 'study-support-progress-v2-6x';
+    function load(){
+      try{ const data = JSON.parse(localStorage.getItem(KEY) || '{}');
+        document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=>{
+          cb.checked = Boolean(data[cb.dataset.id]);
+        });
+      }catch(e){}
+    }
+    function save(){
+      const data = {};
+      document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=> data[cb.dataset.id] = cb.checked);
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+    document.addEventListener('change', e=>{ if(e.target.matches('input[type="checkbox"][data-id]')) save(); });
+    load();
+  </script>
+</body>
+</html>

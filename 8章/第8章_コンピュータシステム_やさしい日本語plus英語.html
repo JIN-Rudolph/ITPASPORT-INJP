@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link rel="stylesheet" href="footer.css">
+<title>外国人留学生向け｜第8章 コンピュータシステム（やさしい日本語＋英語）</title>
+<style>
+    :root{
+      --bg: #0b1220;
+      --panel:#121a2b;
+      --ink:#eaf2ff;
+      --muted:#a8b3cf;
+      --accent:#5ab0ff;
+      --ok:#43d17c;
+      --warn:#ffb657;
+      --danger:#ff6b6b;
+      --ring: rgba(90,176,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:linear-gradient(180deg, #09101e 0%, #0e1830 100%);
+      letter-spacing:.02em;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:linear-gradient(180deg, rgba(9,16,30,.85), rgba(9,16,30,.6));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+    .title{display:flex;gap:14px;align-items:center}
+    .badge{font-size:12px;color:#00142b;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .sub{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    nav#toc{position:sticky;top:84px;align-self:start;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    nav#toc h2{margin:0 0 8px;font-size:16px}
+    nav#toc ul{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+    nav#toc li{margin:6px 0}
+    nav#toc a{color:var(--ink)}
+
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 20px}
+    .controls input[type="search"]{flex:1;min-width:240px;background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+    .btn{background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+
+    section{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px;margin-bottom:18px}
+    h2{margin:.2em 0 .6em;font-size:24px}
+    h3{margin:1.2em 0 .4em;font-size:18px}
+    p{color:var(--ink);opacity:.92}
+    .muted{color:var(--muted)}
+
+    .timeline{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:12px}
+    .step{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;position:relative}
+    .step .num{font-weight:700;color:var(--accent);font-size:12px}
+    .step .name{font-weight:600}
+    .step .desc{color:var(--muted);font-size:13px;margin-top:6px}
+
+    details{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin:.6em 0}
+    details[open]{outline:2px solid var(--ring)}
+    summary{cursor:pointer;font-weight:600}
+
+    .card{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:.6em 0}
+    .label{font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:inline-block;color:var(--muted)}
+
+    .checklist label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px}
+    .checklist input{accent-color:var(--accent);margin-top:3px}
+
+    .model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .model{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+
+    .gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .gloss b{color:var(--accent)}
+
+    .foot{color:var(--muted);font-size:12px;margin-top:8px}
+    .kicker{font-size:13px;color:var(--muted)}
+
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      nav#toc{position:relative;top:auto}
+      .timeline{grid-template-columns: 1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<div class="title">
+<div style="font-weight:800;font-size:20px">📚 外国人留学生向け 学習サポート</div>
+<span class="badge">やさしい日本語 + English terms</span>
+</div>
+<p class="sub">第8章 コンピュータシステム — 4章と同じページ構成。難しい漢字には英語をそえています。</p>
+<div class="controls">
+<input id="q" placeholder="キーワードで検索（例：CPU / メモリ / RAID）" type="search"/>
+<button class="btn" id="expand">すべて開く</button>
+<button class="btn" id="collapse">すべて閉じる</button>
+<button class="btn" id="clear">検索クリア</button>
+</div>
+</div>
+</header>
+<div class="wrap grid">
+<nav aria-label="目次" id="toc">
+<h2>目次</h2>
+<ul id="toc-list">
+    <li><a href="#sec8-1">1 プロセッサ（CPU）</a></li>
+    <li><a href="#sec8-2">2 記憶装置（メモリと記憶媒体）</a></li>
+    <li><a href="#sec8-3">3 入出力デバイス（I/Oインターフェース）</a></li>
+    <li><a href="#sec8-4">4 IoTデバイス（センサー／アクチュエーター／ドライバ）</a></li>
+    <li><a href="#sec8-5">5 システムの構成（処理形態）</a></li>
+    <li><a href="#sec8-6">6 情報システムの構成</a></li>
+    <li><a href="#sec8-7">7 情報システムの利用価値</a></li>
+    <li><a href="#sec8-8">8 システムの評価指標</a></li
+    <li><a href="#sec8-9">9 ソフトウェア（OS）</a></li>
+    <li><a href="#sec8-10">10 ファイルの管理</a></li>
+    <li><a href="#sec8-11">11 オフィスツール</a></li>
+    <li><a href="#sec8-12">12 OSS（オープンソースソフトウェア）</a></li>
+    <li><a href="#sec8-comp">コンピュータの種類</a></li>
+    <li><a href="#sec-input">入力装置</a></li>
+    <li><a href="#sec-output">出力装置</a></li>
+    <li><a href= "index.html">コンピュータシステムの学習にもどる</a></p></li>    
+</ul>
+</nav>
+<main id="content"><section id="sec8-1">
+<h2>8-1 プロセッサ（CPU）</h2>
+<details class="topic" open="True">
+<summary>コンピュータの基本構成 <span>（入力／記憶／演算（Arithmetic/Logic）／制御（Control）／出力）</span></summary>
+<div class="kvs">
+<div class="kv"><h4>入力</h4><p class="list">キーボード・マウス・センサーなど</p></div>
+<div class="kv"><h4>記憶</h4><p class="list">主記憶（RAM）・補助記憶（Secondary storage）（SSD/HDD）</p></div>
+<div class="kv"><h4>演算（Arithmetic/Logic）</h4><p class="list">ALUが数値演算（Arithmetic/Logic）・論理演算（Arithmetic/Logic）を実行</p></div>
+<div class="kv"><h4>制御（Control）</h4><p class="list">制御（Control）装置が命令の解釈と各装置の指揮</p></div>
+<div class="kv"><h4>出力</h4><p class="list">ディスプレイ・プリンタ・アクチュエーター</p></div>
+</div>
+<div aria-hidden="true" class="svgwrap">
+<svg height="140" viewbox="0 0 640 160" width="100%">
+<rect fill="#16205a" height="100" rx="10" stroke="#2b4493" width="120" x="10" y="30"></rect>
+<text fill="#cfe0ff" text-anchor="middle" x="70" y="85">入力</text>
+<rect fill="#16205a" height="100" rx="10" stroke="#2b4493" width="120" x="150" y="30"></rect>
+<text fill="#cfe0ff" text-anchor="middle" x="210" y="63">主記憶</text>
+<text fill="#93b7ff" font-size="12" text-anchor="middle" x="210" y="95">RAM</text>
+<rect fill="#1a2468" height="100" rx="10" stroke="#2b4493" width="120" x="290" y="30"></rect>
+<text fill="#cfe0ff" text-anchor="middle" x="350" y="63">CPU</text>
+<text fill="#93b7ff" font-size="12" text-anchor="middle" x="350" y="95">制御（Control）＋演算（Arithmetic/Logic）</text>
+<rect fill="#16205a" height="100" rx="10" stroke="#2b4493" width="120" x="430" y="30"></rect>
+<text fill="#cfe0ff" text-anchor="middle" x="490" y="63">補助記憶（Secondary storage）</text>
+<text fill="#93b7ff" font-size="12" text-anchor="middle" x="490" y="95">SSD/HDD</text>
+<rect fill="#16205a" height="100" rx="10" stroke="#2b4493" width="60" x="570" y="30"></rect>
+<text fill="#cfe0ff" text-anchor="middle" x="600" y="85">出力</text>
+<defs>
+<marker id="arrow" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="10" refy="3">
+<path d="M0,0 L10,3 L0,6" fill="#6ea8fe"></path>
+</marker>
+</defs>
+<line marker-end="url(#arrow)" stroke="#6ea8fe" stroke-width="2" x1="130" x2="150" y1="80" y2="80"></line>
+<line marker-end="url(#arrow)" stroke="#6ea8fe" stroke-width="2" x1="270" x2="290" y1="80" y2="80"></line>
+<line marker-end="url(#arrow)" stroke="#6ea8fe" stroke-width="2" x1="410" x2="430" y1="80" y2="80"></line>
+<line marker-end="url(#arrow)" stroke="#6ea8fe" stroke-width="2" x1="550" x2="570" y1="80" y2="80"></line>
+</svg>
+</div>
+</details>
+<details class="topic" open="True">
+<summary>CPUの基本的な仕組み <span>（フェッチ→デコード→実行）</span></summary>
+<ul class="list">
+<li><b>レジスタ</b>：高速な作業領域（PC/IR/ACCなど）</li>
+<li><b>命令実行サイクル（Instruction Cycle）</b>：主記憶から命令を<b>フェッチ</b>→内容を<b>デコード</b>→ALU等で<b>実行</b></li>
+<li><b>クロック</b>：動作の刻み。周波数が高いほど並列度や性能の上限が上がるが、消費電力・発熱も増える</li>
+<li><b>パイプライン</b>：複数命令の工程を重ねて処理（スループット向上）</li>
+<li><b>キャッシュメモリ</b>：主記憶より高速な小容量メモリ（局所性（Locality）の原理を利用）</li>
+</ul>
+</details>
+<details class="topic" open="True">
+<summary>バスと<b>バス幅</b> <span>（データ／アドレス／制御（Control））</span></summary>
+<p class="list">バスは装置間でデータや信号をやり取りする共通の通路。代表的に<b>データバス</b>（やり取りする値）、<b>アドレスバス</b>（参照先）、<b>制御（Control）バス</b>（読取/書込などの制御（Control））。</p>
+<table class="table">
+<thead><tr><th>項目</th><th>意味</th><th>影響</th></tr></thead>
+<tbody>
+<tr><td>データバス幅</td><td>一度に転送できるデータ量（例：32bit, 64bit）</td><td>1クロックで扱えるビット数→転送効率</td></tr>
+<tr><td>アドレスバス幅</td><td>表現できるアドレスのビット長</td><td>理論上の最大アドレス空間（例：32bitで約4GB）</td></tr>
+<tr><td>バス周波数</td><td>転送の刻みの速さ</td><td>帯域幅（Bandwidth）（周波数×幅）</td></tr>
+</tbody>
+</table>
+</details>
+</section><section id="sec8-2">
+<h2>8-2 記憶装置（メモリと記憶媒体）</h2>
+<details class="topic" open="True">
+<summary>RAMとROM <span>（揮発性（Volatile）／不揮発性（Non-volatile）（Volatile））</span></summary>
+<table class="table">
+<thead><tr><th>種類</th><th>ポイント</th><th>典型つかいみち</th></tr></thead>
+<tbody>
+<tr><td>RAM</td><td>電源断で消える（揮発）。読み書き高速。</td><td>作業領域（主記憶）、キャッシュ</td></tr>
+<tr><td>ROM</td><td>電源断でも保持（不揮発）。基本は読み出し専用。</td><td>ファームウェア、起動プログラム</td></tr>
+</tbody>
+</table>
+<ul class="list">
+<li>DRAM（安価・大容量）とSRAM（高速・少容量）</li>
+<li>フラッシュメモリ（EEPROMの一種）：SSD・USBメモリに利用</li>
+</ul>
+</details>
+<details class="topic" open="True">
+<summary>メモリのつかいみちと記憶階層</summary>
+<ul class="list">
+<li><b>キャッシュ</b>→<b>主記憶</b>→<b>補助記憶（Secondary storage）</b>の順に高速・小容量から低速・大容量へ</li>
+<li>局所性（Locality）（時間的／空間的）を活かし、平均アクセス時間を短縮</li>
+</ul>
+</details>
+<details class="topic" open="True">
+<summary>記憶媒体の種類</summary>
+<table class="table">
+<thead><tr><th>媒体</th><th>ポイント</th><th>長所</th><th>短所</th></tr></thead>
+<tbody>
+<tr><td>SSD（フラッシュ）</td><td>半導体。ランダムアクセス高速</td><td>高速・静音・耐衝撃</td><td>書換え寿命・価格</td></tr>
+<tr><td>HDD（磁気）</td><td>回転磁気ディスク</td><td>大容量・安価</td><td>物理衝撃に弱い・遅い</td></tr>
+<tr><td>光学（BD/DVD）</td><td>レーザーで読み書き</td><td>配布・長期保存</td><td>書込み速度・耐久</td></tr>
+</tbody>
+</table>
+</details>
+</section><section id="sec8-3">
+<h2>8-3 入出力（Input/Output）デバイス（I/Oインターフェース）</h2>
+<details class="topic" open="True">
+<summary>インターフェースの全体像</summary>
+<ul class="list">
+<li><b>内部</b>：PCIe、SATA、M.2など装置内接続</li>
+<li><b>外部</b>：USB、HDMI、DisplayPort、Thunderbolt など</li>
+<li><b>無線</b>：Wi‑Fi、Bluetooth、NFC など</li>
+</ul>
+</details>
+<details class="topic" open="True">
+<summary>シリアルインターフェース</summary>
+<ul class="list">
+<li><b>UART</b>：シンプルな逐次通信。組込みで広く利用</li>
+<li><b>SPI</b>：主従（Master/Slave）方式。高速・複線</li>
+<li><b>I²C</b>：2線式（SCL/SDA）で多点接続</li>
+<li><b>USB</b>：ホスト制御（Control）型の汎用シリアル</li>
+</ul>
+</details>
+<details class="topic" open="True">
+<summary>パラレルインターフェイス</summary>
+<p class="list">複数ビットを同時転送。プリンタ用の旧式規格（Centronics/IEEE1284）などが代表。近年は配線本数・クロストークの課題から、高速化は主にシリアルへ。</p>
+</details>
+<details class="topic" open="True">
+<summary>ワイヤレスインターフェイス</summary>
+<table class="table">
+<thead><tr><th>方式</th><th>ポイント</th><th>主なつかいみち</th></tr></thead>
+<tbody>
+<tr><td>Wi‑Fi</td><td>高速・中距離・IP通信</td><td>LAN接続、IoTゲートウェイ</td></tr>
+<tr><td>Bluetooth</td><td>省電力・近距離</td><td>ヘッドセット、周辺機器</td></tr>
+<tr><td>NFC</td><td>超近距離・非接触</td><td>決済、タグ読み取り</td></tr>
+<tr><td>LPWA（LoRa/Sigfox等）</td><td>低速・長距離・省電力</td><td>センサ遠隔監視（Monitoring）</td></tr>
+</tbody>
+</table>
+</details>
+</section><section id="sec8-4">
+<h2>8-4 IoTデバイス（センサー／アクチュエーター／ドライバ）</h2>
+<details class="topic" open="True">
+<summary>センサーの種類</summary>
+<table class="table">
+<thead><tr><th>種別</th><th>測るもの</th><th>例</th></tr></thead>
+<tbody>
+<tr><td>物理</td><td>加速度・角速度・振動・圧力・光</td><td>加速度計、ジャイロ、圧力センサ、フォトダイオード</td></tr>
+<tr><td>環境</td><td>温度・湿度・気体・騒音</td><td>温湿度、CO₂、VOC、騒音計</td></tr>
+<tr><td>位置</td><td>距離・位置・方角</td><td>超音波・ToF、GPS、磁気</td></tr>
+<tr><td>画像／音</td><td>画像・音声</td><td>CMOSカメラ、マイク</td></tr>
+</tbody>
+</table>
+</details>
+<details class="topic" open="True">
+<summary>応用的な仕組みのセンサー</summary>
+<ul class="list">
+<li><b>ToF（Time of Flight）</b>：光の往復時間から距離を算出</li>
+<li><b>ホール効果</b>：磁界で電位差→回転や位置検出</li>
+<li><b>ピエゾ素子</b>：圧力で電荷発生→振動・タッチ検出</li>
+</ul>
+</details>
+<details class="topic" open="True">
+<summary>アクチュエーター</summary>
+<ul class="list">
+<li>モータ（DC、サーボ、ステッピング）</li>
+<li>リレー、ソレノイド（直線動作）</li>
+<li>ヒータ、バルブ など</li>
+<li>制御（Control）例：<b>PWM制御（Control）</b>（デューティ比で出力を調整）</li>
+</ul>
+</details>
+<details class="topic" open="True">
+<summary>デバイスドライバ</summary>
+<ul class="list">
+<li>OSがハードウェアを統一的に扱うためのソフトウェア</li>
+<li>アプリケーションはドライバを介して入出力（Input/Output）を利用</li>
+<li>カーネルモジュール／ユーザ空間ドライバ などの形態</li>
+</ul>
+</details>
+</section><section id="sec8-5">
+<h2>8-5 システムの構成（処理形態）</h2>
+<details open="True">
+<summary>集中処理（Centralized processing）と分散処理（Distributed processing）</summary>
+<table class="table">
+<thead><tr><th>方式</th><th>ポイント</th><th>長所</th><th>注意</th></tr></thead>
+<tbody>
+<tr><td>集中処理（Centralized processing）</td><td>1台に処理を集約</td><td>統一管理・効率</td><td>単一障害（Incident/Failure）点・拡張性不足</td></tr>
+<tr><td>分散処理（Distributed processing）</td><td>複数装置で分担</td><td>可用性（Availability）・柔軟性</td><td>管理複雑・整合性（Consistency）課題</td></tr>
+</tbody>
+</table>
+</details>
+</section><section id="sec8-6">
+<h2>8-6 情報システムの構成</h2>
+<details open="True">
+<summary>冗長化（Redundancy）方式</summary>
+<table class="table">
+<tr><th>方式</th><th>動作</th><th>利点</th><th>注意点</th></tr>
+<tr><td>デュアル</td><td>同時稼働し照合</td><td>高信頼</td><td>コスト高</td></tr>
+<tr><td>デュプレックス</td><td>主系と待機系で切替</td><td>コスト抑制</td><td>切替時停止</td></tr>
+<tr><td>クラスタ</td><td>複数台で提供</td><td>可用性（Availability）・拡張性</td><td>構成複雑</td></tr>
+</table>
+</details>
+<details open="True">
+<summary>代表的形態</summary>
+<ul class="list">
+<li>クライアントサーバ</li>
+<li>Web3層</li>
+<li>仮想化（Virtualization）／VDI</li>
+</ul>
+</details>
+<details open="True">
+<summary>RAID</summary>
+<table class="table">
+<tr><th>レベル</th><th>ポイント</th><th>冗長性（Redundancy）</th></tr>
+<tr><td>0</td><td>ストライピング</td><td>なし</td></tr>
+<tr><td>1</td><td>ミラーリング</td><td>高</td></tr>
+<tr><td>5</td><td>分散パリティ</td><td>1台故障可</td></tr>
+</table>
+</details>
+</section><section id="sec8-7">
+<h2>8-7 情報システムの利用価値</h2>
+<details open="True">
+<summary>価値の分類</summary>
+<ul class="list">
+<li>業務効率化</li>
+<li>品質向上</li>
+<li>意思決定支援</li>
+<li>収益拡大</li>
+</ul>
+</details>
+</section><section id="sec8-8">
+<h2>8-8 システムの評価指標</h2>
+<details open="True">
+<summary>性能</summary>
+<ul class="list"><li>スループット・レスポンス・ターンアラウンド</li></ul>
+</details>
+<details open="True">
+<summary>信頼性（Reliability）・可用性（Availability）</summary>
+<ul class="list">
+<li>MTBF・MTTR</li>
+<li>稼働率（Availability rate） = MTBF/(MTBF+MTTR)</li>
+</ul>
+</details>
+<details open="True">
+<summary>経済性</summary>
+<ul class="list">
+<li>TCO・ROI・費用対効果</li>
+</ul>
+</details>
+</section><section id="sec8-9">
+<h2>8-9 ソフトウェア（OS）</h2>
+<details open="True">
+<summary>OSの必要性</summary>
+<ul class="list">
+<li>ハードウェア資源（Resource）を<b>安全かつ公平</b>に管理（CPU・メモリ・I/O）</li>
+<li>アプリからハードを抽象化（Abstraction）し<b>共通のAPI</b>を提供</li>
+<li>ユーザーに<b>操作環境（UI）</b>を提供</li>
+</ul>
+</details>
+<details open="True">
+<summary>OSの機能</summary>
+<table class="table">
+<thead><tr><th>機能</th><th>ポイント</th></tr></thead>
+<tbody>
+<tr><td>プロセス管理</td><td>スケジューリング、同期、死活監視（Monitoring）</td></tr>
+<tr><td>メモリ管理</td><td>仮想記憶（Virtual Memory）、ページング、保護</td></tr>
+<tr><td>ファイル管理</td><td>ファイルシステム、アクセス権</td></tr>
+<tr><td>入出力（Input/Output）管理</td><td>デバイスドライバ、バッファ制御（Control）</td></tr>
+<tr><td>ユーザインタフェース</td><td>CLI/GUI、シェル</td></tr>
+<tr><td>ネットワーク</td><td>TCP/IPスタック、認証</td></tr>
+</tbody>
+</table>
+</details>
+<details open="True">
+<summary>OSの種類</summary>
+<ul class="list">
+<li>つかいみち：デスクトップ／サーバ／モバイル／組込み</li>
+<li>処理形態：バッチ／タイムシェアリング／リアルタイム</li>
+<li>ユーザ／タスク：シングル／マルチユーザ、シングル／マルチタスク</li>
+</ul>
+</details>
+</section><section id="sec8-10">
+<h2>8-10 ファイルの管理</h2>
+<details open="True">
+<summary>ディレクトリ管理</summary>
+<ul class="list">
+<li>階層構造（Hierarchy）：ルート配下にフォルダ（ディレクトリ）を配置</li>
+<li>パス：<b>絶対パス</b>（ルートから）／<b>相対パス</b>（現在地から）</li>
+<li>拡張子・関連付け・隠し属性 など</li>
+</ul>
+</details>
+<details open="True">
+<summary>ファイル共有</summary>
+<ul class="list">
+<li>アクセス権（読み・書き・実行）、ACL</li>
+<li>共有方式：SMB/CIFS、NFS、クラウドストレージ</li>
+<li>排他制御（Mutual Exclusion）（Control）（共有ロック・排他ロック）</li>
+</ul>
+</details>
+<details open="True">
+<summary>バックアップ</summary>
+<table class="table">
+<thead><tr><th>方式</th><th>対象</th><th>長所</th><th>注意</th></tr></thead>
+<tbody>
+<tr><td>フル</td><td>全データ</td><td>復元（Restore）が簡単</td><td>時間・容量が大</td></tr>
+<tr><td>差分（Differential）</td><td>前回フル以降の変更</td><td>復元（Restore）はフル＋最新差分（Differential）</td><td>差分（Differential）が肥大化</td></tr>
+<tr><td>増分（Incremental）</td><td>直前バックアップ以降の変更</td><td>効率よい保存</td><td>復元（Restore）手順が複雑</td></tr>
+</tbody>
+</table>
+<p class="list">3-2-1 ルール：<b>3</b>つのコピーを<b>2</b>種類の媒体に<b>1</b>つはオフサイト。</p>
+</details>
+</section><section id="sec8-11">
+<h2>8-11 オフィスツール</h2>
+<details open="True">
+<summary>ソフトウェアパッケージ</summary>
+<ul class="list">
+<li>ワープロ／表計算／プレゼンテーション／メール／DB</li>
+<li>テンプレート・マクロ・共同編集などの機能</li>
+</ul>
+</details>
+<details open="True">
+<summary>Webブラウザ</summary>
+<ul class="list">
+<li>レンダリングエンジン、拡張機能、キャッシュ</li>
+<li>Cookie・履歴・プライバシーモード</li>
+<li>標準規格（HTML/CSS/JavaScript）に基づく表示</li>
+</ul>
+</details>
+</section><section id="sec8-12">
+<h2>8-12 OSS（オープンソースソフトウェア）</h2>
+<details open="True">
+<summary>OSSのポイント</summary>
+<ul class="list">
+<li>ソースコード公開・改変・再配布をライセンスで許諾</li>
+<li>コミュニティ主導の改良、ベンダロックイン低減</li>
+<li>ライセンス遵守（著作権表示・配布条件など）が必要</li>
+</ul>
+</details>
+<details open="True">
+<summary>主なライセンス例</summary>
+<ul class="list">
+<li>GPL（コピーレフト）、MIT、Apache License 2.0 など</li>
+</ul>
+</details>
+<details open="True">
+<summary>OSSの種類（代表カテゴリ）</summary>
+<ul class="list">
+<li>OS（例：Linux）、ミドルウェア（Web/アプリサーバ）</li>
+<li>DB（例：リレーショナル/NoSQL）、プログラミング言語・ランタイム</li>
+<li>アプリケーション（オフィス、ブラウザ等）</li>
+</ul>
+</details>
+</section><section id="sec-comp">
+<h2>コンピュータの種類</h2>
+<details open="True">
+<summary>分類</summary>
+<ul class="list">
+<li>汎用コンピュータ（メインフレーム）</li>
+<li>スーパーコンピュータ（科学技術計算・シミュレーション）</li>
+<li>パーソナルコンピュータ（デスクトップ・ノートPC）</li>
+<li>情報端末（スマートフォン・タブレット・専用端末）</li>
+</ul>
+</details>
+</section><section id="sec-input">
+<h2>入力装置</h2>
+<details open="True">
+<summary>例</summary>
+<table class="table">
+<tr><th>装置</th><th>つかいみち</th></tr>
+<tr><td>キーボード</td><td>文字入力</td></tr>
+<tr><td>マウス／トラックパッド</td><td>ポインティング操作</td></tr>
+<tr><td>タブレット／タッチパネル</td><td>直感的入力</td></tr>
+<tr><td>イメージスキャナ</td><td>画像読み取り</td></tr>
+<tr><td>バーコードリーダ</td><td>商品管理・在庫</td></tr>
+<tr><td>OCR</td><td>文字認識</td></tr>
+<tr><td>Webカメラ</td><td>映像入力</td></tr>
+</table>
+</details>
+</section><section id="sec-output">
+<h2>出力装置</h2>
+<details open="True">
+<summary>例</summary>
+<ul class="list">
+<li>ディスプレイ（液晶・有機EL・解像度・リフレッシュレート）</li>
+<li>プリンタ
+            <ul>
+<li>ページプリンタ（レーザ方式など）</li>
+<li>シリアルプリンタ（インクジェット、ドットインパクト）</li>
+</ul>
+</li>
+</ul>
+</details>
+</section>
+<p class="muted">Copyright©Chibamode.JIN<br>
+<a href= "index.html">コンピュータシステムの学習にもどる</a></p>     
+</main>
+</div>
+<script>
+  const expandBtn=document.getElementById('expand');
+  const collapseBtn=document.getElementById('collapse');
+  const clearBtn=document.getElementById('clear');
+  const q=document.getElementById('q');
+  expandBtn&&expandBtn.addEventListener('click',()=>document.querySelectorAll('details').forEach(d=>d.open=true));
+  collapseBtn&&collapseBtn.addEventListener('click',()=>document.querySelectorAll('details').forEach(d=>d.open=false));
+  clearBtn&&clearBtn.addEventListener('click',()=>{{q.value=''; q.dispatchEvent(new Event('input'));}});
+  q&&q.addEventListener('input',()=>{{
+    const kw=q.value.trim().toLowerCase();
+    document.querySelectorAll('section').forEach(sec=>{{
+      if(!kw){{sec.style.display=''; return;}}
+      sec.style.display = sec.textContent.toLowerCase().includes(kw)?'':'none';
+    }});
+  }});
+</script>
+</body>
+</html>

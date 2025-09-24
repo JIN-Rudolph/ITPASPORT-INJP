@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>アルゴリズム基礎 | Pseudo-code & Flowchart</title>
+  <link rel="stylesheet" href="algo.css">
+</head>
+<body>
+  <header>
+    <h1>📝 アルゴリズムの基礎 (Algorithms Basics)</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>疑似言語 (Pseudo-code)</h2>
+      <p>疑似言語は、人間がわかりやすいように<b>簡単な英語や日本語で書くアルゴリズムの説明</b>です。<br>
+      実際にはプログラムを走らせません<br>
+      It is not a real programming language, but close to English and code.</p>
+      <pre class="code">
+# 最大値を求める (Find maximum)
+max = a[0]
+for i from 1 to n-1:
+    if a[i] > max:
+        max = a[i]
+print max
+      </pre>
+    </section>
+
+    <section class="card">
+      <h2>流れ図 (Flowchart)</h2>
+      <img src = "un.png" width="400" height="400">
+      <p>例: x を 0 から 9 まで数える。</p>
+    </section>
+
+    <section class="card">
+      <h2>アルゴリズムの基本構造</h2>
+      <ul>
+        <li><b>順次処理 (Sequence)</b>：上から順に実行<br>
+          例：x=1 → y=x+2 → print y</li>
+        <li><b>分岐処理 (Selection)</b>：条件によって道を選ぶ<br>
+          例：if x>0 then print "positive"</li>
+        <li><b>繰り返し処理 (Iteration / Loop)</b>：同じ処理を何度も<br>
+          例：for i=1 to 10 do print i</li>
+      </ul>
+      <div class="note">
+        <p>この3つを組み合わせれば、どんなアルゴリズムも表現できます！</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Copyright©Chibamode.JIN</p><br>
+      <a href="algo_home.html">💻 アルゴリズムとプログラミングにもどる</a>
+    </footer>
+  </main>
+</body>
+</html>

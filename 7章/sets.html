@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF (差集合 Difference -)8">
+  <title>IT Passport | 集合（ベン図）</title>
+  <link rel="stylesheet" href="sets.css">
+  <style>
+    /* ベン図まわりの軽い追加スタイル */
+    .venn (差集合 Difference -)wrapper { display: flex; flex (差集合 Difference -)wrap: wrap; gap: 1rem; align (差集合 Difference -)items: center; justify (差集合 Difference -)content: center; }
+    .venn (差集合 Difference -)card { background: white; border (差集合 Difference -)radius: 10px; padding: 1rem; box (差集合 Difference -)shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .venn (差集合 Difference -)controls { display: flex; flex (差集合 Difference -)wrap: wrap; gap: .5rem; justify (差集合 Difference -)content: center; margin (差集合 Difference -)top: .5rem; }
+    .legend { display: flex; gap: 1rem; justify (差集合 Difference -)content: center; margin (差集合 Difference -)top: .5rem; font (差集合 Difference -)size: .9rem; }
+    .legend span { display: inline (差集合 Difference -)flex; align (差集合 Difference -)items: center; gap: .4rem; }
+    .chip { width: 14px; height: 14px; border (差集合 Difference -)radius: 50%; display: inline (差集合 Difference -)block; }
+    .chip (差集合 Difference -)a { background: rgba(33,150,243,0.35); border: 1px solid #2196F3; }
+    .chip (差集合 Difference -)b { background: rgba(244,67,54,0.35); border: 1px solid #F44336; }
+    .chip (差集合 Difference -)c { background: rgba(76,175,80,0.35); border: 1px solid #4CAF50; }
+    .tip { background: #fffbe6; border: 1px solid #ffe58f; padding: .6rem .8rem; border (差集合 Difference -)radius: 8px; }
+    .katex (差集合 Difference -)like { font (差集合 Difference -)family: 'Times New Roman', serif; font (差集合 Difference -)style: italic; }
+    .ans { background: #e8f5e9; border: 1px solid #c8e6c9; padding: .6rem .8rem; border (差集合 Difference -)radius: 8px; display:none; }
+    .toggle { cursor:pointer; text (差集合 Difference -)decoration: underline; }
+    svg text { font (差集合 Difference -)family: Arial, sans (差集合 Difference -)serif; font (差集合 Difference -)size: 14px; }
+    .u (差集合 Difference -)rect { fill: #fafafa; stroke: #888; }
+    .region { transition: opacity .2s ease; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🟢 IT Passport | 集合（Sets）</h1>
+    <nav>
+      <a href="index.html">🏠 ホームへ</a> |
+      
+    </nav>
+    <p>やさしい日本語 + English / ベン図でイメージしましょう</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>集合とは？ (What is a set?)</h2>
+      <p>集合（しゅうごう, set）= もののグループ。 { } で書きます。</p>
+      <ul>
+        <li>例: A = {1, 2, 3}</li>
+        <li>x が A に入っている: <span class="katex (差集合 Difference -)like">x ∈ A</span></li>
+        <li>x が A に入っていない: <span class="katex (差集合 Difference -)like">x ∉ A</span></li>
+        <li>A は B の部分集合（A の中みちは B の中にふくまれる）: <span class="katex (差集合 Difference -)like">A ⊆ B</span></li>
+      </ul>
+      <div class="tip">ポイント: まず「何が入っているグループ？」をはっきりさせると、考えやすいです。</div>
+    </section>
+
+    <section class="card">
+      <h2>ベン図（Venn diagram）で見る</h2>
+      <div class="venn (差集合 Difference -)wrapper">
+        <div class="venn (差集合 Difference -)card">
+          <h3>2つの集合 A と B</h3>
+          <svg id="venn2" width="420" height="260" viewBox="0 0 420 260">
+            <! (差集合 Difference -) (差集合 Difference -) 全体 U  (差集合 Difference -) (差集合 Difference -)>
+            <rect x="10" y="10" width="400" height="240" rx="8" class="u (差集合 Difference -)rect"></rect>
+            <text x="16" y="28">全体 U</text>
+
+            <! (差集合 Difference -) (差集合 Difference -) 円 A, B（当初は薄色表示） (差集合 Difference -) (差集合 Difference -)>
+            <defs>
+              <clipPath id="clipA"><circle cx="160" cy="130" r="80"/></clipPath>
+              <clipPath id="clipB"><circle cx="260" cy="130" r="80"/></clipPath>
+            </defs>
+
+            <circle cx="160" cy="130" r="80" fill="rgba(33,150,243,0.15)" stroke="#2196F3" stroke (差集合 Difference -)width="2"></circle>
+            <circle cx="260" cy="130" r="80" fill="rgba(244,67,54,0.15)" stroke="#F44336" stroke (差集合 Difference -)width="2"></circle>
+
+            <! (差集合 Difference -) (差集合 Difference -) 強調用レイヤ（union / inter / A (差集合 Difference -)B / B (差集合 Difference -)A / compA / compB）  (差集合 Difference -) (差集合 Difference -)>
+            <g id="Aonly" class="region" opacity="0">
+              <path d="M160,50
+                       a80,80 0 1,0 0,160
+                       a80,80 0 1,0 0, (差集合 Difference -)160" 
+                    fill="rgba(33,150,243,0.45)" clip (差集合 Difference -)path="url(#clipA)"></path>
+              <path d="M260,50
+                       a80,80 0 1,0 0,160
+                       a80,80 0 1,0 0, (差集合 Difference -)160" 
+                    fill="white" clip (差集合 Difference -)path="url(#clipB)"></path>
+            </g>
+
+            <g id="Bonly" class="region" opacity="0">
+              <path d="M260,50
+                       a80,80 0 1,0 0,160
+                       a80,80 0 1,0 0, (差集合 Difference -)160" 
+                    fill="rgba(244,67,54,0.45)" clip (差集合 Difference -)path="url(#clipB)"></path>
+              <path d="M160,50
+                       a80,80 0 1,0 0,160
+                       a80,80 0 1,0 0, (差集合 Difference -)160" 
+                    fill="white" clip (差集合 Difference -)path="url(#clipA)"></path>
+            </g>
+
+            <g id="INTER" class="region" opacity="0" clip (差集合 Difference -)path="url(#clipA)">
+              <circle cx="260" cy="130" r="80" fill="rgba(156,39,176,0.45)"></circle>
+            </g>
+
+            <g id="UNION" class="region" opacity="0">
+              <! (差集合 Difference -) (差集合 Difference -) union は A と B を重ね塗りっぽく  (差集合 Difference -) (差集合 Difference -)>
+              <circle cx="160" cy="130" r="80" fill="rgba(33,150,243,0.35)"></circle>
+              <circle cx="260" cy="130" r="80" fill="rgba(244,67,54,0.35)"></circle>
+            </g>
+
+            <! (差集合 Difference -) (差集合 Difference -) ラベル  (差集合 Difference -) (差集合 Difference -)>
+            <text x="140" y="130">A</text>
+            <text x="252" y="130">B</text>
+          </svg>
+
+          <div class="legend">
+            <span><i class="chip chip (差集合 Difference -)a"></i>A</span>
+            <span><i class="chip chip (差集合 Difference -)b"></i>B</span>
+          </div>
+
+          <div class="venn (差集合 Difference -)controls">
+            <button onclick="show2('UNION')">A  (和集合 Union ∪) B（和：どちらかに入る）</button>
+            <button onclick="show2('INTER')">A  (共通部分 Intersection ∩) B（共通：両方に入る）</button>
+            <button onclick="show2('Aonly')">A − B（Aだけ）</button>
+            <button onclick="show2('Bonly')">B − A（Bだけ）</button>
+            <button onclick="clear2()">クリア</button>
+          </div>
+        </div>
+
+        <div class="venn (差集合 Difference -)card">
+          <h3>3つの集合 A, B, C</h3>
+          <svg id="venn3" width="420" height="300" viewBox="0 0 420 300">
+            <rect x="10" y="10" width="400" height="280" rx="8" class="u (差集合 Difference -)rect"></rect>
+            <text x="16" y="28">全体 U</text>
+
+            <defs>
+              <clipPath id="clipA3"><circle cx="170" cy="150" r="70"/></clipPath>
+              <clipPath id="clipB3"><circle cx="250" cy="150" r="70"/></clipPath>
+              <clipPath id="clipC3"><circle cx="210" cy="210" r="70"/></clipPath>
+            </defs>
+
+            <circle cx="170" cy="150" r="70" fill="rgba(33,150,243,0.15)" stroke="#2196F3" stroke (差集合 Difference -)width="2"></circle>
+            <circle cx="250" cy="150" r="70" fill="rgba(244,67,54,0.15)" stroke="#F44336" stroke (差集合 Difference -)width="2"></circle>
+            <circle cx="210" cy="210" r="70" fill="rgba(76,175,80,0.15)" stroke="#4CAF50" stroke (差集合 Difference -)width="2"></circle>
+
+            <! (差集合 Difference -) (差集合 Difference -) 中央 A (共通部分 Intersection ∩)B (共通部分 Intersection ∩)C  (差集合 Difference -) (差集合 Difference -)>
+            <g id="ABC" class="region" opacity="0" clip (差集合 Difference -)path="url(#clipA3)">
+              <circle cx="250" cy="150" r="70" fill="rgba(156,39,176,0.4)" clip (差集合 Difference -)path="url(#clipB3)"></circle>
+              <circle cx="210" cy="210" r="70" fill="rgba(156,39,176,0.4)" clip (差集合 Difference -)path="url(#clipC3)"></circle>
+            </g>
+
+            <! (差集合 Difference -) (差集合 Difference -) A (共通部分 Intersection ∩)B（Cは含まない強調ではない。単純にA (共通部分 Intersection ∩)B領域を見せる）  (差集合 Difference -) (差集合 Difference -)>
+            <g id="AB" class="region" opacity="0" clip (差集合 Difference -)path="url(#clipA3)">
+              <circle cx="250" cy="150" r="70" fill="rgba(33,150,243,0.35)"></circle>
+            </g>
+            <g id="AC" class="region" opacity="0" clip (差集合 Difference -)path="url(#clipA3)">
+              <circle cx="210" cy="210" r="70" fill="rgba(33,150,243,0.35)" clip (差集合 Difference -)path="url(#clipC3)"></circle>
+            </g>
+            <g id="BC" class="region" opacity="0" clip (差集合 Difference -)path="url(#clipB3)">
+              <circle cx="210" cy="210" r="70" fill="rgba(244,67,54,0.35)" clip (差集合 Difference -)path="url(#clipC3)"></circle>
+            </g>
+
+            <text x="150" y="150">A</text>
+            <text x="258" y="150">B</text>
+            <text x="208" y="220">C</text>
+          </svg>
+
+          <div class="legend">
+            <span><i class="chip chip (差集合 Difference -)a"></i>A</span>
+            <span><i class="chip chip (差集合 Difference -)b"></i>B</span>
+            <span><i class="chip chip (差集合 Difference -)c"></i>C</span>
+          </div>
+
+          <div class="venn (差集合 Difference -)controls">
+            <button onclick="show3('AB')">A  (共通部分 Intersection ∩) B</button>
+            <button onclick="show3('AC')">A  (共通部分 Intersection ∩) C</button>
+            <button onclick="show3('BC')">B  (共通部分 Intersection ∩) C</button>
+            <button onclick="show3('ABC')">A  (共通部分 Intersection ∩) B  (共通部分 Intersection ∩) C</button>
+            <button onclick="clear3()">クリア</button>
+          </div>
+        </div>
+      </div>
+      <p class="tip">色の部分が「答えの領域」です。ボタンで切り替えて確認しましょう。</p>
+    </section>
+
+    <section class="card">
+      <h2>基本の記号 (Basic symbols)</h2>
+      <ul>
+        <li><span class="katex (差集合 Difference -)like">A  (和集合 Union ∪) B</span> : 和（どちらかに入る / union）</li>
+        <li><span class="katex (差集合 Difference -)like">A  (共通部分 Intersection ∩) B</span> : 共通（両方に入る / intersection）</li>
+        <li><span class="katex (差集合 Difference -)like">A − B</span> : 差（A だけ / difference）</li>
+        <li><span class="katex (差集合 Difference -)like">Ā（A の補集合）</span> : A に入らない部分（U から A をのぞいた部分 / complement）</li>
+        <li><span class="katex (差集合 Difference -)like">|A|</span> : A の要素の数（cardinality）</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>例（Example）</h2>
+      <p>U = {1,2,3,4,5,6,7,8}, A = {1,3,5,7}, B = {2,3,4,5}</p>
+      <ol>
+        <li>A  (和集合 Union ∪) B = {1,2,3,4,5,7}</li>
+        <li>A  (共通部分 Intersection ∩) B = {3,5}</li>
+        <li>A − B = {1,7}</li>
+        <li>補集合 Ā = {2,4,6,8}（U の中で A に入らないもの）</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>練習問題（Practice）</h2>
+      <p>U = {a,b,c,d,e}, A = {a,c,d}, B = {b,c}</p>
+      <ol>
+        <li> A  (和集合 Union ∪) B は？ <span class="toggle" onclick="toggleAns('q1')">答えを見る</span></li>
+        <div id="q1" class="ans">{a,b,c,d}</div>
+        <li> A  (共通部分 Intersection ∩) B は？ <span class="toggle" onclick="toggleAns('q2')">答えを見る</span></li>
+        <div id="q2" class="ans">{c}</div>
+        <li> A − B は？ <span class="toggle" onclick="toggleAns('q3')">答えを見る</span></li>
+        <div id="q3" class="ans">{a,d}</div>
+        <li> B の補集合（B̄）は？ <span class="toggle" onclick="toggleAns('q4')">答えを見る</span></li>
+        <div id="q4" class="ans">{a,d,e}</div>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+  <p>Copyright©Chibamode.JIN</p><br>
+  <a href="index.html">🏠 ホームに戻る</a> | <a href="sets_home.html">📗 集合サブホームへ</a></p>
+</footer>
+
+  <script>
+    // 2つベン図の表示切り替え
+    function show2(id) {
+      ['UNION','INTER','Aonly','Bonly'].forEach(key => {
+        const g = document.getElementById(key);
+        if (!g) return;
+        g.style.opacity = (key === id) ? 1 : 0;
+      });
+    }
+    function clear2() { show2(''); }
+
+    // 3つベン図の表示切り替え
+    function show3(id) {
+      ['AB','AC','BC','ABC'].forEach(key => {
+        const g = document.getElementById(key);
+        if (!g) return;
+        g.style.opacity = (key === id) ? 1 : 0;
+      });
+    }
+    function clear3() { show3(''); }
+
+    // 答えの開閉
+    function toggleAns(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

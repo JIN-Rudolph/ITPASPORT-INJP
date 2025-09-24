@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>変数と配列 | Variables & Arrays</title>
+  <link rel="stylesheet" href="algo hesu.css">
+</head>
+<body>
+  <header>
+    <h1>📗 変数と配列 (Variables & Arrays)</h1>
+  </header>
+
+  <main>
+   <section class="card">
+  <h2>📦 変数 (Variable)</h2>
+  <p>変数は <b>1つだけ値を入れられる入れ物</b> です。</p>
+
+  <input type="text" id="varInput" placeholder="例: Taro">
+  <button onclick="setVariable()">入れる</button>
+
+  <div id="varBox" class="box">
+    <span class="box-label">myVar</span>
+    <div id="varContent">（空っぽ）</div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>📚 配列 (Array)</h2>
+  <p>配列は <b>同じ種類の入れ物がならんだもの</b> です。</p>
+
+  <input type="text" id="arrInput" placeholder="値を入力">
+  <button onclick="pushArray()">追加する</button>
+  <button onclick="popArray()">削除する</button>
+
+  <div id="arrayBox" class="array-box">
+    <!-- 値の入った箱がここに並ぶ -->
+  </div>
+</section>
+
+    <footer>
+    <p>Copyright©Chibamode.JIN</p><br>
+    <a href="algo_home.html">💻 アルゴリズムとプログラミングにもどる</a>
+    </footer>
+  </main>
+  <script>
+  // 変数用
+  let myVar;
+
+  function setVariable() {
+    myVar = document.getElementById("varInput").value;
+    const content = document.getElementById("varContent");
+    const box = document.getElementById("varBox");
+
+    content.textContent = myVar || "（空っぽ）";
+    box.classList.add("filled");
+  }
+
+  // 配列用
+  
+let myArray = [];
+const MAX_SIZE = 5; // 上限を固定
+
+function pushArray() {
+  const val = document.getElementById("arrInput").value;
+  if (!val) return;
+
+  if (myArray.length >= MAX_SIZE) {
+    alert(`⚠️ 配列の上限は ${MAX_SIZE} です`);
+    return;
+  }
+
+  myArray.push(val);
+  renderArray();
+}
+  function renderArray() {
+    const arrayBox = document.getElementById("arrayBox");
+    arrayBox.innerHTML = ""; // 一旦クリア
+
+    myArray.forEach((val, index) => {
+      const slot = document.createElement("div");
+      slot.className = "array-slot filled";
+      slot.textContent = val;
+      slot.setAttribute("data-index", index);
+
+      // クリックで削除
+      slot.addEventListener("click", () => {
+        myArray.splice(index, 1); // 配列から削除
+        renderArray(); // 再描画
+      });
+
+      arrayBox.appendChild(slot);
+    });
+  }
+  async function runVisual() {
+    const blank1 = document.getElementById("blank1").value;
+    const visual = document.getElementById("arrayVisual");
+    const log = document.getElementById("visualLog");
+
+    let a = [1, 2, 3];
+    let total;
+
+    try {
+      total = eval(blank1); // 初期値 (0 が正解)
+    } catch {
+      log.textContent = "⚠️ total の初期値を正しく入力してください";
+      return;
+    }
+
+    // 配列を表示
+    visual.innerHTML = "";
+    a.forEach(val => {
+      const slot = document.createElement("div");
+      slot.className = "array-slot";
+      slot.textContent = val;
+      visual.appendChild(slot);
+    });
+
+    const slots = document.querySelectorAll(".array-slot");
+    log.textContent = `最初の total = ${total}`;
+
+    // ステップごとにアニメーション
+    for (let i = 0; i < a.length; i++) {
+      await new Promise(r => setTimeout(r, 1000)); // 1秒待つ
+      slots.forEach(s => s.classList.remove("active"));
+      slots[i].classList.add("active");
+
+      const before = total;
+      total = total + a[i];
+      log.textContent += `\n i=${i} → ${before}+${a[i]} = ${total}`;
+    }
+
+    await new Promise(r => setTimeout(r, 1000));
+    if (total === 6) {
+      log.textContent += `\n 🎉 正解！ 合計は ${total}`;
+    } else {
+      log.textContent += `\n 🤔 結果は ${total} でした。`;
+    }
+  }
+
+</script>
+
+
+
+</body>
+</html>

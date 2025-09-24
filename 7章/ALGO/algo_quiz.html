@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>アルゴリズムとプログラミング クイズ | Quiz</title>
+  <link rel="stylesheet" href="algo quiz.css">
+  <style>
+    body { font-family: sans-serif; }
+    .quiz-container {
+      max-width: 700px; margin: auto; background: #f9f9f9;
+      padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .quiz-options button {
+      display: block; width: 100%; padding: 10px; margin: 10px 0;
+      border: none; border-radius: 8px; background: #e0f7fa; cursor: pointer; font-size: 18px;
+    }
+    .quiz-options button:hover { background: #b2ebf2; }
+    .progress-bar { width: 100%; background-color: #ddd; border-radius: 10px; overflow: hidden; margin: 20px 0; }
+    .progress { height: 20px; background-color: #008080; width: 0%; text-align: center; color: white; font-size: 12px; line-height: 20px; }
+    .result { font-weight: bold; margin-top: 20px; text-align: center; }
+    .back-home { display: block; text-align: center; margin-top: 30px; padding: 10px; background: #008080; color: white; border-radius: 8px; text-decoration: none; width: 200px; margin-left: auto; margin-right: auto; }
+    .back-home:hover { background: #006666; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💻 アルゴリズムとプログラミング クイズ</h1>
+  </header>
+
+  <main class="quiz-container">
+    <div class="progress-bar"><div id="progress" class="progress">0%</div></div>
+    <div id="question-container"></div>
+    <div class="quiz-options" id="options"></div>
+    <div id="feedback" class="result"></div>
+  </main>
+
+  <script>
+    const questions = [
+      // --- 変数・配列 (10問) ---
+      {q:'変数は何を保存するもの？',options:['けいさん式','データの値','ファイル','命令'],answer:1},
+      {q:'整数や文字を保存できる箱のことを何という？',options:['配列','関数','変数','リスト'],answer:2},
+      {q:'配列は何をまとめたもの？',options:['同じ型のデータ','関数','命令文','条件式'],answer:0},
+      {q:'配列の最初の要素の番号は多くの場合？',options:['0','1','2','10'],answer:0},
+      {q:'配列[3] = 7 と書いたとき、意味は？',options:['配列の3番目に7を入れる','配列全体を7にする','7番目に3を入れる','エラーになる'],answer:0},
+      {q:'変数 x=3, y=5 のとき x+y=?',options:['2','8','15','35'],answer:1},
+      {q:'配列 {2,4,6} の2番目の値は？',options:['2','4','6','エラー'],answer:1},
+      {q:'変数を宣言する理由は？',options:['見やすくするため','値を保存・再利用するため','速くするため','無意味'],answer:1},
+      {q:'真偽を表すデータ型は？',options:['int','string','bool','array'],answer:2},
+      // --- リスト・スタック・キュー (10問) ---
+      {q:'スタックのルールは？',options:['FIFO','LIFO','ランダム','昇順ソート'],answer:1},
+      {q:'スタックの「最後に入れたものが先に出る」は何と呼ばれる？',options:['FIFO','LIFO','ランダム','昇順ソート'],answer:1},
+      {q:'キューのルールは？',options:['FIFO','LIFO','ランダム','降順ソート'],answer:0},
+      {q:'キューの「先に入れたものが先に出る」は何と呼ばれる？',options:['FIFO','LIFO','ランダム','昇順ソート'],answer:0},
+      {q:'ブラウザの戻る/進むはどのデータ構造？',options:['配列','スタック','キュー','木'],answer:1},
+      {q:'待ち行列（列に並ぶ人）はどのデータ構造？',options:['配列','スタック','キュー','木'],answer:2},
+      {q:'スタックにpushとは？',options:['データをだす','データをいれる','並び替える','削除する'],answer:1},
+      {q:'スタックからpopとは？',options:['最後にデータをだす','データをいれる','並び替える','削除する'],answer:0},
+      {q:'キューで新しい要素を入れる操作は？',options:['DEQUEUE','ENQUEUE','PUSH','POP'],answer:1},
+      {q:'キューから要素を取り出す操作は？',options:['DEQUEUE','ENQUEUE','PUSH','POP'],answer:0},
+      {q:'スタック・キューの使い分けで正しいのは？',options:['順番が大事→キュー','最後に入れたものを先に使う→スタック','両方正しい','どちらも同じ'],answer:2},
+      // --- 木構造 (10問) ---
+      {q:'木構造の最上位を何という？',options:['親ノード','根ノード','葉ノード','子ノード'],answer:1},
+      {q:'子を持たないノードを何という？',options:['根ノード','親ノード','葉ノード','兄弟ノード'],answer:2},
+      {q:'1つの親から分かれる子のことを？',options:['枝','葉','子ノード','兄弟'],answer:2},
+      {q:'二分木で各ノードが持つ子の最大数は？',options:['1','2','3','無限'],answer:1},
+      {q:'木構造を順に処理する操作は？',options:['走査','探索','ソート','コピー'],answer:0},
+      {q:'木構造で「同じ親を持つノード」を何という？',options:['根ノード','子ノード','兄弟ノード','葉ノード'],answer:2},
+      // --- アルゴリズム基礎 (15問) ---
+      {q:'フローチャートで開始と終了を表す図形は？',options:['長方形','ひし形','楕円(まるっぽいえん）','平行四辺形'],answer:2},
+      {q:'フローチャートで処理を表す図形は？',options:['長方形','ひし形','楕円','平行四辺形'],answer:0},
+      {q:'フローチャートで条件分岐を表す図形は？',options:['長方形','ひし形','楕円','円'],answer:1},
+      {q:'アルゴリズムの基本構造は？',options:['順次（じゅんじ）・選択（せんたく）・繰り返し','入力・出力・保存','変数・配列・関数','木・スタック・キュー'],answer:0},
+      {q:'疑似言語は何のために使う？',options:['実行するため','設計をわかりやすくするため','翻訳するため','暗号化するため'],answer:1},
+      {q:'「もし〜なら」の構造は？',options:['順次（じゅんじ）','分岐（ぶんき）','反復（はんぷく）','再帰（さいき）'],answer:1},
+      {q:'「くり返す」の構造は？',options:['順次（じゅんじ）','分岐（ぶんき）','反復（はんぷく）','関数（かんすう）'],answer:2},
+      {q:'アルゴリズムが正しいとは？',options:['速い','間違いなく結果が出る','短い','人気がある'],answer:1},
+      {q:'探索アルゴリズムで効率が良いのは？',options:['線形探索','二分探索','総当たり','乱択'],answer:1},
+      {q:'アルゴリズムを評価する基準は？',options:['実行時間とメモリ','色と形','人気度','文字数'],answer:0},
+      {q:'フローチャートで「入力・出力」を表す図形は？',options:['長方形','平行四辺形','楕円','ひし形'],answer:1},
+      {q:'「もしAならばBする」はどんな処理？',options:['順次','分岐','反復','代入'],answer:1},
+      {q:'「同じ処理を何回もくり返す」のはどんな構造？',options:['順次','分岐','反復','関数'],answer:2},
+      // --- 総合問題 (5問) ---
+      {q:'配列・スタック・キュー・木に共通するのは？',options:['データ構造','アルゴリズム','OS機能','ネットワーク'],answer:0},
+      {q:'配列の利点は？',options:['高速なアクセス','順番がない','サイズが自由','データが消えない'],answer:0},
+      {q:'スタックが使われるのは？',options:['関数呼び出し管理','待ち行列','ファイル保存','ネット接続'],answer:0},
+      {q:'木構造の応用例は？',options:['フォルダ構造','ソート','関数定義','ネットワーク通信'],answer:0},
+      {q:'アルゴリズム設計で大事なのは？',options:['正しさと効率','デザイン','人気','偶然'],answer:0},
+      {q:'二分探索法とはなんですか？',options:['前にあるかうしろにあるかしぼりながら探す','前にあるか探す','うしろにあるか探す','データの構造'],answer:0},
+      {q:'スタックで「最後に追加したデータ」を取り出す操作は？',options:['push','pop','enqueue','dequeue'],answer:1},
+      {q:'木構造で「一番下にあるノード」を何という？',options:['根ノード','子ノード','葉ノード','枝'],answer:2},
+      {q:'フローチャートで「判断（はい/いいえ）」を表す図形は？',options:['長方形','ひし形','楕円','平行四辺形'],answer:1},
+      {q:'文字列を結合する演算子（多くの言語で使われるのは）？',options:['+','-','*','/'],answer:0},
+      {q:'データ構造とアルゴリズムを学ぶ理由は？',options:['効率よく問題を解くため','プログラミング言語を覚えるため','パソコンを速くするため','デザインを良くするため'],answer:0}
+    ];
+
+    let remainingQuestions = [...questions];
+    let totalQuestions = questions.length;
+    let currentQuestion = 0;
+    let score = 0;
+
+    function updateProgress() {
+      const progress = document.getElementById('progress');
+      const percent = Math.round((currentQuestion / totalQuestions) * 100);
+      progress.style.width = percent + '%';
+      progress.textContent = percent + '%';
+    }
+
+    function showQuestion() {
+      if (remainingQuestions.length === 0) {
+        document.getElementById('question-container').innerHTML = '<h2>🎉 クイズ終了！</h2>';
+        document.getElementById('options').innerHTML = '';
+        document.getElementById('feedback').textContent = 'あなたのスコア: ' + score + '/' + totalQuestions;
+        return;
+      }
+      const idx = Math.floor(Math.random() * remainingQuestions.length);
+      const qObj = remainingQuestions.splice(idx, 1)[0];
+      currentQuestion++;
+
+      document.getElementById('question-container').innerHTML = '<p><strong>Q' + currentQuestion + ':</strong> ' + qObj.q + '</p>';
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      qObj.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i, qObj.answer);
+        optionsDiv.appendChild(btn);
+      });
+      updateProgress();
+    }
+
+    function checkAnswer(selected, correct) {
+      const feedback = document.getElementById('feedback');
+      if (selected === correct) {
+        feedback.textContent = '正解！ (Correct!)';
+        feedback.style.color = 'green';
+        score++;
+      } else {
+        feedback.textContent = '不正解… (Incorrect)';
+        feedback.style.color = 'red';
+      }
+      setTimeout(() => {
+        feedback.textContent = '';
+        showQuestion();
+      }, 1000);
+    }
+
+    showQuestion();
+  </script>
+  <footer>
+  <p>Copyright©Chibamode.JIN</p><br>
+  <a href="algo_home.html">💻 アルゴリズムとプログラミングにもどる</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>外国人留学生向け｜4-1 システム開発 / 4-2 ソフトウェア開発管理技術（やさしい日本語＋英語用語）</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel:#121a2b;
+      --ink:#eaf2ff;
+      --muted:#a8b3cf;
+      --accent:#5ab0ff;
+      --ok:#43d17c;
+      --warn:#ffb657;
+      --danger:#ff6b6b;
+      --ring: rgba(90,176,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:linear-gradient(180deg, #09101e 0%, #0e1830 100%);
+      letter-spacing:.02em;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:linear-gradient(180deg, rgba(9,16,30,.85), rgba(9,16,30,.6));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+    .title{display:flex;gap:14px;align-items:center}
+    .badge{font-size:12px;color:#00142b;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .sub{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    nav#toc{position:sticky;top:84px;align-self:start;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    nav#toc h2{margin:0 0 8px;font-size:16px}
+    nav#toc ul{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+    nav#toc li{margin:6px 0}
+    nav#toc a{color:var(--ink)}
+
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 20px}
+    .controls input[type="search"]{flex:1;min-width:240px;background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+    .btn{background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+
+    section{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px;margin-bottom:18px}
+    h2{margin:.2em 0 .6em;font-size:24px}
+    h3{margin:1.2em 0 .4em;font-size:18px}
+    p{color:var(--ink);opacity:.92}
+    .muted{color:var(--muted)}
+
+    .timeline{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:12px}
+    .step{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;position:relative}
+    .step .num{font-weight:700;color:var(--accent);font-size:12px}
+    .step .name{font-weight:600}
+    .step .desc{color:var(--muted);font-size:13px;margin-top:6px}
+
+    details{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin:.6em 0}
+    details[open]{outline:2px solid var(--ring)}
+    summary{cursor:pointer;font-weight:600}
+
+    .card{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:.6em 0}
+    .label{font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:inline-block;color:var(--muted)}
+
+    .checklist label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px}
+    .checklist input{accent-color:var(--accent);margin-top:3px}
+
+    .model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .model{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+
+    .gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .gloss b{color:var(--accent)}
+
+    .foot{color:var(--muted);font-size:12px;margin-top:8px}
+    .kicker{font-size:13px;color:var(--muted)}
+
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      nav#toc{position:relative;top:auto}
+      .timeline{grid-template-columns: 1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div style="font-weight:800;font-size:20px">📚 外国人留学生向け 学習サポート</div>
+        <span class="badge">やさしい日本語 + English terms</span>
+      </div>
+      <p class="sub">4-1 システム開発／4-2 ソフトウェア開発管理技術 — 基本をコンパクトに解説。難しい漢字には英語用語をそえています。</p>
+      <div class="controls">
+        <input id="q" type="search" placeholder="キーワードで検索（例：テスト計画 / waterfall / CMMI）" />
+        <button class="btn" id="expand">すべて開く</button>
+        <button class="btn" id="collapse">すべて閉じる</button>
+        <button class="btn" id="clear">検索クリア</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap grid">
+    <!-- TOC -->
+    <nav id="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ul>
+        <li><a href="#sec41">4-1 システム開発</a>
+          <ul>
+            <li><a href="#proc">システム開発のプロセス</a></li>
+            <li><a href="#req">要件定義</a></li>
+            <li><a href="#design">設計</a></li>
+            <li><a href="#prog">プログラミング</a></li>
+            <li><a href="#test">テスト</a></li>
+            <li><a href="#deploy">導入・受け入れ</a></li>
+            <li><a href="#ops">運用・保守</a></li>
+            <li><a href="#outsourcing">開発の外部委託</a></li>
+            <li><a href="#estimate">ソフトウェアの見積り</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec42">4-2 ソフトウェア開発管理技術</a>
+          <ul>
+            <li><a href="#methods">プロセス・手法</a></li>
+            <li><a href="#models">開発モデル</a></li>
+            <li><a href="#agile">アジャイル（XP/Scrum）</a></li>
+            <li><a href="#reverse">リバースエンジニアリング</a></li>
+            <li><a href="#frame">共通フレーム</a></li>
+            <li><a href="#cmm">能力成熟モデル（CMM/CMMI）</a></li>
+            <li><a href= "../HOME.html">学習一覧ホームにもどる</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- 4-1 -->
+      <section id="sec41">
+        <h2>4-1 システム開発 <span class="kicker">System Development</span></h2>
+        <p>システムを作って使えるようにする全体の流れです。<br>やさしい日本語で短く説明し、<span class="muted">（英語：カッコ内）</span>も書きます。</p>
+
+        <h3 id="proc">システム開発のプロセス <span class="kicker">Process</span></h3>
+        <div class="timeline" role="list">
+          <div class="step" role="listitem">
+            <div class="num">1</div>
+            <div class="name">要件定義（Requirements）</div>
+            <div class="desc">なにを作り、なぜ必要か、だれが使うかを決める。</div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="num">2</div>
+            <div class="name">設計（Design）</div>
+            <div class="desc">どう作るか、全体と細かい部分の設計をする。</div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="num">3</div>
+            <div class="name">プログラミング（Implementation）</div>
+            <div class="desc">設計どおりに、コードを書く。</div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="num">4</div>
+            <div class="name">テスト（Testing）</div>
+            <div class="desc">正しく動くか、問題はないかを確かめる。</div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="num">5</div>
+            <div class="name">導入・受け入れ（Deployment & Acceptance）</div>
+            <div class="desc">本番へ入れて、利用者に確認してもらう。</div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="num">6</div>
+            <div class="name">運用・保守（Operations & Maintenance）</div>
+            <div class="desc">日々の運用、改善、障害対応をする。</div>
+          </div>
+        </div>
+
+        <h3 id="req">要件定義 <span class="kicker">Requirements Definition</span></h3>
+        <details open>
+          <summary>システム要件定義（System Requirements）</summary>
+          <div class="card">
+            <p>ビジネスの目的、利用者（ユーザ）、使う環境（クラウド/オンプレ）、セキュリティ、性能（Performance）、可用性（Availability）など、<b>システム全体</b>に必要なことを決めます。</p>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-id="req-sys-1">目的とスコープ（Scope）を説明できる</label></li>
+              <li><label><input type="checkbox" data-id="req-sys-2">利用者・利害関係者（Stakeholders）を特定した</label></li>
+              <li><label><input type="checkbox" data-id="req-sys-3">非機能要件（NFR: セキュリティ/性能/可用性）を定義した</label></li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>ソフトウェア要件定義（Software Requirements）</summary>
+          <div class="card">
+            <p>機能要件（Functional）と非機能要件（Non-Functional）を、<b>テストできる文</b>で書きます。例：「ユーザはメールとパスワードでログインできる」。</p>
+            <p class="foot">Tips: ユースケース（Use Case）やユーザストーリー（User Story）で書くと分かりやすい。</p>
+          </div>
+        </details>
+
+        <h3 id="design">設計 <span class="kicker">Design</span></h3>
+        <details>
+          <summary>システム設計（System Architecture）</summary>
+          <div class="card">
+            <p>全体構成（例：フロントエンド／API／DB）、外部連携、ネットワーク、可観測性（Observability）など。</p>
+          </div>
+        </details>
+        <details>
+          <summary>ソフトウェア設計（Detailed Design）</summary>
+          <div class="card">
+            <p>データモデル、クラス設計、API仕様、UIワイヤーフレーム、例外処理、ログ設計など。</p>
+          </div>
+        </details>
+
+        <h3 id="prog">プログラミング <span class="kicker">Implementation</span></h3>
+        <div class="card">
+          <p>コーディング規約（Coding Standards）、コードレビュー、静的解析（Static Analysis）、自動テスト（Automated Test）を用いて品質を守ります。</p>
+        </div>
+
+        <h3 id="test">テスト <span class="kicker">Testing</span></h3>
+        <details>
+          <summary>テストの実施手順（How to test）</summary>
+          <div class="card">
+            <ol>
+              <li>テスト計画の作成（Test Plan）</li>
+              <li>テスト仕様の設計（Test Design / Cases）</li>
+              <li>テスト環境の設定（Environment）</li>
+              <li>テストの実施（Execution）</li>
+              <li>テスト結果の評価（Evaluation & Report）</li>
+            </ol>
+          </div>
+        </details>
+        <details>
+          <summary>テストの技法（Techniques）</summary>
+          <div class="card">
+            <ul>
+              <li>ホワイトボックステスト（White-box）：コードの中身を見てテスト。</li>
+              <li>ブラックボックステスト（Black-box）：入力と出力だけでテスト（同値分割・境界値分析など）。</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>テストの計画（Planning）</summary>
+          <div class="card">
+            <p>対象範囲、リスク、スケジュール、体制、完了条件（Exit Criteria）を決める。</p>
+          </div>
+        </details>
+        <details>
+          <summary>テストの実施（Execution）</summary>
+          <div class="card">
+            <ul>
+              <li>ソフトウェア統合テスト（Integration）</li>
+              <li>システム統合テスト（System Integration）</li>
+              <li>システム検証テスト（System Verification / UAT準備）</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>テスト結果の評価（Evaluation）</summary>
+          <div class="card">
+            <p>合格/不合格、欠陥（Defect）の重大度、再発防止（Lessons Learned）をまとめる。</p>
+          </div>
+        </details>
+
+        <h3 id="deploy">導入・受け入れ <span class="kicker">Deployment & Acceptance</span></h3>
+        <details>
+          <summary>導入手順（Migration → Go-Live）</summary>
+          <div class="card">
+            <ol>
+              <li>移行データの決定（Data to migrate）</li>
+              <li>移行方法の決定（Method: 手動/自動/段階的）</li>
+              <li>システム導入計画（Plan: 日程・手順・バックアウト）</li>
+              <li>システムの導入（Go-Live）</li>
+            </ol>
+          </div>
+        </details>
+        <details>
+          <summary>システム導入計画・受入（Acceptance）</summary>
+          <div class="card">
+            <p>受入基準（Acceptance Criteria）を満たすことを、利用者と確認（UAT: User Acceptance Test）。</p>
+          </div>
+        </details>
+
+        <h3 id="ops">運用・保守 <span class="kicker">Operations & Maintenance</span></h3>
+        <details>
+          <summary>運用・保守に関する留意点</summary>
+          <div class="card">
+            <ul>
+              <li>監視（Monitoring）・ログ・バックアップ</li>
+              <li>変更管理（Change Management）・構成管理（Configuration）</li>
+              <li>セキュリティパッチ・脆弱性対応</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>システムの保守（Maintenance）</summary>
+          <div class="card">
+            <p>是正保守（Corrective）、適応保守（Adaptive）、予防保守（Preventive）、機能追加（Perfective）。</p>
+          </div>
+        </details>
+        <details>
+          <summary>システムの障害対策（Incident / BCP）</summary>
+          <div class="card">
+            <ul>
+              <li>インシデント対応手順、SLA、エスカレーション</li>
+              <li>DR/BCP（Disaster Recovery / Business Continuity）</li>
+            </ul>
+          </div>
+        </details>
+
+        <h3 id="outsourcing">システムの開発の外部委託 <span class="kicker">Outsourcing</span></h3>
+        <div class="card">
+          <ul>
+            <li>RFP（提案依頼書）→ ベンダ選定 → 契約（請負/準委任）</li>
+            <li>SLA・成果物・受入基準・著作権・秘密保持（NDA）を明確に</li>
+            <li>進捗・品質・コスト・リスクの可視化（定例会・報告）</li>
+          </ul>
+        </div>
+
+        <h3 id="estimate">ソフトウェアの見積り <span class="kicker">Estimation</span></h3>
+        <div class="card">
+          <p>よく使う方法：</p>
+          <ul>
+            <li>類推見積り（Analogous）・三点見積り（PERT）</li>
+            <li>LOC（行数）・FP（ファンクションポイント）・UCP（Use Case Points）</li>
+            <li>COCOMOモデル（工数/コストを計算）</li>
+          </ul>
+          <p class="foot">見積りは<b>前提条件</b>と<b>リスク</b>を必ず明記しましょう。</p>
+        </div>
+      </section>
+
+      <!-- 4-2 -->
+      <section id="sec42">
+        <h2>4-2 ソフトウェア開発管理技術 <span class="kicker">Software Engineering Management</span></h2>
+
+        <h3 id="methods">ソフトウェア開発のプロセス・手法 <span class="kicker">Processes & Practices</span></h3>
+        <div class="card">
+          <div class="gloss">
+            <div><b>手法（Method）</b><br>作り方の考え方やルール。</div>
+            <div><b>プロセス（Process）</b><br>進め方の段取り・役割・成果物。</div>
+          </div>
+        </div>
+
+        <h3 id="models">ソフトウェア開発モデル <span class="kicker">Lifecycle Models</span></h3>
+        <div class="model-grid">
+          <div class="model">
+            <div class="label">ウォーターフォール（Waterfall）</div>
+            <p>上から下へ順番に進む。要件が安定している時に合う。変更は苦手。</p>
+          </div>
+          <div class="model">
+            <div class="label">スパイラル（Spiral）</div>
+            <p>計画→リスク分析→開発→評価を何度も回す。リスク管理が中心。</p>
+          </div>
+          <div class="model">
+            <div class="label">プロトタイピング（Prototyping）</div>
+            <p>試作品を作って早く学ぶ。利用者のフィードバックを得やすい。</p>
+          </div>
+        </div>
+
+        <h3 id="agile">アジャイル（Agile） <span class="kicker">XP / Scrum</span></h3>
+        <details>
+          <summary>XP（エクストリームプログラミング）</summary>
+          <div class="card">
+            <ul>
+              <li>テスト駆動開発（TDD）</li>
+              <li>ペアプログラミング（Pair Programming）</li>
+              <li>継続的インテグレーション（CI）</li>
+              <li>リファクタリング（Refactoring）</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>スクラム（Scrum）</summary>
+          <div class="card">
+            <ul>
+              <li>役割：プロダクトオーナー／スクラムマスター／開発チーム</li>
+              <li>イベント：スプリント、プランニング、デイリースクラム、レビュー、レトロ</li>
+              <li>成果物：プロダクトバックログ、スプリントバックログ、インクリメント</li>
+            </ul>
+          </div>
+        </details>
+
+        <h3 id="reverse">リバースエンジニアリング <span class="kicker">Reverse Engineering</span></h3>
+        <div class="card">
+          <p>既存のソフトを解析して、仕様や設計を取り出すこと。保守・移行・互換確認などで使う。倫理・法令に注意。</p>
+        </div>
+
+        <h3 id="frame">共通フレーム <span class="kicker">Common Framework</span></h3>
+        <div class="card">
+          <p>発注者と受注者が同じ言葉で話すための、<b>作業項目の共通リスト</b>。工程・成果物・責任分担を合わせる。</p>
+        </div>
+
+        <h3 id="cmm">能力成熟モデル（CMM / CMMI） <span class="kicker">Capability Maturity</span></h3>
+        <div class="card">
+          <ol>
+            <li><b>初期（Initial）</b>：人に依存。プロセスが不安定。</li>
+            <li><b>管理（Managed）</b>：基本プロジェクト管理はできる。</li>
+            <li><b>定義（Defined）</b>：組織で標準プロセスを定義。</li>
+            <li><b>定量的に管理（Quantitatively Managed）</b>：測定・分析で管理。</li>
+            <li><b>最適化（Optimizing）</b>：継続的改善。</li>
+          </ol>
+        </div>
+      </section>
+
+      <section>
+        <h2>用語ミニ辞書 <span class="kicker">Mini Glossary</span></h2>
+        <div class="gloss">
+          <div><b>受入（Acceptance）</b> 利用者がOKすること。</div>
+          <div><b>非機能要件（NFR）</b> 性能・安全・使いやすさ等。</div>
+          <div><b>バックアウト</b> 導入が失敗したら元に戻す計画。</div>
+          <div><b>SLA</b> サービス品質の約束。</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>学習チェック <span class="kicker">Self-check</span></h2>
+        <div class="checklist">
+          <label><input type="checkbox" data-id="chk-1"> 要件定義と設計のちがいを説明できる</label>
+          <label><input type="checkbox" data-id="chk-2"> ホワイトボックスとブラックボックスを例で言える</label>
+          <label><input type="checkbox" data-id="chk-3"> ウォーターフォールとスクラムの使い分けを話せる</label>
+        </div>
+      </section>
+
+      <p class="muted">Copyright©Chibamode.JIN<br>
+      <a href= "../HOME.html">学習一覧ホームにもどる</a></p>
+    </main>
+  </div>
+
+  <script>
+    // Search filter
+    const q = document.getElementById('q');
+    const sections = Array.from(document.querySelectorAll('section, details, .card, .model'));
+    const clearBtn = document.getElementById('clear');
+    function filter(){
+      const term = q.value.trim().toLowerCase();
+      sections.forEach(el=>{
+        if(!term){ el.style.removeProperty('outline'); el.style.removeProperty('display'); return; }
+        const hit = el.textContent.toLowerCase().includes(term);
+        el.style.display = hit? 'block' : 'none';
+        if(hit){ el.style.outline = '2px solid var(--ring)'; }
+        else { el.style.removeProperty('outline'); }
+      });
+    }
+    q.addEventListener('input', filter);
+    clearBtn.addEventListener('click', ()=>{ q.value=''; filter(); });
+
+    // Expand/collapse all details
+    const expandBtn = document.getElementById('expand');
+    const collapseBtn = document.getElementById('collapse');
+    function setAll(open){ document.querySelectorAll('details').forEach(d=> d.open = open); }
+    expandBtn.addEventListener('click', ()=> setAll(true));
+    collapseBtn.addEventListener('click', ()=> setAll(false));
+
+    // Persist checklist state
+    const KEY = 'study-support-progress-v1';
+    function load(){
+      try{ const data = JSON.parse(localStorage.getItem(KEY) || '{}');
+        document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=>{
+          cb.checked = Boolean(data[cb.dataset.id]);
+        });
+      }catch(e){}
+    }
+    function save(){
+      const data = {};
+      document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=> data[cb.dataset.id] = cb.checked);
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+    document.addEventListener('change', e=>{ if(e.target.matches('input[type="checkbox"][data-id]')) save(); });
+    load();
+  </script>
+</body>
+</html>

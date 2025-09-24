@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="stylesheet" href="footer.css">
+  <title>ITパスポート 第8章 コンピュータシステム｜8-13 ハードウェア</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121938; --ink:#eef3ff; --muted:#b9c3e6;
+      --brand:#6ea8fe; --accent:#7ee7ff; --ok:#22c55e; --bad:#ef4444;
+    }
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; background: linear-gradient(180deg,#0b1020,#0b1020 40%,#0e1530); color:var(--ink);}
+    header{position:sticky; top:0; backdrop-filter: blur(8px); background: #0b1020cc; border-bottom: 1px solid #1f2a5a}
+    .wrap{max-width:1100px; margin:0 auto; padding:20px}
+    .badge{font-size:12px; color:#0b1020; background:linear-gradient(90deg,var(--brand),var(--accent)); padding:4px 8px; border-radius:999px; font-weight:700}
+    h1{margin:6px 0 12px; font-size:28px}
+    .sub{color:var(--muted); margin:0}
+    nav.toc{display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin:18px 0}
+    .card{background:linear-gradient(180deg,#121938,#0f1742); border:1px solid #20306b; border-radius:16px; padding:16px; box-shadow: 0 10px 24px rgba(4,12,48,0.35)}
+    .card h3{margin:0 0 6px; font-size:16px}
+    .card p{margin:0; color:var(--muted)}
+    details{border:1px solid #22316b; background:#11183b; border-radius:14px; padding:14px; margin:12px 0}
+    details[open]{background:#10173a}
+    details summary{cursor:pointer; font-weight:700; list-style:none}
+    .list{color:var(--muted)}
+    .table{width:100%; border-collapse: collapse; margin-top:10px}
+    .table th,.table td{border:1px solid #263472; padding:8px; text-align:left}
+    .table th{background:#0f1742}
+    .quiz{margin-top:14px; border:1px dashed #2b4493; border-radius:14px; padding:14px}
+    .quiz button{background:linear-gradient(90deg,var(--brand),var(--accent)); color:#0b1020; border:none; padding:8px 12px; border-radius:10px; font-weight:800; cursor:pointer}
+    .result{margin-top:8px; font-weight:700}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="badge">ITパスポート 第8章</div>
+      <h1>8-13 ハードウェア</h1>
+      <p class="sub">コンピュータ・入力装置・出力装置</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="toc">
+      <a class="card" href="#sec-comp"><h3>コンピュータの種類</h3></a>
+      <a class="card" href="#sec-input"><h3>入力装置</h3></a>
+      <a class="card" href="#sec-output"><h3>出力装置</h3></a>
+    </nav>
+
+    <section id="sec-comp">
+      <h2>コンピュータの種類</h2>
+      <details open>
+        <summary>分類</summary>
+        <ul class="list">
+          <li>汎用コンピュータ（メインフレーム）</li>
+          <li>スーパーコンピュータ（科学技術計算・シミュレーション）</li>
+          <li>パーソナルコンピュータ（デスクトップ・ノートPC）</li>
+          <li>情報端末（スマートフォン・タブレット・専用端末）</li>
+        </ul>
+      </details>
+      <div class="quiz" data-quiz="q-comp">
+        <h4>確認クイズ（コンピュータ）</h4>
+        <div><label><input type="radio" name="q-comp" value="A"> スーパーコンピュータは主に文書作成に利用される。</label></div>
+        <div><label><input type="radio" name="q-comp" value="B" data-correct> スーパーコンピュータは科学技術計算やシミュレーションに用いられる。</label></div>
+        <button onclick="grade('q-comp')">採点</button>
+        <div class="result" id="res-q-comp"></div>
+      </div>
+    </section>
+
+    <section id="sec-input">
+      <h2>入力装置</h2>
+      <details open>
+        <summary>代表例</summary>
+        <table class="table">
+          <tr><th>装置</th><th>用途</th></tr>
+          <tr><td>キーボード</td><td>文字入力</td></tr>
+          <tr><td>マウス／トラックパッド</td><td>ポインティング操作</td></tr>
+          <tr><td>タブレット／タッチパネル</td><td>直感的入力</td></tr>
+          <tr><td>イメージスキャナ</td><td>画像読み取り</td></tr>
+          <tr><td>バーコードリーダ</td><td>商品管理・在庫</td></tr>
+          <tr><td>OCR</td><td>文字認識</td></tr>
+          <tr><td>Webカメラ</td><td>映像入力</td></tr>
+        </table>
+      </details>
+      <div class="quiz" data-quiz="q-input">
+        <h4>確認クイズ（入力装置）</h4>
+        <div><label><input type="radio" name="q-input" value="A"> OCRは映像通話に使用する装置である。</label></div>
+        <div><label><input type="radio" name="q-input" value="B" data-correct> OCRは紙の文字を読み取りデジタル化する。</label></div>
+        <button onclick="grade('q-input')">採点</button>
+        <div class="result" id="res-q-input"></div>
+      </div>
+    </section>
+
+    <section id="sec-output">
+      <h2>出力装置</h2>
+      <details open>
+        <summary>代表例</summary>
+        <ul class="list">
+          <li>ディスプレイ（液晶・有機EL・解像度・リフレッシュレート）</li>
+          <li>プリンタ
+            <ul>
+              <li>ページプリンタ（レーザ方式など）</li>
+              <li>シリアルプリンタ（インクジェット、ドットインパクト）</li>
+            </ul>
+          </li>
+        </ul>
+      </details>
+      <div class="quiz" data-quiz="q-output">
+        <h4>確認クイズ（出力装置）</h4>
+        <div><label><input type="radio" name="q-output" value="A"> ページプリンタは1行ずつ印刷する。</label></div>
+        <div><label><input type="radio" name="q-output" value="B" data-correct> ページプリンタはページ単位で高速に印刷する。</label></div>
+        <button onclick="grade('q-output')">採点</button>
+        <div class="result" id="res-q-output"></div>
+      </div>
+    </section>
+        <div class="footer">
+      <p>Copyright©Chibamode.JIN</p><br>
+      <a href= "index.html">📚 8章　コンピュータシステムにもどる</a>
+    </div>
+  </main>
+
+  <script>
+    function grade(id){
+      const group=document.querySelector(`[data-quiz="${id}"]`);
+      const selected=group.querySelector('input[type=radio]:checked');
+      const res=document.getElementById(`res-${id}`);
+      if(!selected){res.textContent='選択してください。';return}
+      const correct=selected.hasAttribute('data-correct');
+      if(correct){res.textContent='正解！';res.style.color='var(--ok)'}
+      else{res.textContent='不正解。';res.style.color='var(--bad)'}
+    }
+  </script>
+</body>
+</html>

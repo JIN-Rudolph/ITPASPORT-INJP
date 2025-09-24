@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>集合クイズ | Sets Quiz</title>
+  <link rel="stylesheet" href="sets.css">
+  <style>
+    body { font-family: sans-serif; }
+    .quiz-container {
+      max-width: 700px; margin: auto; background: #f9f9f9;
+      padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .quiz-options button {
+      display: block; width: 100%; padding: 10px; margin: 10px 0;
+      border: none; border-radius: 8px; background: #e0f7fa; cursor: pointer; font-size: 18px;
+    }
+    .quiz-options button:hover { background: #b2ebf2; }
+    .progress-bar { width: 100%; background-color: #ddd; border-radius: 10px; overflow: hidden; margin: 20px 0; }
+    .progress { height: 20px; background-color: #008080; width: 0%; text-align: center; color: white; font-size: 12px; line-height: 20px; }
+    .result { font-weight: bold; margin-top: 20px; text-align: center; }
+    .back-home { display: block; text-align: center; margin-top: 30px; padding: 10px; background: #008080; color: white; border-radius: 8px; text-decoration: none; width: 200px; margin-left: auto; margin-right: auto; }
+    .back-home:hover { background: #006666; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>集合クイズ (Sets Quiz)</h1>
+  </header>
+
+  <main class="quiz-container">
+    <div class="progress-bar"><div id="progress" class="progress">0%</div></div>
+    <div id="question-container"></div>
+    <div class="quiz-options" id="options"></div>
+    <div id="feedback" class="result"></div>
+  </main>
+
+  <script>
+    const questions = [
+      // --- フルーツ・動物型 25問 ---
+      {q:'A={🍎,🍌},B={🍌,🍇} のとき A の共通部分 (Intersection ∩)B=?',options:['{🍎}','{🍇}','{🍌}','{🍎,🍇}'],answer:2},
+      {q:'A={🐶,🐱},B={🐱,🐦} のとき A の和集合 (Union ∪)B=?',options:['{🐶}','{🐱,🐦}','{🐶,🐱,🐦}','{🐶,🐦}'],answer:2},
+      {q:'A={🍎,🍌},B={🍎} のとき A の差集合 (Difference -)B=?',options:['{🍌}','{🍎}','{🍎,🍌}','{}'],answer:0},
+      {q:'A={🐶,🐱},B={🐶} のとき A の差集合 (Difference -)B=?',options:['{🐱}','{🐶}','{🐶,🐱}','{}'],answer:0},
+      {q:'A={🍇},B={🍎,🍌,🍇} のとき A の共通部分 (Intersection ∩)B=?',options:['{🍎}','{🍇}','{🍌}','{}'],answer:1},
+      {q:'A={🍎,🍌,🍇},B={🍌} のとき A の共通部分 (Intersection ∩)B=?',options:['{🍎}','{🍌}','{🍇}','{}'],answer:1},
+      {q:'A={🐶,🐦},B={🐱,🐦} のとき A の共通部分 (Intersection ∩)B=?',options:['{🐶}','{🐱}','{🐦}','{}'],answer:2},
+      {q:'A={🍎},B={🍌} のとき A の和集合 (Union ∪)B=?',options:['{🍎,🍌}','{🍎}','{🍌}','{}'],answer:0},
+      {q:'A={🐶},B={🐱,🐦} のとき A の和集合 (Union ∪)B=?',options:['{🐶,🐱,🐦}','{🐱}','{🐦}','{}'],answer:0},
+      {q:'A={🍇,🍌},B={🍎,🍇} のとき A の差集合 (Difference -)B=?',options:['{🍌}','{🍎}','{🍇}','{}'],answer:0},
+      {q:'A={🐱,🐶},B={🐱} のとき A の共通部分 (Intersection ∩)B=?',options:['{🐱}','{🐶}','{🐱,🐶}','{}'],answer:0},
+      {q:'A={🍎,🍇},B={🍇,🍌} のとき A の和集合 (Union ∪)B=?',options:['{🍎,🍇,🍌}','{🍎}','{🍇}','{}'],answer:0},
+      {q:'A={🐦},B={🐱,🐶} のとき A の共通部分 (Intersection ∩)B=?',options:['{🐦}','{}','{🐱}','{🐶}'],answer:1},
+      {q:'A={🍌},B={🍎,🍇} のとき A の和集合 (Union ∪)B=?',options:['{🍌,🍎,🍇}','{🍌}','{🍎}','{}'],answer:0},
+      {q:'A={🐱,🐦},B={🐶} のとき A の和集合 (Union ∪)B=?',options:['{🐱,🐦,🐶}','{🐱}','{🐶}','{}'],answer:0},
+      {q:'A={🍎},B={🍎,🍌,🍇} のとき A の差集合 (Difference -)B=?',options:['{}','{🍎}','{🍌}','{🍇}'],answer:0},
+      {q:'A={🐶},B={🐶,🐱} のとき B の差集合 (Difference -)A=?',options:['{🐱}','{🐶}','{}','{🐱,🐶}'],answer:0},
+      {q:'A={🍎,🍌},B={🍌,🍇} のとき A の和集合 (Union ∪)B=?',options:['{🍎,🍌,🍇}','{🍎}','{🍌}','{}'],answer:0},
+      {q:'A={🐱},B={🐱,🐦} のとき A の和集合 (Union ∪)B=?',options:['{🐱,🐦}','{🐱}','{🐦}','{}'],answer:0},
+      {q:'A={🍇,🍎},B={🍎} のとき A の共通部分 (Intersection ∩)B=?',options:['{🍇}','{🍎}','{}','{🍇,🍎}'],answer:1},
+      {q:'A={🐦,🐶},B={🐦} のとき A の差集合 (Difference -)B=?',options:['{🐶}','{🐦}','{}','{🐦,🐶}'],answer:0},
+      {q:'A={🍌},B={🍎} のとき A の共通部分 (Intersection ∩)B=?',options:['{}','{🍎}','{🍌}','{🍎,🍌}'],answer:0},
+      {q:'A={🐱,🐶},B={🐦} のとき A の和集合 (Union ∪)B=?',options:['{🐱,🐶,🐦}','{🐱}','{🐶}','{}'],answer:0},
+      {q:'A={🍇},B={🍇} のとき A の共通部分 (Intersection ∩)B=?',options:['{🍇}','{}','{🍎}','{🍌}'],answer:0},
+      {q:'A={🐦,🐱},B={🐦,🐶} のとき A の共通部分 (Intersection ∩)B=?',options:['{🐦}','{🐱}','{🐶}','{}'],answer:0},
+
+      // --- 数字型 25問 ---
+      {q:'A={1,2,3},B={3,4} のとき A の共通部分 (Intersection ∩)B=?',options:['{1}','{2}','{3}','{1,2,4}'],answer:2},
+      {q:'A={1,2},B={2,3} のとき A の和集合 (Union ∪)B=?',options:['{1,2}','{2,3}','{1,2,3}','{3}'],answer:2},
+      {q:'A={1,2,3},B={1} のとき A の差集合 (Difference -)B=?',options:['{2,3}','{1}','{1,2,3}','{}'],answer:0},
+      {q:'A={2,4,6},B={1,2,3} のとき A の共通部分 (Intersection ∩)B=?',options:['{2}','{4}','{1,3}','{}'],answer:0},
+      {q:'A={5,6},B={7,8} のとき A の和集合 (Union ∪)B=?',options:['{5,6,7,8}','{5,6}','{7,8}','{}'],answer:0},
+      {q:'A={1,3},B={3,5} のとき A の共通部分 (Intersection ∩)B=?',options:['{1}','{3}','{5}','{}'],answer:1},
+      {q:'A={2,3},B={3,4} のとき A の差集合 (Difference -)B=?',options:['{2}','{3}','{}','{2,3}'],answer:0},
+      {q:'A={1,2,3},B={4,5} のとき A の共通部分 (Intersection ∩)B=?',options:['{}','{1}','{2}','{3}'],answer:0},
+      {q:'A={6,7},B={7,8} のとき A の和集合 (Union ∪)B=?',options:['{6,7,8}','{6,7}','{7,8}','{}'],answer:0},
+      {q:'A={9},B={9,10} のとき A の共通部分 (Intersection ∩)B=?',options:['{9}','{10}','{}','{9,10}'],answer:0},
+      {q:'A={2,4},B={4,6} のとき A の共通部分 (Intersection ∩)B=?',options:['{2}','{4}','{6}','{}'],answer:1},
+      {q:'A={1,5},B={5,7} のとき A の和集合 (Union ∪)B=?',options:['{1,5,7}','{5}','{1}','{}'],answer:0},
+      {q:'A={3,4,5},B={5} のとき A の差集合 (Difference -)B=?',options:['{3,4}','{5}','{}','{3,4,5}'],answer:0},
+      {q:'A={8},B={7,8} のとき A の共通部分 (Intersection ∩)B=?',options:['{8}','{7}','{}','{7,8}'],answer:0},
+      {q:'A={1,2},B={3,4} のとき A の和集合 (Union ∪)B=?',options:['{1,2,3,4}','{1,2}','{3,4}','{}'],answer:0},
+      {q:'A={10,11},B={11,12} のとき A の共通部分 (Intersection ∩)B=?',options:['{10}','{11}','{12}','{}'],answer:1},
+      {q:'A={2,5},B={5,6} のとき A の共通部分 (Intersection ∩)B=?',options:['{2}','{5}','{6}','{}'],answer:1},
+      {q:'A={4},B={4,5} のとき A の和集合 (Union ∪)B=?',options:['{4,5}','{4}','{5}','{}'],answer:0},
+      {q:'A={6,8},B={8,9} のとき A の差集合 (Difference -)B=?',options:['{6}','{8}','{}','{6,8,9}'],answer:0},
+      {q:'A={7},B={8} のとき A の和集合 (Union ∪)B=?',options:['{7,8}','{7}','{8}','{}'],answer:0},
+      {q:'A={1,2,3},B={2,3} のとき A の共通部分 (Intersection ∩)B=?',options:['{1}','{2,3}','{2}','{}'],answer:1},
+      {q:'A={9,10},B={11} のとき A の和集合 (Union ∪)B=?',options:['{9,10,11}','{9,10}','{11}','{}'],answer:0},
+      {q:'A={2},B={2,3,4} のとき A の共通部分 (Intersection ∩)B=?',options:['{2}','{3}','{}','{2,3}'],answer:0},
+      {q:'A={5,7},B={7} のとき A の共通部分 (Intersection ∩)B=?',options:['{5}','{7}','{}','{5,7}'],answer:1},
+      {q:'A={8,9},B={9,10} のとき A の共通部分 (Intersection ∩)B=?',options:['{8}','{9}','{10}','{}'],answer:1}
+    ];
+
+    let remainingQuestions = [...questions];
+    let totalQuestions = questions.length;
+    let currentQuestion = 0;
+    let score = 0;
+
+    function updateProgress() {
+      const progress = document.getElementById('progress');
+      const percent = Math.round((currentQuestion / totalQuestions) * 100);
+      progress.style.width = percent + '%';
+      progress.textContent = percent + '%';
+    }
+
+    function showQuestion() {
+      if (remainingQuestions.length === 0) {
+        document.getElementById('question-container').innerHTML = '<h2>🎉 クイズ終了！</h2>';
+        document.getElementById('options').innerHTML = '';
+        document.getElementById('feedback').textContent = 'あなたのスコア: ' + score + '/' + totalQuestions;
+        return;
+      }
+      const idx = Math.floor(Math.random() * remainingQuestions.length);
+      const qObj = remainingQuestions.splice(idx, 1)[0];
+      currentQuestion++;
+
+      document.getElementById('question-container').innerHTML = '<p><strong>Q' + currentQuestion + ':</strong> ' + qObj.q + '</p>';
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      qObj.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i, qObj.answer);
+        optionsDiv.appendChild(btn);
+      });
+      updateProgress();
+    }
+
+    function checkAnswer(selected, correct) {
+      const feedback = document.getElementById('feedback');
+      if (selected === correct) {
+        feedback.textContent = '正解！ (Correct!)';
+        feedback.style.color = 'green';
+        score++;
+      } else {
+        feedback.textContent = '不正解… (Incorrect)';
+        feedback.style.color = 'red';
+      }
+      setTimeout(() => {
+        feedback.textContent = '';
+        showQuestion();
+      }, 1000);
+    }
+
+    showQuestion();
+  </script>
+  <footer>
+    <p>Copyright©Chibamode.JIN</p><br>
+    <a href="index.html">🏠 ホームに戻る</a> | <a href="sets_home.html">📗 集合サブホームへ</a></p>
+  </footer>
+</body>
+</html>

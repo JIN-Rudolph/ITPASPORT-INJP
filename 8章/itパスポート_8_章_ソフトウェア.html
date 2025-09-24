@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>ITパスポート 第8章 コンピュータシステム｜学習教材</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121938; --ink:#eef3ff; --muted:#b9c3e6;
+      --brand:#6ea8fe; --accent:#7ee7ff; --ok:#22c55e; --bad:#ef4444;
+    }
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; background: linear-gradient(180deg,#0b1020,#0b1020 40%,#0e1530); color:var(--ink);}
+    header{position:sticky; top:0; backdrop-filter: blur(8px); background: #0b1020cc; border-bottom: 1px solid #1f2a5a}
+    .wrap{max-width:1100px; margin:0 auto; padding:20px}
+    .badge{font-size:12px; color:#0b1020; background:linear-gradient(90deg,var(--brand),var(--accent)); padding:4px 8px; border-radius:999px; font-weight:700}
+    h1{margin:6px 0 12px; font-size:28px}
+    .sub{color:var(--muted); margin:0}
+    nav.toc{display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin:18px 0}
+    .card{background:linear-gradient(180deg,#121938,#0f1742); border:1px solid #20306b; border-radius:16px; padding:16px; box-shadow: 0 10px 24px rgba(4,12,48,0.35)}
+    .card h3{margin:0 0 6px; font-size:16px}
+    .card p{margin:0; color:var(--muted)}
+    details{border:1px solid #22316b; background:#11183b; border-radius:14px; padding:14px; margin:12px 0}
+    details[open]{background:#10173a}
+    details summary{cursor:pointer; font-weight:700; list-style:none}
+    .list{color:var(--muted)}
+    .table{width:100%; border-collapse: collapse; margin-top:10px}
+    .table th,.table td{border:1px solid #263472; padding:8px; text-align:left}
+    .table th{background:#0f1742}
+    .quiz{margin-top:14px; border:1px dashed #2b4493; border-radius:14px; padding:14px}
+    .quiz button{background:linear-gradient(90deg,var(--brand),var(--accent)); color:#0b1020; border:none; padding:8px 12px; border-radius:10px; font-weight:800; cursor:pointer}
+    .result{margin-top:8px; font-weight:700}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="badge">ITパスポート 第8章</div>
+      <h1>コンピュータシステム｜HTML学習教材</h1>
+      <p class="sub">8-5〜8-8</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="toc">
+      <a class="card" href="#sec8-5"><h3>8-5 システムの構成</h3><p>集中処理・分散処理</p></a>
+      <a class="card" href="#sec8-6"><h3>8-6 情報システムの構成</h3><p>冗長化・クライアントサーバ・Web・仮想化・RAID</p></a>
+      <a class="card" href="#sec8-7"><h3>8-7 情報システムの利用価値</h3></a>
+      <a class="card" href="#sec8-8"><h3>8-8 システムの評価指標</h3></a>
+      <a class="card" href="#sec8-9"><h3>8-9 ソフトウェア（OS）</h3><p>OSの必要性・機能・種類</p></a>
+      <a class="card" href="#sec8-10"><h3>8-10 ファイルの管理</h3><p>ディレクトリ・共有・バックアップ</p></a>
+      <a class="card" href="#sec8-11"><h3>8-11 オフィスツール</h3><p>ソフトウェアパッケージ・Webブラウザ</p></a>
+      <a class="card" href="#sec8-12"><h3>8-12 OSS</h3><p>特徴・主な種類</p></a>
+    </nav>
+
+    <section id="sec8-5">
+      <h2>8-5 システムの構成（処理形態）</h2>
+      <details open>
+        <summary>集中処理と分散処理</summary>
+        <table class="table">
+          <thead><tr><th>方式</th><th>概要</th><th>長所</th><th>留意点</th></tr></thead>
+          <tbody>
+            <tr><td>集中処理</td><td>1台に処理を集約</td><td>統一管理・効率</td><td>単一障害点・拡張性不足</td></tr>
+            <tr><td>分散処理</td><td>複数装置で分担</td><td>可用性・柔軟性</td><td>管理複雑・整合性課題</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <div class="quiz" data-quiz="q8-5">
+        <h4>確認クイズ（8-5）</h4>
+        <div><label><input type="radio" name="q8-5" value="A"> 集中処理は拠点ごとの最適化に強い。</label></div>
+        <div><label><input type="radio" name="q8-5" value="B" data-correct> 分散処理は柔軟性に優れるが整合性管理が課題。</label></div>
+        <button onclick="grade('q8-5')">採点</button>
+        <div class="result" id="res-q8-5"></div>
+      </div>
+    </section>
+
+    <section id="sec8-6">
+      <h2>8-6 情報システムの構成</h2>
+      <details open>
+        <summary>冗長化方式</summary>
+        <table class="table">
+          <tr><th>方式</th><th>動作</th><th>利点</th><th>注意点</th></tr>
+          <tr><td>デュアル</td><td>同時稼働し照合</td><td>高信頼</td><td>コスト高</td></tr>
+          <tr><td>デュプレックス</td><td>主系と待機系で切替</td><td>コスト抑制</td><td>切替時停止</td></tr>
+          <tr><td>クラスタ</td><td>複数台で提供</td><td>可用性・拡張性</td><td>構成複雑</td></tr>
+        </table>
+      </details>
+      <details>
+        <summary>代表的形態</summary>
+        <ul class="list">
+          <li>クライアントサーバ</li>
+          <li>Web3層</li>
+          <li>仮想化／VDI</li>
+        </ul>
+      </details>
+      <details>
+        <summary>RAID</summary>
+        <table class="table">
+          <tr><th>レベル</th><th>概要</th><th>冗長性</th></tr>
+          <tr><td>0</td><td>ストライピング</td><td>なし</td></tr>
+          <tr><td>1</td><td>ミラーリング</td><td>高</td></tr>
+          <tr><td>5</td><td>分散パリティ</td><td>1台故障可</td></tr>
+        </table>
+      </details>
+      <div class="quiz" data-quiz="q8-6">
+        <h4>確認クイズ（8-6）</h4>
+        <div><label><input type="radio" name="q8-6" value="B" data-correct> デュプレックスは障害時に待機系へ切替える。</label></div>
+        <div><label><input type="radio" name="q8-6" value="C"> RAID0は冗長性が高い。</label></div>
+        <button onclick="grade('q8-6')">採点</button>
+        <div class="result" id="res-q8-6"></div>
+      </div>
+    </section>
+
+    <section id="sec8-7">
+      <h2>8-7 情報システムの利用価値</h2>
+      <details open>
+        <summary>価値の分類</summary>
+        <ul class="list">
+          <li>業務効率化</li>
+          <li>品質向上</li>
+          <li>意思決定支援</li>
+          <li>収益拡大</li>
+        </ul>
+      </details>
+      <div class="quiz" data-quiz="q8-7">
+        <h4>確認クイズ（8-7）</h4>
+        <div><label><input type="radio" name="q8-7" value="B" data-correct> 多面的に評価する必要がある。</label></div>
+        <button onclick="grade('q8-7')">採点</button>
+        <div class="result" id="res-q8-7"></div>
+      </div>
+    </section>
+
+    <section id="sec8-8">
+      <h2>8-8 システムの評価指標</h2>
+      <details open>
+        <summary>性能</summary>
+        <ul class="list"><li>スループット・レスポンス・ターンアラウンド</li></ul>
+      </details>
+      <details>
+        <summary>信頼性・可用性</summary>
+        <ul class="list">
+          <li>MTBF・MTTR</li>
+          <li>稼働率 = MTBF/(MTBF+MTTR)</li>
+        </ul>
+      </details>
+      <details>
+        <summary>経済性</summary>
+        <ul class="list">
+          <li>TCO・ROI・費用対効果</li>
+        </ul>
+      </details>
+      <div class="quiz" data-quiz="q8-8">
+        <h4>確認クイズ（8-8）</h4>
+        <div><label><input type="radio" name="q8-8" value="B" data-correct> 直列システムの稼働率は各稼働率の積。</label></div>
+        <button onclick="grade('q8-8')">採点</button>
+        <div class="result" id="res-q8-8"></div>
+      </div>
+    </section>
+      
+    <!-- 8-9 ソフトウェア（OS） -->
+    <section id="sec8-9">
+      <h2>8-9 ソフトウェア（OS）</h2>
+      <details open>
+        <summary>OSの必要性</summary>
+        <ul class="list">
+          <li>ハードウェア資源を<b>安全かつ公平</b>に管理（CPU・メモリ・I/O）</li>
+          <li>アプリからハードを抽象化し<b>共通のAPI</b>を提供</li>
+          <li>ユーザーに<b>操作環境（UI）</b>を提供</li>
+        </ul>
+      </details>
+      <details>
+        <summary>OSの機能</summary>
+        <table class="table">
+          <thead><tr><th>機能</th><th>概要</th></tr></thead>
+          <tbody>
+            <tr><td>プロセス管理</td><td>スケジューリング、同期、死活監視</td></tr>
+            <tr><td>メモリ管理</td><td>仮想記憶、ページング、保護</td></tr>
+            <tr><td>ファイル管理</td><td>ファイルシステム、アクセス権</td></tr>
+            <tr><td>入出力管理</td><td>デバイスドライバ、バッファ制御</td></tr>
+            <tr><td>ユーザインタフェース</td><td>CLI/GUI、シェル</td></tr>
+            <tr><td>ネットワーク</td><td>TCP/IPスタック、認証</td></tr>
+          </tbody>
+        </table>
+      </details>
+      <details>
+        <summary>OSの種類</summary>
+        <ul class="list">
+          <li>用途：デスクトップ／サーバ／モバイル／組込み</li>
+          <li>処理形態：バッチ／タイムシェアリング／リアルタイム</li>
+          <li>ユーザ／タスク：シングル／マルチユーザ、シングル／マルチタスク</li>
+        </ul>
+      </details>
+      <div class="quiz" data-quiz="q8-9">
+        <h4>確認クイズ（8-9）</h4>
+        <div><label><input type="radio" name="q8-9" value="A"> OSはアプリが直接ハードを操作できるようにする。</label></div>
+        <div><label><input type="radio" name="q8-9" value="B" data-correct> OSは資源管理と抽象化によりアプリを支える。</label></div>
+        <button onclick="grade('q8-9')">採点</button>
+        <div class="result" id="res-q8-9"></div>
+      </div>
+    </section>
+
+    <!-- 8-10 ファイルの管理 -->
+    <section id="sec8-10">
+      <h2>8-10 ファイルの管理</h2>
+      <details open>
+        <summary>ディレクトリ管理</summary>
+        <ul class="list">
+          <li>階層構造：ルート配下にフォルダ（ディレクトリ）を配置</li>
+          <li>パス：<b>絶対パス</b>（ルートから）／<b>相対パス</b>（現在地から）</li>
+          <li>拡張子・関連付け・隠し属性 など</li>
+        </ul>
+      </details>
+      <details>
+        <summary>ファイル共有</summary>
+        <ul class="list">
+          <li>アクセス権（読み・書き・実行）、ACL</li>
+          <li>共有方式：SMB/CIFS、NFS、クラウドストレージ</li>
+          <li>排他制御（共有ロック・排他ロック）</li>
+        </ul>
+      </details>
+      <details>
+        <summary>バックアップ</summary>
+        <table class="table">
+          <thead><tr><th>方式</th><th>対象</th><th>長所</th><th>留意点</th></tr></thead>
+          <tbody>
+            <tr><td>フル</td><td>全データ</td><td>復元が簡単</td><td>時間・容量が大</td></tr>
+            <tr><td>差分</td><td>前回フル以降の変更</td><td>復元はフル＋最新差分</td><td>差分が肥大化</td></tr>
+            <tr><td>増分</td><td>直前バックアップ以降の変更</td><td>効率よい保存</td><td>復元手順が複雑</td></tr>
+          </tbody>
+        </table>
+        <p class="list">3-2-1 ルール：<b>3</b>つのコピーを<b>2</b>種類の媒体に<b>1</b>つはオフサイト。</p>
+      </details>
+      <div class="quiz" data-quiz="q8-10">
+        <h4>確認クイズ（8-10）</h4>
+        <div><label><input type="radio" name="q8-10" value="A" data-correct> 「差分バックアップ」は前回フル以降の変更を対象とする。</label></div>
+        <div><label><input type="radio" name="q8-10" value="B"> 「増分バックアップ」は前回フル以降の変更を対象とする。</label></div>
+        <button onclick="grade('q8-10')">採点</button>
+        <div class="result" id="res-q8-10"></div>
+      </div>
+    </section>
+
+    <!-- 8-11 オフィスツール -->
+    <section id="sec8-11">
+      <h2>8-11 オフィスツール</h2>
+      <details open>
+        <summary>ソフトウェアパッケージ</summary>
+        <ul class="list">
+          <li>ワープロ／表計算／プレゼンテーション／メール／DB</li>
+          <li>テンプレート・マクロ・共同編集などの機能</li>
+        </ul>
+      </details>
+      <details>
+        <summary>Webブラウザ</summary>
+        <ul class="list">
+          <li>レンダリングエンジン、拡張機能、キャッシュ</li>
+          <li>Cookie・履歴・プライバシーモード</li>
+          <li>標準規格（HTML/CSS/JavaScript）に基づく表示</li>
+        </ul>
+      </details>
+      <div class="quiz" data-quiz="q8-11">
+        <h4>確認クイズ（8-11）</h4>
+        <div><label><input type="radio" name="q8-11" value="A"> ブラウザはOSの機能でありアプリではない。</label></div>
+        <div><label><input type="radio" name="q8-11" value="B" data-correct> ブラウザはWeb標準に従ってページを解釈・表示するアプリである。</label></div>
+        <button onclick="grade('q8-11')">採点</button>
+        <div class="result" id="res-q8-11"></div>
+      </div>
+    </section>
+
+    <!-- 8-12 OSS -->
+    <section id="sec8-12">
+      <h2>8-12 OSS（オープンソースソフトウェア）</h2>
+      <details open>
+        <summary>OSSの特徴</summary>
+        <ul class="list">
+          <li>ソースコード公開・改変・再配布をライセンスで許諾</li>
+          <li>コミュニティ主導の改良、ベンダロックイン低減</li>
+          <li>ライセンス遵守（著作権表示・配布条件など）が必要</li>
+        </ul>
+      </details>
+      <details>
+        <summary>主なライセンス例</summary>
+        <ul class="list">
+          <li>GPL（コピーレフト）、MIT、Apache License 2.0 など</li>
+        </ul>
+      </details>
+      <details>
+        <summary>OSSの種類（代表カテゴリ）</summary>
+        <ul class="list">
+          <li>OS（例：Linux）、ミドルウェア（Web/アプリサーバ）</li>
+          <li>DB（例：リレーショナル/NoSQL）、プログラミング言語・ランタイム</li>
+          <li>アプリケーション（オフィス、ブラウザ等）</li>
+        </ul>
+      </details>
+      <div class="quiz" data-quiz="q8-12">
+        <h4>確認クイズ（8-12）</h4>
+        <div><label><input type="radio" name="q8-12" value="A"> OSSはライセンスの制約が無い。</label></div>
+        <div><label><input type="radio" name="q8-12" value="B" data-correct> OSSはライセンスに従って改変や再配布が許される。</label></div>
+        <button onclick="grade('q8-12')">採点</button>
+        <div class="result" id="res-q8-12"></div>
+      </div>
+    </section>
+        <div class="footer">
+      <p>Copyright©Chibamode.JIN</p><br>
+      <a href= "index.html">📚 8章　コンピュータシステムにもどる</a>
+    </div>
+  </main>
+
+  <script>
+    const answered=new Set();
+    function grade(id){
+      const group=document.querySelector(`[data-quiz="${id}"]`);
+      const selected=group.querySelector('input[type=radio]:checked');
+      const res=document.getElementById(`res-${id}`);
+      if(!selected){res.textContent='選択してください。';return}
+      const correct=selected.hasAttribute('data-correct');
+      if(correct){res.textContent='正解！';res.style.color='var(--ok)';answered.add(id)}
+      else{res.textContent='不正解。';res.style.color='var(--bad)'}
+    }
+  </script>
+</body>
+</html>

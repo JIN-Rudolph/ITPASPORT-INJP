@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF (差集合 Difference -)8">
+  <title>集合入門 | Introduction to Sets</title>
+  <link rel="stylesheet" href="sets.css">
+  <style>
+    .set (差集合 Difference -)images {
+      display: flex;
+      gap: 20px;
+      justify (差集合 Difference -)content: center;
+      margin: 20px 0;
+    }
+    .set (差集合 Difference -)images img {
+      width: 80px;
+      height: 80px;
+    }
+    .quiz (差集合 Difference -)container {
+      background: #f9f9f9;
+      padding: 20px;
+      border (差集合 Difference -)radius: 12px;
+      margin (差集合 Difference -)top: 30px;
+      text (差集合 Difference -)align: center;
+    }
+    .quiz (差集合 Difference -)options button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border (差集合 Difference -)radius: 8px;
+      background: #e0f7fa;
+      cursor: pointer;
+      font (差集合 Difference -)size: 18px;
+    }
+    .quiz (差集合 Difference -)options button:hover {
+      background: #b2ebf2;
+    }
+    .result {
+      font (差集合 Difference -)weight: bold;
+      margin (差集合 Difference -)top: 15px;
+    }
+    .back (差集合 Difference -)top {
+      display: block;
+      margin: 40px auto;
+      padding: 10px 20px;
+      text (差集合 Difference -)align: center;
+      background: #008080;
+      color: white;
+      border (差集合 Difference -)radius: 8px;
+      text (差集合 Difference -)decoration: none;
+      width: 200px;
+    }
+    .back (差集合 Difference -)top:hover {
+      background: #006666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>集合入門 (Introduction to Sets)</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>集合とは？ (What is a Set?)</h2>
+      <p>集合 (Set) とは、ものをまとめたグループのことです。</p>
+      <p>例えば「フルーツの集合」を考えてみましょう：</p>
+      <div class="set (差集合 Difference -)images">
+        <img src="images/apple.png" alt="Apple">
+        <img src="images/banana.png" alt="Banana">
+        <img src="images/grape.png" alt="Grape">
+      </div>
+      <p>このとき、集合 A を次のように表します：</p>
+      <p><strong>A = {りんご, バナナ, ぶどう}</strong><br>
+      <em>A = {apple, banana, grape}</em></p>
+    </section>
+
+    <section>
+      <h2>集合の操作 (Operations on Sets)</h2>
+      <p>集合にはいくつかの基本操作があります：</p>
+      <ul>
+        <li><strong>和集合 (Union,  (和集合 Union ∪))</strong>: どちらかにあるもの全部</li>
+        <li><strong>共通集合 (Intersection,  (共通部分 Intersection ∩))</strong>: 両方にあるもの</li>
+        <li><strong>差集合 (Difference, −)</strong>: 片方にしかないもの</li>
+      </ul>
+      <p>例：A = {りんご, バナナ}, B = {バナナ, ぶどう}</p>
+      <ul>
+        <li>A  (和集合 Union ∪) B = {りんご, バナナ, ぶどう}</li>
+        <li>A  (共通部分 Intersection ∩) B = {バナナ}</li>
+        <li>A − B = {りんご}</li>
+      </ul>
+    </section>
+
+    <section class="quiz (差集合 Difference -)container">
+      <h2>クイズ (Quiz)</h2>
+      <p>A = {犬, 猫}, B = {猫, 鳥} のとき、A  (共通部分 Intersection ∩) B は？</p>
+      <div class="set (差集合 Difference -)images">
+        <img src="images/dog.png" alt="Dog">
+        <img src="images/cat.png" alt="Cat">
+        <img src="images/bird.png" alt="Bird">
+      </div>
+      <div class="quiz (差集合 Difference -)options">
+        <button onclick="checkAnswer('dog')">A: {犬}</button>
+        <button onclick="checkAnswer('cat')">B: {猫}</button>
+        <button onclick="checkAnswer('bird')">C: {鳥}</button>
+        <button onclick="checkAnswer('dog,bird')">D: {犬, 鳥}</button>
+      </div>
+      <div id="quiz (差集合 Difference -)result" class="result"></div>
+    </section>
+
+    <footer>
+  <p>Copyright©Chibamode.JIN</p><br>
+  <a href="index.html">🏠 ホームに戻る</a> | <a href="sets_home.html">📗 集合サブホームへ</a></p>
+</footer>
+  </main>
+
+  <script>
+    function checkAnswer(answer) {
+      const result = document.getElementById('quiz (差集合 Difference -)result');
+      if (answer === 'cat') {
+        result.textContent = "正解！(Correct!) → A  (共通部分 Intersection ∩) B = {猫}";
+        result.style.color = "green";
+      } else {
+        result.textContent = "不正解… (Incorrect)";
+        result.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>

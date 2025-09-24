@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>IT Passport | Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>📝 IT Passport | 離散数学クイズ</h1>
+    <nav>
+      <a href="index.html">🏠 ホームへ</a> |
+      <a href="discrete.html">🔢 学習ページへ</a>
+    </nav>
+    <p>50問ランダム！ 導入編（4択）➡ 実践編（入力式）</p>
+  </header>
+
+  <main>
+    <div class="progress-container">
+      <progress id="progress-bar" value="1" max="50"></progress>
+      <span id="progress-text">1 / 50 問</span>
+    </div>
+
+    <section id="multiple-choice" class="card">
+      <h2>Step 1: 4択クイズ (Multiple Choice)</h2>
+      <p id="mc-question">問題を読み込み中...</p>
+      <div id="mc-options"></div>
+      <p id="mc-feedback"></p>
+      <button onclick="nextMCQuestion()">次の問題へ</button>
+    </section>
+
+    <section id="input-quiz" class="card">
+      <h2>Step 2: 入力式クイズ (Input)</h2>
+      <p id="input-question">問題を読み込み中...</p>
+      <input type="text" id="input-answer" placeholder="答えを入力">
+      <button onclick="checkInputAnswer()">答え合わせ</button>
+      <p id="input-feedback"></p>
+      <button onclick="nextInputQuestion()">次の問題へ</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Copyright©Chibamode.JIN</p><br>
+    <a href="index.html">🏠 ホームに戻る</a>
+  </footer>
+
+  <script>
+    // 問題生成
+    const mcQuestions = [];
+    const inputQuestions = [];
+    for (let i = 1; i <= 50; i++) {
+      let binStr = i.toString(2);
+      mcQuestions.push({
+        q: `${i}(10) を 2進数に変換してください`,
+        options: shuffle([binStr, (i+1).toString(2), (i+2).toString(2), (i+3).toString(2)]),
+        answer: binStr
+      });
+      inputQuestions.push({
+        q: `${binStr}(2) を 10進数に変換してください`,
+        answer: String(i)
+      });
+    }
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    // 出題管理
+    let remainingMC = [...mcQuestions];
+    let remainingInput = [...inputQuestions];
+    let currentQuestion = 1;
+
+    function updateProgress() {
+      document.getElementById("progress-bar").value = currentQuestion;
+      document.getElementById("progress-text").innerText = `${currentQuestion} / 50 問`;
+    }
+
+    function pickRandomQuestion(pool) {
+      let idx = Math.floor(Math.random() * pool.length);
+      return pool.splice(idx, 1)[0]; // 取り出して削除
+    }
+
+    // --- Multiple Choice ---
+    function loadMCQuestion() {
+      if (remainingMC.length === 0) {
+        document.getElementById("mc-question").innerText = "🎉 4択問題は終了しました！入力問題に挑戦してください。";
+        document.getElementById("mc-options").innerHTML = "";
+        return;
+      }
+      let q = pickRandomQuestion(remainingMC);
+      document.getElementById("mc-question").innerText = q.q;
+      let optionsDiv = document.getElementById("mc-options");
+      optionsDiv.innerHTML = "";
+      q.options.forEach(opt => {
+        let btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => checkMCAnswer(opt, q.answer);
+        optionsDiv.appendChild(btn);
+      });
+      document.getElementById("mc-feedback").innerText = "";
+    }
+
+    function checkMCAnswer(selected, correct) {
+      if (selected === correct) {
+        document.getElementById("mc-feedback").innerText = "✅ 正解！";
+        document.getElementById("mc-feedback").style.color = "green";
+      } else {
+        document.getElementById("mc-feedback").innerText = "❌ 不正解。正しい答えは " + correct;
+        document.getElementById("mc-feedback").style.color = "red";
+      }
+    }
+
+    function nextMCQuestion() {
+      if (remainingMC.length > 0) {
+        currentQuestion++;
+        updateProgress();
+        loadMCQuestion();
+      }
+    }
+
+    // --- Input Quiz ---
+    let currentInputQ = null;
+
+    function loadInputQuestion() {
+      if (remainingInput.length === 0) {
+        document.getElementById("input-question").innerText = "🎉 全問終了！お疲れさまでした！";
+        return;
+      }
+      currentInputQ = pickRandomQuestion(remainingInput);
+      document.getElementById("input-question").innerText = currentInputQ.q;
+      document.getElementById("input-answer").value = "";
+      document.getElementById("input-feedback").innerText = "";
+    }
+
+    function checkInputAnswer() {
+      if (!currentInputQ) return;
+      let correct = currentInputQ.answer;
+      let userAns = document.getElementById("input-answer").value.trim();
+      if (userAns === correct) {
+        document.getElementById("input-feedback").innerText = "✅ 正解！";
+        document.getElementById("input-feedback").style.color = "green";
+      } else {
+        document.getElementById("input-feedback").innerText = "❌ 不正解。正しい答えは " + correct;
+        document.getElementById("input-feedback").style.color = "red";
+      }
+    }
+
+    function nextInputQuestion() {
+      if (remainingInput.length > 0) {
+        currentQuestion++;
+        updateProgress();
+        loadInputQuestion();
+      }
+    }
+
+    // 初期化
+    window.onload = () => {
+      updateProgress();
+      loadMCQuestion();
+      loadInputQuestion();
+    };
+  </script>
+</body>
+</html>

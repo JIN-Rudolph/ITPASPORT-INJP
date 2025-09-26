@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>外国人留学生向け｜1-1 企業活動 / 1-2 業務分析・データ利活用 / 1-3 会計・財務（やさしい日本語＋英語用語）</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel:#121a2b;
+      --ink:#eaf2ff;
+      --muted:#a8b3cf;
+      --accent:#5ab0ff;
+      --ok:#43d17c;
+      --warn:#ffb657;
+      --danger:#ff6b6b;
+      --ring: rgba(90,176,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:linear-gradient(180deg, #09101e 0%, #0e1830 100%);
+      letter-spacing:.02em;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:linear-gradient(180deg, rgba(9,16,30,.85), rgba(9,16,30,.6));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+    .title{display:flex;gap:14px;align-items:center}
+    .badge{font-size:12px;color:#00142b;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .sub{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    nav#toc{position:sticky;top:84px;align-self:start;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    nav#toc h2{margin:0 0 8px;font-size:16px}
+    nav#toc ul{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+    nav#toc li{margin:6px 0}
+    nav#toc a{color:var(--ink)}
+
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 20px}
+    .controls input[type="search"]{flex:1;min-width:240px;background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+    .btn{background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+
+    section{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px;margin-bottom:18px}
+    h2{margin:.2em 0 .6em;font-size:24px}
+    h3{margin:1.2em 0 .4em;font-size:18px}
+    p{color:var(--ink);opacity:.92}
+    .muted{color:var(--muted)}
+
+    .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .card{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:.6em 0}
+    .label{font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:inline-block;color:var(--muted)}
+    details{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin:.6em 0}
+    details[open]{outline:2px solid var(--ring)}
+    summary{cursor:pointer;font-weight:600}
+    ul.check{list-style:none;padding-left:0}
+    ul.check li{margin:.4em 0}
+    .gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .gloss b{color:var(--accent)}
+    .kicker{font-size:13px;color:var(--muted)}
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      nav#toc{position:relative;top:auto}
+      .gloss{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div style="font-weight:800;font-size:20px">📚 外国人留学生向け 学習サポート</div>
+        <span class="badge">やさしい日本語 + English terms</span>
+      </div>
+      <p class="sub">1-1 企業活動／1-2 業務分析・データ利活用／1-3 会計・財務 — やさしい言葉と英語で、要点をコンパクトに解説します。</p>
+      <div class="controls">
+        <input id="q" type="search" placeholder="キーワードで検索（例：CSR / Pareto / ROE）" />
+        <button class="btn" id="expand">すべて開く</button>
+        <button class="btn" id="collapse">すべて閉じる</button>
+        <button class="btn" id="clear">検索クリア</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap grid">
+    <!-- TOC -->
+    <nav id="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ul>
+        <li><a href="#sec11">1-1 企業活動 <span class="kicker">Business Activities</span></a>
+          <ul>
+            <li><a href="#vision">経営理念・CSR</a></li>
+            <li><a href="#org">組織構成</a></li>
+            <li><a href="#resources">経営資源</a></li>
+            <li><a href="#mgmt">経営管理</a></li>
+            <li><a href="#hrm">ヒューマンリソース</a></li>
+            <li><a href="#production">生産管理</a></li>
+            <li><a href="#inventory">在庫管理</a></li>
+            <li><a href="#ind4">第4次産業革命</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec12">1-2 業務分析・データ利活用 <span class="kicker">Business Analysis & Data</span></a>
+          <ul>
+            <li><a href="#ba">業務の把握・分析</a></li>
+            <li><a href="#viz">可視化と図表</a></li>
+            <li><a href="#decision">意思決定</a></li>
+            <li><a href="#problem">問題解決</a></li>
+            <li><a href="#office">オフィスツール</a></li>
+            <li><a href="#bigdata">ビッグデータ</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec13">1-3 会計・財務 <span class="kicker">Accounting & Finance</span></a>
+          <ul>
+            <li><a href="#accttypes">会計の種類</a></li>
+            <li><a href="#salesprofit">売上と利益</a></li>
+            <li><a href="#statements">財務諸表</a></li>
+            <li><a href="#ratios">財務指標</a></li>
+          </ul>
+        </li>
+        <li><a href= "index.html">企業と法務の学習にもどる</a></p></li>     
+      </ul>
+    </nav>
+
+    <main>
+      <!-- 1-1 -->
+      <section id="sec11">
+        <h2>1-1 企業活動 <span class="kicker">Business Activities</span></h2>
+        <p>会社が<b>価値を作る</b>ための動き。わかりやすい日本語と英語用語で説明します。</p>
+
+        <h3 id="vision">経営理念・CSR <span class="kicker">Mission/Vision & CSR</span></h3>
+        <div class="card">
+          <ul class="check">
+            <li><b>経営理念（Mission / Vision / Values）</b>：会社が何のためにあるか。長期の目標。</li>
+            <li><b>CSR（Corporate Social Responsibility）</b>：社会や環境に配慮して行動すること。</li>
+            <li><b>ESG</b>：環境（Environment）・社会（Social）・ガバナンス（Governance）を重視する投資の考え。</li>
+          </ul>
+        </div>
+
+        <h3 id="org">企業の組織構成 <span class="kicker">Organization Structures</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">職能別（Functional）</div><p>仕事の種類ごとに分ける。専門性を高めやすい。</p></div>
+          <div class="card"><div class="label">階層型（Hierarchical）</div><p>上司→部下の階層。指示が通りやすい。</p></div>
+          <div class="card"><div class="label">マトリックス（Matrix）</div><p>機能×製品など二つの軸で管理。調整が必要。</p></div>
+          <div class="card"><div class="label">プロジェクト（Project）</div><p>目的ごとにチームを作る。柔軟でスピードが出る。</p></div>
+          <div class="card"><div class="label">事業部制（Divisional）</div><p>製品や地域ごとに事業部を作る。収益責任が明確。</p></div>
+          <div class="card"><div class="label">カンパニー制（Company-in-Company）</div><p>会社内に小さな会社単位。自律性が高い。</p></div>
+        </div>
+
+        <h3 id="resources">経営資源 <span class="kicker">Management Resources</span></h3>
+        <div class="card">
+          <ul class="check">
+            <li>ヒト（People）・モノ（Physical Assets）・カネ（Finance）・情報（Information）・時間（Time）。</li>
+            <li>これらを<b>配分（Allocation）</b>し、価値を最大化する。</li>
+          </ul>
+        </div>
+
+        <h3 id="mgmt">経営管理 <span class="kicker">Management Control</span></h3>
+        <details>
+          <summary>目標と指標（Goals & KPIs）</summary>
+          <div class="card"><p>目標（Goal）を決め、測る指標（KPI）で進捗を確認。</p></div>
+        </details>
+        <details>
+          <summary>PDCA / OODA</summary>
+          <div class="card"><p>計画→実行→確認→改善（PDCA）や観察→判断→決定→行動（OODA）で継続的改善。</p></div>
+        </details>
+
+        <h3 id="hrm">ヒューマンリソースマネジメント <span class="kicker">HRM</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">モチベーション（Motivation）</div><p>内発的／外発的動機を理解し、働きがいを高める。</p></div>
+          <div class="card"><div class="label">研修・人材開発（Training & Development）</div><p>OJT、集合研修、eラーニングなど。</p></div>
+          <div class="card"><div class="label">人事制度（HR Systems）</div><p>等級・評価・報酬・昇進を設計。</p></div>
+          <div class="card"><div class="label">働き方（Work Styles）</div><p>ワークライフバランス、在宅勤務、フレックスなど。</p></div>
+        </div>
+
+        <h3 id="production">生産管理 <span class="kicker">Production Management</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">JIT</div><p>必要な物を必要な時に。ムダを減らす。</p></div>
+          <div class="card"><div class="label">FMS</div><p>柔軟に種類を変えて生産できる仕組み。</p></div>
+          <div class="card"><div class="label">MRP</div><p>必要量を逆算して資材を手配。</p></div>
+          <div class="card"><div class="label">セル生産 / ライン生産</div><p>一人／チームで完結 vs. 流れ作業。</p></div>
+          <div class="card"><div class="label">BTO</div><p>注文後に作る方式（Build To Order）。</p></div>
+          <div class="card"><div class="label">正味所要量（Net Requirements）</div><p>在庫・予約を考えた実際の必要量。</p></div>
+        </div>
+
+        <div class="card"><p><img src="eoq.png" alt="EOQ Chart" style="max-width:100%"><br>例：EOQ（経済的発注量）の最適点</p></div><h3 id="inventory">在庫管理 <span class="kicker">Inventory Management</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">EOQ（経済的発注量）</div><p>発注コストと在庫コストの合計が最小になる量。</p></div>
+          <div class="card"><div class="label">定量発注方式（Q-System）</div><p>在庫がしきい値を下回ったら一定量を発注。</p><img src="qsystem.png" alt="Q-System" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">定期発注方式（P-System）</div><p>決まった間隔で発注数量を決める。</p><img src="psystem.png" alt="P-System" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">資源管理（Resource Control）</div><p>設備・人の稼働を可視化し最適化。</p></div>
+        </div>
+
+        <div class="card"><p><img src="indrev.png" alt="Industrial Revolutions" style="max-width:100%"><br>産業革命の流れ</p></div><h3 id="ind4">第4次産業革命など <span class="kicker">Industry 4.0, Society 5.0</span></h3>
+        <div class="card">
+          <ul class="check">
+            <li>産業革命（Industrial Revolutions）<br>1次：蒸気、2次：電力、3次：IT、<b>4次：データとAI・IoT</b>。</li>
+            <li>インダストリー4.0：工場のデジタル化・自律化。</li>
+            <li>Society 5.0：日本のビジョン。サイバー空間と現実空間を融合。<br><img src="society5.png" alt="Society 5.0 Concept" style="max-width:100%;margin-top:6px"></li>
+            <li>デジタルトランスフォーメーション（DX）・データ駆動型社会（Data-driven Society）。</li>
+            <li>国家戦略特区法：新しい実証や投資を進めるための特別な区域の法律。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 1-2 -->
+      <section id="sec12">
+        <h2>1-2 業務分析・データ利活用 <span class="kicker">Business Analysis & Data Utilization</span></h2>
+        <p>仕事の流れを<b>見える化</b>し、データで考える力をつけます。</p>
+
+        <h3 id="ba">業務の把握・業務計画 <span class="kicker">Understanding & Planning</span></h3>
+        <div class="card">
+          <p>業務（Process）を洗い出し、目的・入力・出力・担当・時間を整理します。</p>
+        </div>
+
+        <h3 id="viz">図表と分析手法 <span class="kicker">Charts & Analysis</span></h3><div class="card"><p><img src="pareto.png" alt="Pareto Chart" style="max-width:100%"><br>例：Pareto Chart（重要な少数を見つける）</p></div>
+        <div class="grid2">
+          <div class="card"><div class="label">パレート図（Pareto Chart）</div><p>重要な少数を見つける。</p></div>
+          <div class="card"><div class="label">ABC分析</div><p>在庫や顧客をA/B/Cに分類。</p><img src="abc.png" alt="ABC Analysis" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">特性要因図（Fishbone）</div><p>原因を網羅的に整理。</p><img src="fishbone.png" alt="Fishbone Diagram" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">アローダイアグラム</div><p>作業の順番と所要時間を図示。</p><img src="arrow.png" alt="Arrow Diagram" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">ガントチャート（Gantt）</div><p>計画と進捗を横棒で表示。</p></div>
+          <div class="card"><div class="label">散布図 / レーダーチャート</div><p>関係性やバランスを可視化。</p><img src="radar.png" alt="Radar Chart" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">管理図 / ヒストグラム</div><p>ばらつきと分布を確認。</p><img src="control_chart.png" alt="Control Chart" style="max-width:100%;margin-top:6px"><br><img src="histogram.png" alt="Histogram" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">回帰分析 / Zグラフ / 箱ひげ図</div><p>傾向・季節性・分布の中心を把握。</p><img src="scatter.png" alt="Scatter Plot" style="max-width:100%;margin-top:6px"><br><img src="regression.png" alt="Regression" style="max-width:100%;margin-top:6px"><br><img src="boxplot.png" alt="Boxplot" style="max-width:100%;margin-top:6px"></div>
+        </div>
+
+        <div class="card"><p><img src="gantt.png" alt="Gantt Chart" style="max-width:100%"><br>例：Gantt Chart（計画と進捗を可視化）</p></div><h3 id="decision">意思決定 <span class="kicker">Decision Making</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">デシジョンツリー（Decision Tree）</div><p>選択肢と結果を木で表す。</p></div>
+          <div class="card"><div class="label">シミュレーション（Simulation）</div><p>仮想的に試して結果を予測。</p></div>
+        </div>
+
+        <h3 id="problem">問題解決 <span class="kicker">Problem Solving</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">ブレーンストーミング</div><p>自由にたくさんのアイデアを出す。</p></div>
+          <div class="card"><div class="label">親和図法（KJ法）</div><p>似たアイデアをグループ化し、本質を見つける。</p></div>
+        </div>
+
+        <h3 id="office">オフィスツールの利用 <span class="kicker">Office Tools</span></h3>
+        <div class="card">
+          <p>表計算（Spreadsheet）、スライド、文書、BIツールなどを<b>目的に合わせて</b>使い分ける。</p>
+        </div>
+
+        <h3 id="bigdata">ビッグデータ <span class="kicker">Big Data</span></h3>
+        <details>
+          <summary>ビッグデータとは（What is Big Data）</summary>
+          <div class="card"><p>多様・大量・高速に生まれるデータ（3V: Volume, Variety, Velocity）。</p></div>
+        </details>
+        <details>
+          <summary>分類と活用（Types & Use）</summary>
+          <div class="card">
+            <ul class="check">
+              <li>オープンデータ（Open Data）・産業データ（Industrial）・パーソナルデータ（Personal）。</li>
+              <li>例：交通の最適化、需要予測、顧客分析など。</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>分析方法（Analytics Methods）</summary>
+          <div class="grid2">
+            <div class="card"><div class="label">クロス集計</div><p>カテゴリー間の関係を見る。</p></div>
+            <div class="card"><div class="label">アソシエーション分析</div><p>一緒に起きる組合せを見つける。</p></div>
+            <div class="card"><div class="label">ロジスティック回帰</div><p>Yes/Noを予測。</p></div>
+            <div class="card"><div class="label">クラスタ分析</div><p>似たグループに分ける。</p></div>
+            <div class="card"><div class="label">デシジョンツリー分析</div><p>分岐で予測・説明。</p></div>
+          </div>
+        </details>
+        <details>
+          <summary>留意点・課題（Considerations）</summary>
+          <div class="card">
+            <ul class="check">
+              <li>プライバシー・セキュリティ・倫理（Ethics）。</li>
+              <li>データ品質（Data Quality）・バイアス（Bias）。</li>
+              <li>目的適合（Fit for Purpose）と説明可能性（Explainability）。</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>関連技術・学問分野（Related Fields）</summary>
+          <div class="card"><p>データサイエンス、機械学習、統計学、情報学、データエンジニアリング。</p></div>
+        </details>
+      </section>
+
+      <!-- 1-3 -->
+      <section id="sec13">
+        <h2>1-3 会計・財務 <span class="kicker">Accounting & Finance</span></h2>
+        <p>会社のお金の<b>記録と判断</b>を扱います。</p>
+
+        <h3 id="accttypes">会計の種類 <span class="kicker">Types of Accounting</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">財務会計（Financial）</div><p>投資家など外部向けに報告。</p></div>
+          <div class="card"><div class="label">管理会計（Managerial）</div><p>社内の意思決定のために利用。</p></div>
+        </div>
+
+        <div class="card"><p><img src="breakeven.png" alt="Break-even Analysis" style="max-width:100%"><br>例：損益分岐点分析（Break-even Point）</p></div><h3 id="salesprofit">売上と利益 <span class="kicker">Sales & Profit</span></h3>
+        <div class="card">
+          <ul class="check">
+            <li><b>費用（Cost/Expense）</b>と<b>利益（Profit）</b>、<b>利益率（Profit Margin）</b>を理解。</li>
+            <li><b>損益分岐点（Break-even Point）</b>：売上が費用をちょうどカバーする点。</li>
+          </ul>
+        </div>
+
+        <h3 id="statements">財務諸表の種類と役割 <span class="kicker">Financial Statements</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">貸借対照表（Balance Sheet）</div><p>ある時点の資産・負債・純資産。</p><img src="balance_layout.png" alt="Balance Sheet Layout" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">損益計算書（Income Statement）</div><p>期間の収益と費用・利益。</p><img src="income_flow.png" alt="Income Statement Flow" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">キャッシュフロー計算書（Cash Flow）</div><p>現金の入りと出。</p><img src="cashflow.png" alt="Cash Flow Example" style="max-width:100%;margin-top:6px"></div>
+          <div class="card"><div class="label">決算（Closing）</div><p>1年などの期間のまとめ。</p></div>
+        </div>
+
+        <h3 id="ratios">財務指標 <span class="kicker">Financial Ratios</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">安全性（Solvency）</div><p>流動比率（Current Ratio）、当座比率（Quick Ratio）、自己資本比率（Equity Ratio）。</p></div>
+          <div class="card"><div class="label">収益性（Profitability）</div><p>ROA（Return on Assets）、ROE（Return on Equity）。</p></div>
+          <div class="card"><div class="label">効率性（Efficiency）</div><p>純資産回転率（Net Asset Turnover）、在庫回転率（Inventory Turnover）。</p></div>
+        </div>
+
+        <section>
+          <h2>用語ミニ辞書 <span class="kicker">Mini Glossary</span></h2>
+          <div class="gloss">
+            <div><b>KPI</b> 目標を測る指標。</div>
+            <div><b>EOQ</b> 最適な発注量。</div>
+            <div><b>DX</b> デジタルで業務を変えること。</div>
+            <div><b>ROE</b> 株主のお金でどれだけ利益を出したか。</div>
+          </div>
+        </section>
+
+        <section>
+          <h2>学習チェック <span class="kicker">Self-check</span></h2>
+          <div class="card">
+            <label><input type="checkbox" data-id="chk-a1"> 組織構成の種類を説明できる</label><br/>
+            <label><input type="checkbox" data-id="chk-a2"> Pareto図とABC分析の違いを説明できる</label><br/>
+            <label><input type="checkbox" data-id="chk-a3"> ROAとROEの違いを言える</label>
+          </div>
+        </section>
+
+      <p class="muted">Copyright©Chibamode.JIN<br>
+      <a href= "index.html">コンピュータシステムの学習にもどる</a></p>     
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Search filter
+    const q = document.getElementById('q');
+    const sections = Array.from(document.querySelectorAll('section, details, .card'));
+    const clearBtn = document.getElementById('clear');
+    function filter(){
+      const term = q.value.trim().toLowerCase();
+      sections.forEach(el=>{
+        if(!term){ el.style.removeProperty('outline'); el.style.removeProperty('display'); return; }
+        const hit = el.textContent.toLowerCase().includes(term);
+        el.style.display = hit? 'block' : 'none';
+        if(hit){ el.style.outline = '2px solid var(--ring)'; }
+        else { el.style.removeProperty('outline'); }
+      });
+    }
+    q.addEventListener('input', filter);
+    clearBtn.addEventListener('click', ()=>{ q.value=''; filter(); });
+
+    // Expand/collapse all details
+    const expandBtn = document.getElementById('expand');
+    const collapseBtn = document.getElementById('collapse');
+    function setAll(open){ document.querySelectorAll('details').forEach(d=> d.open = open); }
+    expandBtn.addEventListener('click', ()=> setAll(true));
+    collapseBtn.addEventListener('click', ()=> setAll(false));
+
+    // Persist checklist state
+    const KEY = 'study-support-11-13-v1';
+    function load(){
+      try{ const data = JSON.parse(localStorage.getItem(KEY) || '{}');
+        document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=>{
+          cb.checked = Boolean(data[cb.dataset.id]);
+        });
+      }catch(e){}
+    }
+    function save(){
+      const data = {};
+      document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=> data[cb.dataset.id] = cb.checked);
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+    document.addEventListener('change', e=>{ if(e.target.matches('input[type="checkbox"][data-id]')) save(); });
+    load();
+  </script>
+</body>
+</html>

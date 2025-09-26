@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>外国人留学生向け｜1-4 知的財産・セキュリティ法規／1-5 契約・事業法務・標準化（やさしい日本語＋英語）</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel:#121a2b;
+      --ink:#eaf2ff;
+      --muted:#a8b3cf;
+      --accent:#5ab0ff;
+      --ok:#43d17c;
+      --warn:#ffb657;
+      --danger:#ff6b6b;
+      --ring: rgba(90,176,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:linear-gradient(180deg, #09101e 0%, #0e1830 100%);
+      letter-spacing:.02em;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:linear-gradient(180deg, rgba(9,16,30,.85), rgba(9,16,30,.6));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+    .title{display:flex;gap:14px;align-items:center}
+    .badge{font-size:12px;color:#00142b;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .sub{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    nav#toc{position:sticky;top:84px;align-self:start;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    nav#toc h2{margin:0 0 8px;font-size:16px}
+    nav#toc ul{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+    nav#toc li{margin:6px 0}
+    nav#toc a{color:var(--ink)}
+
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 20px}
+    .controls input[type="search"]{flex:1;min-width:240px;background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+    .btn{background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+
+    section{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px;margin-bottom:18px}
+    h2{margin:.2em 0 .6em;font-size:24px}
+    h3{margin:1.2em 0 .4em;font-size:18px}
+    p{color:var(--ink);opacity:.92}
+    .muted{color:var(--muted)}
+
+    .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .card{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:.6em 0}
+    .label{font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:inline-block;color:var(--muted)}
+    details{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin:.6em 0}
+    details[open]{outline:2px solid var(--ring)}
+    summary{cursor:pointer;font-weight:600}
+    ul.check{list-style:none;padding-left:0}
+    ul.check li{margin:.4em 0}
+    .kicker{font-size:13px;color:var(--muted)}
+    .gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+    .gloss b{color:var(--accent)}
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      nav#toc{position:relative;top:auto}
+    }
+  
+    /* tables */
+    .tablewrap{overflow:auto;border:1px solid rgba(255,255,255,.08);border-radius:16px}
+    table.tab{width:100%;border-collapse:collapse;min-width:760px;background:#0c1426}
+    table.tab th, table.tab td{border:1px solid rgba(255,255,255,.08);padding:10px 12px;text-align:left;vertical-align:top}
+    table.tab th{background:#0f1830;color:var(--ink);font-weight:700;white-space:nowrap}
+    table.tab tr:nth-child(even) td{background:#0b1529}
+    .note{font-size:12px;color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div style="font-weight:800;font-size:20px">📚 外国人留学生向け 学習サポート</div>
+        <span class="badge">やさしい日本語 + English terms</span>
+      </div>
+      <p class="sub">1-4 知的財産・セキュリティ法規／1-5 契約・事業法務・標準化 — 難しい用語をやさしく、英語も併記して解説します（教育目的｜Educational use only）</p>
+      <div class="controls">
+        <input id="q" type="search" placeholder="キーワードで検索（例：著作権 / NDA / ISO 27001 / QR）" />
+        <button class="btn" id="expand">すべて開く</button>
+        <button class="btn" id="collapse">すべて閉じる</button>
+        <button class="btn" id="clear">検索クリア</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap grid">
+    <!-- TOC -->
+    <nav id="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ul>
+        <li><a href="#sec14">1-4 知的財産・セキュリティ法規 <span class="kicker">Intellectual Property & Security Laws</span></a>
+          <ul>
+            <li><a href="#ip-basic">知的財産の基本</a></li>
+            <li><a href="#copyright">著作権</a></li>
+            <li><a href="#industrial">産業財産権</a></li>
+            <li><a href="#unfair">不正競争防止法</a></li>
+            <li><a href="#sw-license">ソフトウェアライセンス</a></li>
+            <li><a href="#other-rights">その他の権利</a></li>
+            <li><a href="#security-laws">セキュリティ関連法規</a></li>
+            <li><a href="#guidelines">情報セキュリティのガイドライン</a></li>
+            <li><a href="#labor-std">労働基準法</a></li>
+            <li><a href="#labor-agree">労使協定</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec15">1-5 契約・事業法務・標準化 <span class="kicker">Contracts, Business Laws & Standards</span></a>
+          <ul>
+            <li><a href="#contracts">契約と働き方のタイプ</a></li>
+            <li><a href="#biz-laws">主な事業関連法</a></li>
+            <li><a href="#comp-gov">コンプライアンスとガバナンス</a></li>
+            <li><a href="#standard-bodies">標準化団体</a></li>
+            <li><a href="#standards">国際規格</a></li>
+            <li><a href="#codes">JANコード・QRコード</a></li>
+          </ul>
+        </li>
+        <li><a href= "index.html">企業活動と法務の学習にもどる</a></li>    
+      </ul>
+    </nav>
+
+    <main>
+      <!-- 1-4 -->
+      <section id="sec14">
+        <h2>1-4 知的財産・セキュリティ法規 <span class="kicker">Intellectual Property & Security Laws</span></h2>
+        <p>他人の作品やアイデアを<b>正しく使う</b>ためのルールです。簡単な日本語＋英語でポイントをまとめます。</p>
+
+        <h3 id="ip-basic">知的財産の基本 <span class="kicker">Basics of Intellectual Property (IP)</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">知的財産権（IP Rights）</div><p>頭で考えて作った成果を守る権利。例：発明、デザイン、音楽、文章、プログラム。</p></div>
+          <div class="card"><div class="label">区分（Categories）</div><p><b>著作権（Copyright）</b> と <b>産業財産権（Industrial Property）</b>（特許・実用新案・意匠・商標）。</p></div>
+        </div>
+
+        <h3 id="copyright">著作権 <span class="kicker">Copyright</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">著作者人格権（Moral Rights）</div><p>作者の名誉や思いを守る権利。氏名表示・同一性保持など。ゆずれない（譲渡不可）。</p></div>
+          <div class="card"><div class="label">著作財産権（Economic Rights）</div><p>コピー・公開・翻案など、使い方をコントロールする権利。ライセンスで他人が使える。</p></div>
+          <div class="card"><div class="label">Webページの権利（IP on Web Pages）</div><p>本文・画像・CSS・JS・デザインも著作物になりうる。引用は出典明示・必要最小限で。</p></div>
+        </div>
+
+        <h3 id="industrial">産業財産権関連法規 <span class="kicker">Industrial Property Laws</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">特許（Patent）</div><p>新しい発明を独占的に使える権利（出願→審査→登録）。</p></div>
+          <div class="card"><div class="label">実用新案（Utility Model）</div><p>小さな改良など形状・構造のアイデアを保護。</p></div>
+          <div class="card"><div class="label">意匠（Design）</div><p>物の形や模様など見た目を保護。</p></div>
+          <div class="card"><div class="label">商標（Trademark）</div><p>商品やサービスのマーク・名前を保護。</p></div>
+        </div>
+
+        <h3 id="unfair">不正競争防止法 <span class="kicker">Unfair Competition Prevention Act</span></h3>
+        <div class="card">
+          <ul class="check">
+            <li>他社の表示・商品形態の<b>まね</b>、営業秘密（Trade Secret）の不正取得・使用などを禁止。</li>
+            <li>営業秘密は<b>秘密管理・有用性・非公知</b>がポイント。</li>
+          </ul>
+        </div>
+
+        <h3 id="sw-license">ソフトウェアライセンス <span class="kicker">Software Licenses</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">ソフトウェアと著作権</div><p>プログラムコードも著作物。無断コピーは不可（No unauthorized copying）。</p></div>
+          <div class="card"><div class="label">ライセンスの種類（Types）</div><p>商用（Proprietary）、フリー（Freeware）、オープンソース（Open Source: MIT/GPL/Apache/BSD など）。</p></div>
+          <div class="card"><div class="label">OSSの注意（Compliance）</div><p>表示（Attribution）、ライセンス同梱、改変の明示、GPLは派生物を同ライセンスで公開（Copyleft）。</p></div>
+        </div>
+
+        <h3 id="other-rights">その他の権利 <span class="kicker">Other Rights</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">プライバシー権（Privacy）</div><p>個人の私生活を守る権利。</p></div>
+          <div class="card"><div class="label">肖像権（Portrait Right）</div><p>無断で顔写真などを使われない権利。</p></div>
+          <div class="card"><div class="label">パブリシティ権（Right of Publicity）</div><p>有名人の名前・姿を商業利用する権利。</p></div>
+        </div>
+
+        <h3 id="security-laws">セキュリティ関連法規 <span class="kicker">Security-related Laws</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">サイバーセキュリティ基本法</div><p>国・企業・個人の<b>基本方針</b>を定める。背景：サイバー脅威の増加。施策：体制整備・人材育成など。</p></div>
+          <div class="card"><div class="label">不正アクセス禁止法</div><p>他人のID/パスワードを使う・アクセス制御を突破する等を禁止。</p></div>
+          <div class="card"><div class="label">個人情報保護法（APPI）</div><p>個人情報の適正な扱いを定める。要配慮個人情報（Sensitive）、匿名加工情報（Anonymized）、特定個人情報（My Number）。所管：個人情報保護委員会（PPC）。</p></div>
+          <div class="card"><div class="label">特定電子メール法</div><p>迷惑メールの規制。オプトアウト等のルール。</p></div>
+          <div class="card"><div class="label">プロバイダ責任制限法</div><p>ネット上の権利侵害への対応と発信者情報開示の枠組み。</p></div>
+          <div class="card"><div class="label">不正指令電磁的記録に関する罪</div><p>マルウェア等の作成・提供・取得・保管などを処罰。</p></div>
+        </div>
+
+        <h3 id="guidelines">情報セキュリティに関するガイドライン <span class="kicker">Security Guidelines</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">ウイルス対策基準</div><p>マルウェア検知・隔離・更新の基本ルール。</p></div>
+          <div class="card"><div class="label">不正アクセス対策基準</div><p>ID管理、多要素認証、ログ監視など。</p></div>
+          <div class="card"><div class="label">情報セキュリティ管理基準</div><p>資産管理・アクセス制御・教育・監査の枠組み。</p></div>
+          <div class="card"><div class="label">情報セキュリティ監査基準</div><p>独立したチェックで運用の妥当性を確認。</p></div>
+          <div class="card"><div class="label">サイバーセキュリティ経営指針</div><p>経営者の責任・投資判断・リスクコミュニケーション。</p></div>
+          <div class="card"><div class="label">中小企業向け対策ガイドライン</div><p>小規模事業者でも実行しやすい対策。</p></div>
+          <div class="card"><div class="label">CPSF（サイバー・フィジカル）</div><p>サイバー空間と現実空間がつながるシステムの安全対策。</p></div>
+        </div>
+
+        <h3 id="labor-std">労働基準法 <span class="kicker">Labor Standards Act</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">背景（Background）</div><p>労働者を守る最低基準を作るために制定。</p></div>
+          <div class="card"><div class="label">目的（Purpose）</div><p>賃金・労働時間・休憩・休暇などの基本ルールを定める。</p></div>
+          <div class="card"><div class="label">適用範囲（Scope）</div><p>日本で働く多くの労働者と使用者に適用。</p></div>
+        </div>
+
+        <h3 id="labor-agree">労使協定 <span class="kicker">Labor-Management Agreements</span></h3>
+        <div class="card">
+          <ul class="check">
+            <li>労働者と会社が取り決める書面の約束（Written agreement between labor and management）。</li>
+            <li><b>届出が必要</b>な例：<b>36協定（時間外・休日労働）</b>など。</li>
+            <li>届出不要の協定もあるが、社内で共有・遵守することが大切。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 1-5 -->
+      <section id="sec15">
+        <h2>1-5 契約・事業法務・標準化 <span class="kicker">Contracts, Business Laws & Standardization</span></h2>
+        <p>仕事で守る<b>契約・ルール・標準</b>について、要点をコンパクトに確認します。</p>
+
+        <h3 id="contracts">契約と働き方のタイプ <span class="kicker">Contract Types & Work Styles</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">労働者派遣法（Worker Dispatch）</div><p>派遣元の社員が派遣先で働く形。指揮命令は派遣先。</p></div>
+          <div class="card"><div class="label">請負契約（Contract for Work）</div><p>完成物を納める契約。指示は受けるが、<b>仕事の進め方は受託側</b>が管理。</p></div>
+          <div class="card"><div class="label">準委任契約（Service Agreement）</div><p>「結果」ではなく「業務の遂行」を約束。IT業務で多い。</p></div>
+          <div class="card"><div class="label">雇用契約（Employment）</div><p>会社の指揮命令下で働く。労働基準法の保護あり。</p></div>
+          <div class="card"><div class="label">守秘義務契約（NDA）</div><p>秘密情報を第三者に出さない約束。範囲・期間・例外を明確に。</p></div>
+          <div class="card"><div class="label">下請法（Subcontract Act）</div><p>親事業者と下請事業者の取引での不当な押しつけ等を禁止。</p></div>
+        </div>
+
+        <h3 id="biz-laws">主な事業関連法 <span class="kicker">Key Business Laws</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">PL法（Product Liability）</div><p>欠陥で被害が出たとき、製造者の責任。</p></div>
+          <div class="card"><div class="label">特定商取引法</div><p>通信販売・訪問販売などの取引ルール。</p></div>
+          <div class="card"><div class="label">資金決済法（Payment Services）</div><p>前払式支払手段・仮想通貨等のルール。</p></div>
+          <div class="card"><div class="label">金融商品取引法（FIEA）</div><p>有価証券の開示、取引の公正を確保。</p></div>
+          <div class="card"><div class="label">リサイクル法（Recycling）</div><p>廃棄物の減量・再資源化の枠組み。</p></div>
+          <div class="card"><div class="label">独占禁止法（Antimonopoly）</div><p>独占やカルテルを防ぎ、公正な競争を守る。</p></div>
+          <div class="card"><div class="label">デジタルプラットフォーム透明化法</div><p>特定デジタルプラットフォームの透明性・公正性を高める。</p></div>
+          <div class="card"><div class="label">公益通報者保護法</div><p>内部告発（Whistleblowing）を保護。</p></div>
+          <div class="card"><div class="label">情報公開法（FOI）</div><p>行政文書の公開請求ができる仕組み。</p></div>
+        </div>
+
+        <h3 id="comp-gov">コンプライアンスとガバナンス <span class="kicker">Compliance & Corporate Governance</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">コンプライアンス</div><p>法令だけでなく社内規程・倫理も守る（Do the right thing）。</p></div>
+          <div class="card"><div class="label">コーポレートガバナンス</div><p>会社を健全に運営する仕組み。取締役会・監査・内部統制など。</p></div>
+          <div class="card"><div class="label">情報論理（情報倫理）</div><p>情報の扱いで守るべき考え方。誠実・公平・プライバシー尊重。</p></div>
+        </div>
+
+        <h3 id="standard-bodies">標準化団体 <span class="kicker">Standardization Bodies</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">ISO</div><p>国際標準化機構（製品・プロセス全般）。</p></div>
+          <div class="card"><div class="label">IEC</div><p>国際電気標準会議（電気・電子）。</p></div>
+          <div class="card"><div class="label">IEEE</div><p>米国電気電子学会（通信・ネットワーク等）。</p></div>
+          <div class="card"><div class="label">ITU</div><p>国際電気通信連合（周波数・通信規格）。</p></div>
+          <div class="card"><div class="label">W3C</div><p>Web標準（HTML/CSS/Accessibility など）。</p></div>
+        </div>
+
+        <h3 id="standards">国際規格 <span class="kicker">International Standards</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">ISO 9000</div><p>品質マネジメント（Quality Management）。</p></div>
+          <div class="card"><div class="label">ISO 14000</div><p>環境マネジメント（Environmental Management）。</p></div>
+          <div class="card"><div class="label">ISO/IEC 27001</div><p>情報セキュリティ（ISMS）。</p></div>
+          <div class="card"><div class="label">ISO 26000</div><p>社会的責任（Social Responsibility）。</p></div>
+          <div class="card"><div class="label">ISO/IEC 38500</div><p>ITガバナンス（Corporate Governance of IT）。</p></div>
+        </div>
+
+        <h3 id="codes">JANコード・QRコード <span class="kicker">Barcodes & QR Codes</span></h3>
+        <div class="grid2">
+          <div class="card"><div class="label">JANコード（EAN/GTIN）</div><p>商品識別バーコード。レジ・在庫管理で利用。</p></div>
+          <div class="card"><div class="label">QRコード（Quick Response）</div><p>2次元コード。URLや支払い情報などを格納。</p></div>
+        </div>
+
+        <section>
+          <h2>用語ミニ辞書 <span class="kicker">Mini Glossary</span></h2>
+          <div class="gloss">
+            <div><b>Moral Rights</b> 作者の人格を守る権利（譲渡不可）。</div>
+            <div><b>Economic Rights</b> 作品の利用方法をコントロールする権利。</div>
+            <div><b>Trade Secret</b> 秘密管理・有用性・非公知の3要件。</div>
+            <div><b>NDA</b> 守秘義務契約。秘密の範囲・期間・例外を明記。</div>
+            <div><b>Compliance</b> 法令・社内規程・倫理の遵守。</div>
+            <div><b>ISMS</b> 情報セキュリティマネジメントの仕組み。</div>
+          </div>
+        </section>
+
+        <section>
+          <h2>学習チェック <span class="kicker">Self-check</span></h2>
+          <div class="card">
+            <label><input type="checkbox" data-id="c-1"> Moral/Economic Rightsの違いを説明できる</label><br/>
+            <label><input type="checkbox" data-id="c-2"> GPLとMITの違いを一言で言える</label><br/>
+            <label><input type="checkbox" data-id="c-3"> 派遣・請負・準委任の違いを区別できる</label><br/>
+            <label><input type="checkbox" data-id="c-4"> ISO 9000/14000/27001の目的を説明できる</label>
+          </div>
+        </section>
+
+        <p class="muted">※ 本資料は教育目的のサマリーです。実務は最新の法令・規程を確認してください。</p>
+        <p class="muted">Copyright©Chibamode.JIN</p>
+      </section>
+
+      <section id="deriv">
+        <h2>派生学習：対比表とチェックリスト <span class="kicker">Derived Learning: Comparison Tables & Checklists</span></h2>
+
+        <h3>契約タイプの対比表 <span class="kicker">Contracts Compared</span></h3>
+        <div class="tablewrap">
+          <table class="tab">
+            <thead>
+              <tr>
+                <th>項目<br><span class="kicker">Item</span></th>
+                <th>雇用契約<br><span class="kicker">Employment</span></th>
+                <th>労働者派遣<br><span class="kicker">Worker Dispatch</span></th>
+                <th>請負契約<br><span class="kicker">Contract for Work</span></th>
+                <th>準委任契約<br><span class="kicker">Service Agreement</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>指揮命令<br><span class="kicker">Who directs</span></td>
+                <td>会社（雇用主）<br><span class="kicker">Employer</span></td>
+                <td>派遣先が日常指示／雇用は派遣元<br><span class="kicker">Client directs / Employer is agency</span></td>
+                <td>受託側が方法を決定、成果で評価<br><span class="kicker">Contractor controls process, deliverable-based</span></td>
+                <td>受託側が遂行、結果ではなく作業の実施で評価<br><span class="kicker">Performs services, effort-based</span></td>
+              </tr>
+              <tr>
+                <td>目的<br><span class="kicker">Purpose</span></td>
+                <td>労務提供<br><span class="kicker">Provide labor</span></td>
+                <td>一定期間の労務提供<br><span class="kicker">Provide labor at client</span></td>
+                <td>完成物の納品<br><span class="kicker">Deliver a product/result</span></td>
+                <td>業務の遂行<br><span class="kicker">Perform tasks/services</span></td>
+              </tr>
+              <tr>
+                <td>責任の基準<br><span class="kicker">Liability baseline</span></td>
+                <td>勤務態様・就業規則準拠<br><span class="kicker">Work rules</span></td>
+                <td>派遣法・労基法等<br><span class="kicker">Dispatch & labor laws</span></td>
+                <td>成果物の品質・納期<br><span class="kicker">Quality & delivery</span></td>
+                <td>善管注意義務・報酬基準<br><span class="kicker">Due care; effort criteria</span></td>
+              </tr>
+              <tr>
+                <td>報酬の考え方<br><span class="kicker">Payment</span></td>
+                <td>給与<br><span class="kicker">Salary</span></td>
+                <td>派遣料金<br><span class="kicker">Dispatch fee</span></td>
+                <td>出来高・定額（見積）<br><span class="kicker">Fixed/Outcome-based</span></td>
+                <td>時間単価・月額など<br><span class="kicker">Time & materials</span></td>
+              </tr>
+              <tr>
+                <td>例<br><span class="kicker">Examples</span></td>
+                <td>正社員・アルバイト<br><span class="kicker">Employee</span></td>
+                <td>コールセンター要員 等<br><span class="kicker">On-site staff</span></td>
+                <td>開発一式の請負<br><span class="kicker">Build-and-deliver</span></td>
+                <td>運用保守・相談業務<br><span class="kicker">Ops / consulting</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">※ 教育用の一般的な比較です。実務では契約書と最新の法令・ガイドラインを必ず確認してください。</p>
+
+        <h3>OSSライセンスの対比表 <span class="kicker">Open Source Licenses Compared</span></h3>
+        <div class="tablewrap">
+          <table class="tab">
+            <thead>
+              <tr>
+                <th>観点<br><span class="kicker">Aspect</span></th>
+                <th>MIT</th>
+                <th>Apache-2.0</th>
+                <th>GPL-3.0</th>
+                <th>BSD-3-Clause</th>
+                <th>Proprietary<br><span class="kicker">商用</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>利用・改変・再配布<br><span class="kicker">Use/Modify/Redistribute</span></td>
+                <td>可<br><span class="kicker">Permissive</span></td>
+                <td>可<br><span class="kicker">Permissive</span></td>
+                <td>可（派生物はGPL）<br><span class="kicker">Copyleft</span></td>
+                <td>可<br><span class="kicker">Permissive</span></td>
+                <td>条件に従う<br><span class="kicker">Per EULA</span></td>
+              </tr>
+              <tr>
+                <td>著作権表示・ライセンス同梱<br><span class="kicker">Attribution & License file</span></td>
+                <td>必要</td><td>必要（NOTICE含む場合あり）</td><td>必要</td><td>必要</td><td>ベンダー条件</td>
+              </tr>
+              <tr>
+                <td>ソース公開義務<br><span class="kicker">Source disclosure</span></td>
+                <td>不要</td><td>不要</td><td>必要（配布時）</td><td>不要</td><td>非公開が通常</td>
+              </tr>
+              <tr>
+                <td>特許条項<br><span class="kicker">Patent grant</span></td>
+                <td>なし</td><td>あり（明確）</td><td>あり（貢献分等）</td><td>なし</td><td>契約による</td>
+              </tr>
+              <tr>
+                <td>変更点の明示<br><span class="kicker">Notice of changes</span></td>
+                <td>推奨</td><td>一部求められる</td><td>求められる</td><td>推奨</td><td>契約による</td>
+              </tr>
+              <tr>
+                <td>リンク互換の注意<br><span class="kicker">Linking considerations</span></td>
+                <td>制約少</td><td>制約少</td><td>静的/組込みでGPL化の可能性</td><td>制約少</td><td>契約依存</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">※ 本表は概要であり、法的アドバイスではありません（Educational summary, not legal advice）。</p>
+
+        <h3>ライセンス遵守チェックリスト <span class="kicker">License Compliance Checklist</span></h3>
+        <div class="card">
+          <ul class="check">
+            <li><label><input type="checkbox" data-id="lc-1"> 利用するソフトの<b>ライセンス種別</b>を確認した（MIT/Apache/GPLなど）。<span class="kicker">Identify license type</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-2"> 配布物に<b>著作権表示・LICENSE/NOTICE</b>を同梱した。<span class="kicker">Include attribution & files</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-3"> <b>変更箇所</b>を明示した（必要な場合）。<span class="kicker">Mark your modifications</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-4"> GPL等の<b>ソース提供義務</b>に対応した（URL/提供方法）。<span class="kicker">Provide source when required</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-5"> LGPL等の<b>リンク方針</b>（動的/静的）を整理した。<span class="kicker">Linking policy reviewed</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-6"> <b>特許・商標・ロゴ</b>の扱いを確認した（Apache特許条項、商標は別扱い）。<span class="kicker">Patent/trademark handled</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-7"> 依存関係を<b>一覧化</b>し、第三者ライセンス一覧に反映した。<span class="kicker">3rd-party inventory</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-8"> アプリ内または文書に<b>ライセンス表示画面/セクション</b>を用意した。<span class="kicker">In-app notices</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-9"> <b>スキャン/SBOM</b>で検出したリスクを処理した。<span class="kicker">Scan & fix findings</span></label></li>
+            <li><label><input type="checkbox" data-id="lc-10"> 社内の<b>承認フロー</b>と保管ルールに従った。<span class="kicker">Follow internal approvals</span></label></li>
+          </ul>
+        </div>
+        <p class="muted">Copyright©Chibamode.JIN<br>
+        <a href= "index.html">コンピュータシステムの学習にもどる</a></p>     
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Search filter
+    const q = document.getElementById('q');
+    const blocks = Array.from(document.querySelectorAll('section, details, .card'));
+    const clearBtn = document.getElementById('clear');
+    function filter(){
+      const term = q.value.trim().toLowerCase();
+      blocks.forEach(el=>{
+        if(!term){ el.style.removeProperty('outline'); el.style.removeProperty('display'); return; }
+        const hit = el.textContent.toLowerCase().includes(term);
+        el.style.display = hit? 'block' : 'none';
+        if(hit){ el.style.outline = '2px solid var(--ring)'; }
+        else { el.style.removeProperty('outline'); }
+      });
+    }
+    q.addEventListener('input', filter);
+    clearBtn.addEventListener('click', ()=>{ q.value=''; filter(); });
+
+    // Expand/collapse all details (not used here but kept for consistency)
+    const expandBtn = document.getElementById('expand');
+    const collapseBtn = document.getElementById('collapse');
+    function setAll(open){ document.querySelectorAll('details').forEach(d=> d.open = open); }
+    expandBtn.addEventListener('click', ()=> setAll(true));
+    collapseBtn.addEventListener('click', ()=> setAll(false));
+
+    // Persist checklist state
+    const KEY = 'study-support-14-15-v1';
+    function load(){
+      try{ const data = JSON.parse(localStorage.getItem(KEY) || '{}');
+        document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=>{
+          cb.checked = Boolean(data[cb.dataset.id]);
+        });
+      }catch(e){}
+    }
+    function save(){
+      const data = {};
+      document.querySelectorAll('input[type="checkbox"][data-id]').forEach(cb=> data[cb.dataset.id] = cb.checked);
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+    document.addEventListener('change', e=>{ if(e.target.matches('input[type="checkbox"][data-id]')) save(); });
+    load();
+  </script>
+</body>
+</html>

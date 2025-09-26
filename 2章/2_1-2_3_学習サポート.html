@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="footer.css">
+  <title>外国人留学生向け｜2-1〜2-3 学習サポート（図解＋やさしい日本語＋英語）</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel:#121a2b;
+      --ink:#eaf2ff;
+      --muted:#a8b3cf;
+      --accent:#5ab0ff;
+      --ring: rgba(90,176,255,.35);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial; color:var(--ink);
+      background:linear-gradient(180deg, #09101e 0%, #0e1830 100%); letter-spacing:.02em;}
+    header{position:sticky;top:0;z-index:20; backdrop-filter:saturate(1.2) blur(10px);
+      background:linear-gradient(180deg, rgba(9,16,30,.85), rgba(9,16,30,.6)); border-bottom:1px solid rgba(255,255,255,.08);}
+    .wrap{max-width:1100px;margin-inline:auto;padding:20px}
+    .title{display:flex;gap:14px;align-items:center}
+    .badge{font-size:12px;color:#00142b;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .sub{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+    nav#toc{position:sticky;top:84px;align-self:start;background:#121a2b;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    nav#toc h2{margin:0 0 8px;font-size:16px}
+    nav#toc ul{list-style:none;margin:0;padding:0;max-height:70vh;overflow:auto}
+    nav#toc li{margin:6px 0}
+    nav#toc a{color:var(--ink)}
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 20px}
+    .controls input[type="search"]{flex:1;min-width:240px;background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px}
+    .btn{background:#0c1426;color:var(--ink);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+    section{background:#121a2b;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px;margin-bottom:18px}
+    h2{margin:.2em 0 .6em;font-size:24px}
+    h3{margin:1.2em 0 .4em;font-size:18px}
+    p{opacity:.96}
+    .muted{color:var(--muted)}
+    details{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin:.6em 0}
+    details[open]{outline:2px solid var(--ring)}
+    summary{cursor:pointer;font-weight:700}
+    .card{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin:.6em 0}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+    .model{background:#0c1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+    figure{margin:10px 0;text-align:center}
+    figcaption{font-size:12px;color:var(--muted);margin-top:6px}
+    mark{background:rgba(90,176,255,.25);padding:0 .2em;border-radius:4px}
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      nav#toc{position:relative;top:auto}
+      .two-col{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div style="font-weight:800;font-size:20px">📚 外国人留学生向け 学習サポート</div>
+        <span class="badge">やさしい日本語 + English terms</span>
+      </div>
+      <p class="sub">2-1 経営情報分析／経営戦略・アライアンス／役職と規模の経済｜2-2 市場調査・マーケティング・経営管理｜2-3 技術戦略・代表システム・AI・IoT・eビジネス — 図解つきで、やさしく丁寧に説明します。</p>
+      <div class="controls">
+        <input id="q" type="search" placeholder="キーワードで検索（例：SWOT / 価格設定 / IoT / ERP）" />
+        <button class="btn" id="expand">すべて開く</button>
+        <button class="btn" id="collapse">すべて閉じる</button>
+        <button class="btn" id="clear">検索クリア</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap grid">
+    <nav id="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ul>
+        <li><a href="#sec21">2-1 経営情報分析・経営戦略</a>
+          <ul>
+            <li><a href="#analysis">経営情報分析手法</a></li>
+            <li><a href="#strategy">経営戦略</a></li>
+            <li><a href="#alliance">アライアンス</a></li>
+            <li><a href="#roles">経営執行機関と役職</a></li>
+            <li><a href="#scale">規模の経済・経験曲線</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec22">2-2 市場調査とマーケティング</a>
+          <ul>
+            <li><a href="#mmix">マーケティングミックス</a></li>
+            <li><a href="#othermkt">その他のマーケティング</a></li>
+            <li><a href="#webmkt">Webマーケティング</a></li>
+            <li><a href="#pricing">価格設定手法</a></li>
+            <li><a href="#plans">販売・製品・仕入計画</a></li>
+            <li><a href="#promotion">販売促進・顧客満足度調査</a></li>
+            <li><a href="#biz">ビジネス戦略・管理</a></li>
+            <li><a href="#mgmtsys">経営管理システム</a></li>
+          </ul>
+        </li>
+        <li><a href="#sec23">2-3 技術戦略とeビジネス</a>
+          <ul>
+            <li><a href="#techplan">技術開発戦略・計画</a></li>
+            <li><a href="#terms">技術戦略に関する用語</a></li>
+            <li><a href="#activities">技術戦略の活動・手法</a></li>
+            <li><a href="#bizsystems">代表ビジネス分野のシステム</a></li>
+            <li><a href="#packages">代表的なビジネスソフトウェア</a></li>
+            <li><a href="#ai">AIの利活用</a></li>
+            <li><a href="#gov">行政分野のシステム</a></li>
+            <li><a href="#eng">エンジニアリングシステム</a></li>
+            <li><a href="#ebiz">e-ビジネスと電子商取引</a></li>
+            <li><a href="#edi">EDI・キャッシュレス決済</a></li>
+            <li><a href="#iot">IoTとIoTシステム</a></li>
+            <li><a href="#embedded">組み込みシステム</a></li>
+          </ul>
+        </li>
+        <li><a href= "../index.html">学習一覧ホームにもどる</a></p></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- 2-1 -->
+      <section id="sec21">
+        <h2>2-1 経営情報分析・経営戦略 <span class="muted">Management Analysis & Strategy</span></h2>
+        <p>会社の<strong>今</strong>を読み解き、<strong>次の一手</strong>を考えます。難しそうな言葉には <mark>英語</mark> をそえて説明します。</p>
+
+        <h3 id="analysis">経営情報分析手法 <span class="muted">Analysis Methods</span></h3>
+        <details open>
+          <summary>SWOT分析（SWOT Analysis）</summary>
+          <div class="card">
+            <p>SWOTは、<b>内部</b>の <b>強み（Strengths）</b> / <b>弱み（Weaknesses）</b> と、<b>外部</b>の <b>機会（Opportunities）</b> / <b>脅威（Threats）</b> を整理する基本ツールです。四つの視点を<b>組み合わせ</b>、実行プランに変えます。</p>
+            <ul>
+              <li><b>S×O：</b>強みを活かして機会をつかむ。例：高い技術 × 新市場。</li>
+              <li><b>W×O：</b>弱みを補強して機会を活かす。例：採用・育成を強化。</li>
+              <li><b>S×T：</b>強みで脅威に対抗。例：ブランドで価格競争を回避。</li>
+              <li><b>W×T：</b>守りを固める。例：コスト削減、撤退、提携。</li>
+            </ul>
+            <figure>
+              <img src="images/swot.png" alt="SWOT diagram (EN labels)" width="640">
+              <figcaption>図1：SWOT（画像は英語のみ。日本語は本文で解説）</figcaption>
+            </figure>
+          </div>
+        </details>
+
+        <details>
+          <summary>プロダクトライフサイクル（Product Life Cycle, <span class="muted">PLC</span>）</summary>
+          <div class="card">
+            <p>製品の売れ方は<b>導入（Introduction）</b> → <b>成長（Growth）</b> → <b>成熟（Maturity）</b> → <b>衰退（Decline）</b>の流れ。段階ごとに<b>目的</b>と<b>手段</b>を切り替えます。</p>
+            <ul>
+              <li><b>導入：</b>知ってもらう・試してもらう（無料トライアル、限定キャンペーン）。</li>
+              <li><b>成長：</b>差別化へ投資（機能追加、広告強化、販売チャネル拡大）。</li>
+              <li><b>成熟：</b>効率化とリピート（ロイヤルティ、コスト最適化）。</li>
+              <li><b>衰退：</b>撤退・ニッチ化・次世代の準備。</li>
+            </ul>
+            <figure>
+              <img src="images/plc.png" alt="PLC curve (EN labels)" width="640">
+              <figcaption>図2：PLC。段階でKPIや投資配分が変わります。</figcaption>
+            </figure>
+          </div>
+        </details>
+
+        <details>
+          <summary>PPM（プロダクト・ポートフォリオ・マネジメント）</summary>
+          <div class="card">
+            <p>市場の<b>成長率（Growth）</b>と<b>相対シェア（Relative Share）</b>で製品群を四象限に分け、<b>資源配分</b>を決めます。</p>
+            <ul>
+              <li><b>Star：</b>投資を続けてトップを目指す。</li>
+              <li><b>Cash Cow：</b>利益を生む柱。維持・効率化。</li>
+              <li><b>Question Mark：</b>伸びる市場だが弱い。選別して投資。</li>
+              <li><b>Dog：</b>撤退・縮小を検討。</li>
+            </ul>
+            <figure>
+              <img src="images/ppm.png" alt="PPM matrix (EN labels)" width="640">
+              <figcaption>図3：PPM。投資・維持・選別・撤退の判断に。</figcaption>
+            </figure>
+          </div>
+        </details>
+
+        <details>
+          <summary>成長マトリクス（Ansoff Growth Matrix）</summary>
+          <div class="card">
+            <p><b>市場（Market）</b> と <b>製品（Product）</b> の新旧の組合せで、<b>4つの成長方向</b>を選びます。</p>
+            <ul>
+              <li><b>Market Penetration（市場浸透）：</b>既存市場で既存製品をもっと売る。</li>
+              <li><b>Market Development（新市場開拓）：</b>海外・新セグメントへ展開。</li>
+              <li><b>Product Development（新製品開発）：</b>既存顧客に新機能・新製品。</li>
+              <li><b>Diversification（多角化）：</b>新市場×新製品で挑戦。</li>
+            </ul>
+            <figure>
+              <img src="images/ansoff.png" alt="Ansoff matrix (EN labels)" width="640">
+              <figcaption>図4：Ansoff。どこで伸ばすかを選びます。</figcaption>
+            </figure>
+          </div>
+        </details>
+
+        <h3 id="strategy">経営戦略 <span class="muted">Business Strategies</span></h3>
+        <details>
+          <summary>競争地位別戦略（Leader / Challenger / Follower / Nicher）</summary>
+          <div class="card">
+            <p>市場での<b>立場（Position）</b>により、重点が変わります。</p>
+            <ul>
+              <li><b>Leader：</b>市場全体を広げ、防衛し、標準を作る。</li>
+              <li><b>Challenger：</b>差別化・価格で攻める。話題作り。</li>
+              <li><b>Follower：</b>低コスト・素早い追従。模倣のスピード。</li>
+              <li><b>Nicher：</b>小さく深い市場で専門特化。</li>
+            </ul>
+          </div>
+        </details>
+        <div class="two-col">
+          <div class="card"><b>Brand Strategy（ブランド戦略）</b>：名前・体験・信頼を一貫させる。</div>
+          <div class="card"><b>Push / Pull</b>：流通に働きかける / 指名買いを作る。</div>
+          <div class="card"><b>Niche（ニッチ）</b>：小さいが価値の高い市場に集中。</div>
+          <div class="card"><b>Innovation（イノベーション）</b>：新技術・新モデルでルール変更。</div>
+          <div class="card"><b>Blue Ocean（ブルーオーシャン）</b>：競争の薄い新しい価値領域。</div>
+          <div class="card"><b>Me-too（同質化）</b>：最低限機能＋低価格で勝負。</div>
+        </div>
+
+        <h3 id="alliance">アライアンス <span class="muted">Alliances</span></h3>
+        <div class="two-col">
+          <div class="card"><b>M&amp;A</b>：買収・合併でスピード成長。</div>
+          <div class="card"><b>Holding Company（持株会社）</b>：統治とシナジー。</div>
+          <div class="card"><b>Equity Participation（資本参加）</b>：少数出資で関係強化。</div>
+          <div class="card"><b>Partnership（提携）</b>：技術・販売で協力。</div>
+          <div class="card"><b>Fabless（ファブレス）</b>：設計とブランドに集中、生産は外部。</div>
+          <div class="card"><b>Franchise（フランチャイズ）</b>：ブランドと運営ノウハウのライセンス。</div>
+          <div class="card"><b>Joint Venture（ジョイントベンチャー）</b>：共同で新会社。</div>
+        </div>
+
+        <h3 id="roles">経営執行機関と役職 <span class="muted">Executive Roles</span></h3>
+        <div class="model-grid">
+          <div class="model"><b>CEO</b>（最高経営責任者：Chief Executive Officer）</div>
+          <div class="model"><b>COO</b>（最高執行責任者：Chief Operating Officer）</div>
+          <div class="model"><b>CIO</b>（最高情報責任者：Chief Information Officer）</div>
+          <div class="model"><b>CFO</b>（最高財務責任者：Chief Financial Officer）</div>
+          <div class="model"><b>CCO</b>（Chief Compliance/Customer Officer：会社により意味が異なる）</div>
+          <div class="model"><b>CTO</b>（最高技術責任者：Chief Technology Officer）</div>
+          <div class="model"><b>CISO</b>（最高情報セキュリティ責任者：Chief Information Security Officer）</div>
+        </div>
+
+        <h3 id="scale">規模の経済・経験曲線 <span class="muted">Economies of Scale & Experience Curve</span></h3>
+        <div class="card">
+          <p><b>規模の経済（Economies of Scale）</b>：たくさん作るほど、<b>1個あたりコスト</b>が下がる（固定費が分散）。<br>
+             <b>経験曲線（Experience Curve）</b>：作る量が増えるほど、学びが増え、作業が早くなりコストが下がる。</p>
+        </div>
+      </section>
+
+      <!-- 2-2 -->
+      <section id="sec22">
+        <h2>2-2 市場調査とマーケティング <span class="muted">Market Research & Marketing</span></h2>
+        <p>お客さまを理解し、価値を<b>正しく届ける</b>仕組みを作ります。数字と実験で確かめ、改善を続けます（<b>PDCA</b>）。</p>
+
+        <h3 id="mmix">マーケティングミックス（Marketing Mix）</h3>
+        <div class="model-grid">
+          <div class="model"><b>4P → 7P</b><br>Product / Price / Place / Promotion（サービスでは People / Process / Physical evidence も見る）。</div>
+          <div class="model"><b>リサーチ（Research）</b><br>アンケート・面接・観察・データ分析で事実を集める。</div>
+        </div>
+
+        <h3 id="othermkt">その他のマーケティング</h3>
+        <div class="two-col">
+          <div class="card">Segmentation（セグメンテーション）：市場をグループに分ける。</div>
+          <div class="card">Targeting（ターゲティング）：狙うグループを決める。</div>
+          <div class="card">Positioning（ポジショニング）：比べたときの立ち位置。</div>
+          <div class="card">Direct / One-to-One：個別に届ける。</div>
+          <div class="card">Cross-media（クロスメディア）：複数媒体で連携。</div>
+          <div class="card">3C：Company / Customer / Competitor を整理。</div>
+          <div class="card">RFM：Recency / Frequency / Monetary を使って顧客を分ける。</div>
+          <div class="card">Basket / Association（バスケット分析）：一緒に買う関係を見つける。</div>
+        </div>
+
+        <h3 id="webmkt">Webマーケティング（Digital Marketing）</h3>
+        <div class="two-col">
+          <div class="card">SEO/SEM：検索で見つけてもらう。</div>
+          <div class="card">SNS/Content：有益な内容でファン作り。</div>
+          <div class="card">Email / MA：育成（Nurturing）・スコアリング。</div>
+          <div class="card">Analytics：計測→改善（PDCA）。</div>
+        </div>
+
+        <h3 id="pricing">価格設定手法（Pricing Methods）</h3>
+        <div class="two-col">
+          <div class="card">Cost-plus（原価＋マージン）。</div>
+          <div class="card">Value-based（価値基準：お客の価値）。</div>
+          <div class="card">Competition / Demand（市場状況）。</div>
+          <div class="card">Skimming / Penetration（高値で回収／低値で拡大）。</div>
+          <div class="card">Price discrimination（学生割引など）。</div>
+          <div class="card">Dynamic pricing（需要で変動）。</div>
+        </div>
+
+        <h3 id="plans">販売・製品・仕入計画</h3>
+        <div class="two-col">
+          <div class="card">Sales Plan：目標・チャネル・予算・KPI。</div>
+          <div class="card">Product Plan：機能・品質・デザイン・ラインナップ。</div>
+          <div class="card">Procurement Plan：数量・時期・サプライヤ・在庫。</div>
+        </div>
+
+        <h3 id="promotion">販売促進・顧客満足度（Promotion & CS）</h3>
+        <div class="two-col">
+          <div class="card">Promotion：広告、クーポン、イベント、紹介。</div>
+          <div class="card">CS Survey：満足度/NPS/自由意見を回収。</div>
+        </div>
+
+        <h3 id="biz">ビジネス戦略・管理（Business Strategy & Management）</h3>
+        <div class="two-col">
+          <div class="card"><b>BSC</b>：財務・顧客・業務・学習の4視点を整合。</div>
+          <div class="card"><b>CSF</b>：成功のカギを特定し、KPIへ。</div>
+          <div class="card"><b>VE</b>（Value Engineering）：機能×コストを見直し価値最大化。</div>
+        </div>
+
+        <h3 id="mgmtsys">経営管理システム（Management Systems）</h3>
+        <div class="model-grid">
+          <div class="model"><b>SFA</b>：営業の活動を記録・可視化。</div>
+          <div class="model"><b>CRM</b>：顧客との関係を管理。</div>
+          <div class="model"><b>SCM</b>：供給の流れを最適化。</div>
+          <div class="model"><b>Logistics</b>：輸送・保管の仕組み。</div>
+          <div class="model"><b>Knowledge Mgmt</b>：知識を共有・活用。</div>
+          <div class="model"><b>Value Chain</b>：活動のつながりで価値を高める。</div>
+          <div class="model"><b>Six Sigma</b>：データで品質とムダを改善。</div>
+        </div>
+      </section>
+
+      <!-- 2-3 -->
+      <section id="sec23">
+        <h2>2-3 技術戦略とeビジネス <span class="muted">Technology Strategy & e-Business</span></h2>
+
+        <h3 id="techplan">技術開発戦略・計画（Technology Strategy & Planning）</h3>
+        <div class="two-col">
+          <div class="card">どの技術に投資し、いつ商品化するか。<b>ロードマップ（Roadmap）</b>で時期と目標を見える化。</div>
+          <div class="card">外部連携・標準化・知財（IP）・人材育成も合わせて計画。</div>
+        </div>
+
+        <h3 id="terms">技術戦略に関する用語（Key Terms）</h3>
+        <div class="two-col">
+          <div class="card"><b>魔の川（Devil’s River）</b>：研究→試作への壁。</div>
+          <div class="card"><b>死の谷（Valley of Death）</b>：試作→事業化の壁。</div>
+          <div class="card"><b>ダーウィンの海（Darwinian Sea）</b>：市場での生存競争の壁。</div>
+        </div>
+
+        <h3 id="activities">技術戦略の活動・手法（Activities & Methods）</h3>
+        <div class="two-col">
+          <div class="card">Open Innovation（オープンイノベーション）：外部と連携。</div>
+          <div class="card">Hackathon（ハッカソン）：短期集中の試作イベント。</div>
+          <div class="card">Design Thinking（デザイン思考）：人の課題から発想。</div>
+          <div class="card">BMC（ビジネスモデルキャンバス）：9要素で可視化。</div>
+          <div class="card">Lean Startup（リーンスタートアップ）：小さく作って学ぶ。</div>
+          <div class="card">Persona（ペルソナ）：代表的ユーザ像で検討。</div>
+          <div class="card">Backcasting（バックキャスティング）：未来から逆算。</div>
+        </div>
+
+        <h3 id="bizsystems">代表ビジネス分野のシステム（Representative Systems）</h3>
+        <div class="model-grid">
+          <div class="model">POS：店舗の販売記録と在庫連携。</div>
+          <div class="model">IC card / RFID：非接触で認証・追跡。</div>
+          <div class="model">GPS / GIS：位置・地図の分析。</div>
+          <div class="model">ETC：自動料金収受。</div>
+          <div class="model">CPS：現実とデジタルをつなぐ。</div>
+          <div class="model">Blockchain：改ざん防止・トレース。</div>
+        </div>
+
+        <h3 id="packages">代表的なビジネスソフトウェア（Software Packages）</h3>
+        <div class="two-col">
+          <div class="card">ERP：会計・在庫・人事など全体最適。</div>
+          <div class="card">Function-specific：販売・会計など機能別。</div>
+          <div class="card">Industry-specific：製造・医療・小売など特化。</div>
+        </div>
+
+        <h3 id="ai">AIの利活用（AI Use）</h3>
+        <div class="two-col">
+          <div class="card">原則：公平（Fairness）・透明（Transparency）・プライバシー・安全。</div>
+          <div class="card">活用：予測・分類・対話・最適化・画像/音声。</div>
+          <div class="card">留意：データ品質・バイアス・説明責任・セキュリティ・人の関与。</div>
+        </div>
+
+        <h3 id="gov">行政分野のシステム（Public Sector）</h3>
+        <div class="two-col">
+          <div class="card">Juki Net（住基ネット）：住民情報の連携。</div>
+          <div class="card">J-Alert（Jアラート）：緊急情報の即時配信。</div>
+        </div>
+
+        <h3 id="eng">エンジニアリングシステム（Engineering Systems）</h3>
+        <div class="two-col">
+          <div class="card">CAD：設計支援。</div>
+          <div class="card">CAM：製造支援。</div>
+        </div>
+
+        <h3 id="ebiz">e-ビジネスと電子商取引（e-Business & E-commerce）</h3>
+        <div class="two-col">
+          <div class="card">分類：B2C / B2B / C2C / C2B / B2G。</div>
+          <div class="card">留意：セキュリティ・本人確認・返品規定・税・表示ルール。</div>
+        </div>
+
+        <h3 id="edi">EDI・キャッシュレス決済（EDI & Cashless）</h3>
+        <div class="two-col">
+          <div class="card">EDI：標準電文で発注・請求を自動化。</div>
+          <div class="card">Cashless：クレジット・デビット・QR・交通系IC。</div>
+        </div>
+
+        <h3 id="iot">IoTとIoTシステム（IoT & Applications）</h3>
+        <figure>
+          <img src="images/iot.png" alt="IoT ecosystem (Drone, Cloud, Smart Agriculture, Connected Car, Robot, Smart Factory)" width="760">
+          <figcaption>図5：IoTの全体像。現場のデバイス（ドローン・車・ロボット・工場・農場）と<b>クラウド（Cloud）</b>が<b>データ</b>でつながります。</figcaption>
+        </figure>
+
+        <h3 id="embedded">組み込みシステム（Embedded Systems）</h3>
+        <div class="card">家電・自動車・産業機械に内蔵されたコンピュータ。<b>リアルタイム（Real-time）</b>・<b>省電力（Low power）</b>・<b>安全（Safety）</b>が重要。</div>
+      </section>
+      <p class="muted">Copyright©Chibamode.JIN<br>
+      <a href= "../index.html">学習一覧ホームにもどる</a></p>
+    </main>
+  </div>
+
+  <script>
+    // Search filter
+    const q = document.getElementById('q');
+    const blocks = Array.from(document.querySelectorAll('section, details, .card, .model'));
+    const clearBtn = document.getElementById('clear');
+    function filter(){
+      const term = q.value.trim().toLowerCase();
+      blocks.forEach(el=>{
+        if(!term){ el.style.removeProperty('outline'); el.style.removeProperty('display'); return; }
+        const hit = el.textContent.toLowerCase().includes(term);
+        el.style.display = hit? 'block' : 'none';
+        if(hit){ el.style.outline = '2px solid var(--ring)'; }
+        else { el.style.removeProperty('outline'); }
+      });
+    }
+    q.addEventListener('input', filter);
+    clearBtn.addEventListener('click', ()=>{ q.value=''; filter(); });
+
+    // Expand/collapse all details
+    const expandBtn = document.getElementById('expand');
+    const collapseBtn = document.getElementById('collapse');
+    function setAll(open){ document.querySelectorAll('details').forEach(d=> d.open = open); }
+    expandBtn.addEventListener('click', ()=> setAll(true));
+    collapseBtn.addEventListener('click', ()=> setAll(false));
+  </script>
+</body>
+</html>
